@@ -11,7 +11,6 @@ except ImportError:
     os.system('pip install tabulate')
     import tabula
 
-
 def dataConvert(fileName,schoolName):
     tabula.convert_into(fileName, schoolName + "Data.csv", output_format="csv", pages="all")
     return schoolName + "Data.csv"
