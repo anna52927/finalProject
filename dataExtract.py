@@ -1,9 +1,16 @@
 #compilation of programs
 #requires tabulate(also jpype)
 #Written by Felix
-import tabula
-import csv
-import json
+import csv,json
+
+try:
+    import tabula
+except ImportError:
+    import os
+    os.system('pip install jpype1')
+    os.system('pip install tabulate')
+    import tabula
+
 
 def dataConvert(fileName,schoolName):
     tabula.convert_into(fileName, schoolName + "Data.csv", output_format="csv", pages="all")
