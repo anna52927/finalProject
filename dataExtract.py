@@ -57,9 +57,13 @@ def cleanElement(element):
                     element = element
         return element
 
-def extract(filepath,booleanTable=False,columnLabels=True):
-    if booleanTable:
-        extractBoolean(filepath)
+def extract(filepath,booleanTable=False,columnLabels=True,importanceTable=False):
+    if importanceTable:
+        vals = extractImportanceTable(filepath)
+    elif booleanTable and columnLabels:
+        vals = extractBoolean(filepath)
+    elif booleanTable:
+        vals = noLabelBoolean(filepath)
     else:
         with open(filepath) as f:
             reader = csv.reader(f)
@@ -82,14 +86,37 @@ def extractBoolean(filepath):
         reader = csv.reader(f)
         for (i,line) in enumerate(reader):
             if i == 0:
-                vals = {k:[] for k in line[1:]}
+                vals = {}
                 index = line
             else:
                 for (j,element) in enumerate(line):
-                    if element == 'x':
-                        vals[index[j]].append(line[0])
+                    if element.lower() == 'x':
+                        vals.update({line[0]:index[j]})
     return vals
 
+def noLabelBoolean(filepath):
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        vals = {}
+        
+        for line in reader:
+            if line[1].lower() == 'x':
+                vals.update({line[0]:'yes'})
+            else:
+                vals.update({line[0]:'no'})
+    return vals
+
+def extractImportanceTable(filepath):
+    with open(filepath) as f:
+        reader = csv.reader(f)
+        vals = {}
+
+        for line in reader:
+            for (j,element) in enumerate(line):
+                if element.lower() == 'x':
+                    vals.update({line[0]:4-j})
+    return vals
+                    
 #Chat GPT Generated
 def dictJSON(dictionary, filename):
     with open(filename, 'w') as json_file:
