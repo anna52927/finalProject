@@ -2,6 +2,8 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Random;
 
+//field for what cycle they are admitted in
+
 public class Student {
     //Right now everything int because student will have a 0-3 in this area
     protected int SATScore;
@@ -12,26 +14,26 @@ public class Student {
     protected int firstGen;
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
-    protected ArrayList<String> preference;
+    protected ArrayList<College> preference;
 
-    public Student(int SATScore, int GPA, int major, int extraCurriculars, int essay, int firstGen, ArrayList<String> collegeRank) {
+    public Student(int SATScore, int GPA, int major, int extraCurriculars, int essay, int firstGen, ArrayList<College> collegeRank) {
         this.SATScore = SATScore;
         this.GPA = GPA;
         this.major = major;
         this.extraCurriculars = extraCurriculars;
         this.essay = essay;
         this.firstGen = firstGen;
-        preference = collegePref2(collegeRank);
+        preference = collegePreferenceGen(collegeRank);
 
     }
 
     //would take in the list of colleges ranked TAKES IN STRING TO TEST
     //WILL HAVE TO CHANGE
     //also doing all 8 colleges
-    public static ArrayList<String> collegePreferenceGen(ArrayList<String> collegeRank) {
+    public ArrayList<College> collegePreferenceGen(ArrayList<College> collegeRank) {
         Random random = new Random();
         int prob = random.nextInt(1, 100);
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<College> list = new ArrayList<>();
 
         //pick first college
         if (prob >= 1 && prob <= 40) {
@@ -145,8 +147,8 @@ public class Student {
 
 
     }
-    public static ArrayList<String> collegePref2(ArrayList<String> collegeRank){
-        ArrayList<String> list = new ArrayList<>();
+    public ArrayList<College> collegePref2(ArrayList<College> collegeRank){
+        ArrayList<College> list = new ArrayList<>();
         ArrayList<Integer> collegePercents = new ArrayList<>();
         collegePercents.add(40);
         collegePercents.add(17);
@@ -194,7 +196,11 @@ public class Student {
         System.out.println(list);
         return list;
     }
-    /*public static College decide(ArrayList<College> collegeAct){
+    public College decide(ArrayList<College> collegeAct) {
         return collegeAct.get(0);
-    }*/
+    }
+
+    public ArrayList<College> getList(){
+        return preference;
+    }
 }
