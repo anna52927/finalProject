@@ -1,20 +1,28 @@
 #compilation of programs
 #requires tabulate(also jpype)
 #Written by Felix
-import csv,json
+import csv,json,os
 
+#auto install if tabula not present
 try:
     import tabula
-except ImportError:
-    import os
-    os.system('pip install jpype1')
-    os.system('pip install tabulate')
+except ModuleNotFoundError:
+    import sys,subprocess
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'jpype1'])
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'tabulate'])
     import tabula
 
+#coverts data from pdf to csv
+#returns file name
 def dataConvert(fileName,schoolName):
     tabula.convert_into(fileName, schoolName + "Data.csv", output_format="csv", pages="all")
     return schoolName + "Data.csv"
 
+#Finds a specified set of data and creates a new csv file for that data set
+#takes in values so it knows which line to start and end at
+#takes in values to delay the start or end by a certain amount from the indicator
+#occurence is only for the start indicator
+#returns file name
 def organize(schoolName,dataSetName,startIndicator,sentinel,delayStart=0,delaySentinel=0,occurrence=1):
     with open(schoolName + 'Data.csv') as f:
         with open(schoolName + dataSetName + '.csv','w') as w:
@@ -41,8 +49,9 @@ def organize(schoolName,dataSetName,startIndicator,sentinel,delayStart=0,delaySe
                 startCountdown -= 1
                 endCountdown -= 1
 
-    return schoolName + dataSetName + '.csv'                
+    return schoolName + dataSetName + '.csv'
 
+#gets rid of certain symbols and coverts numbers into proper data types
 def cleanElement(element):
     if element.lower() == 'n/a':
         element = ''
@@ -57,6 +66,8 @@ def cleanElement(element):
                     element = element
         return element
 
+#turns data set into dict with parameters for special sets and varying tables
+#returns dictionary
 def extract(filepath,booleanTable=False,columnLabels=True,importanceTable=False):
     if importanceTable:
         vals = extractImportanceTable(filepath)
@@ -81,6 +92,7 @@ def extract(filepath,booleanTable=False,columnLabels=True,importanceTable=False)
                             vals[line[0]].update({index[j]: cleanElement(element)})
     return vals
 
+#for non-numerical tables marked with true false answers denoted by an "x"
 def extractBoolean(filepath):
     with open(filepath) as f:
         reader = csv.reader(f)
@@ -94,11 +106,12 @@ def extractBoolean(filepath):
                         vals.update({line[0]:index[j]})
     return vals
 
+#for single yes/no answer tables denoted by an "x"
 def noLabelBoolean(filepath):
     with open(filepath) as f:
         reader = csv.reader(f)
         vals = {}
-        
+
         for line in reader:
             if line[1].lower() == 'x':
                 vals.update({line[0]:'yes'})
@@ -106,6 +119,7 @@ def noLabelBoolean(filepath):
                 vals.update({line[0]:'no'})
     return vals
 
+#for the importance table
 def extractImportanceTable(filepath):
     with open(filepath) as f:
         reader = csv.reader(f)
@@ -116,8 +130,10 @@ def extractImportanceTable(filepath):
                 if element.lower() == 'x':
                     vals.update({line[0]:4-j})
     return vals
-                    
-#Chat GPT Generated
+
+#Chat GPT Generated -- modified by Felix
+#turns dict into JSON file and returns file path
 def dictJSON(dictionary, filename):
     with open(filename, 'w') as json_file:
         json.dump(dictionary, json_file, indent=4)
+        return os.path.join(os.getcwd(),filename)
