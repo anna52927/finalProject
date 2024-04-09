@@ -1,25 +1,30 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class College {
-    private int grades;
-    private int testScores;
-    private int coCurricular;
-    private int capacity;
+    private String name;
+    public int capacity;
+    private ArrayList<Student> attendingStudents;
+    private ArrayList<Student> alumni;
 
-    public College(int grades, int testScores, int coCurricular, int capacity){
-        this.grades = grades;
-        this.testScores = testScores;
-        this.coCurricular = coCurricular;
+    public College(String name,int capacity){
         this.capacity = capacity;
+        this.name = name;
+        attendingStudents = new ArrayList<Student>();
+        alumni = new ArrayList<Student>();
+        //potential spot to put the admin constuctor
     }
-    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants){
-        for (Student applicant:
-                applicants) {
-            evaluateApplicant(applicant);
-        }
-        //sort algorithm
-        return applicants[:capacity-1] //however you do this in java
+
+    public void enroll(Student student){
+        attendingStudents.add(student);
     }
+
+    //graduate or leave in general
+    public void graduate(Student student){
+        attendingStudents.remove(student);
+        alumni.add(student);
+    }
+
 }
 

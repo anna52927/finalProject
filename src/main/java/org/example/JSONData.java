@@ -1,4 +1,5 @@
-//Chat GPT generated
+//Chat GPT generated -- Modified by Felix
+package org.example;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -12,18 +13,18 @@ import java.util.Map;
 
 public class JSONData {
 
-    public static void main(String[] args) {
-        File jsonFile = new File("/Users/felixwatt/Documents/CompSci/ProjectData/yaleSATScores.json"); // Replace with the path to your JSON file
+    public Map<String,Object> JSONImport(String filename) {
+        File jsonFile = new File(filename); // Replace with the path to your JSON file
+        Map<String, Object> map = new HashMap<>();
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonFile);
-            Map<String, Object> hashMap = convertJsonToMap(rootNode);
-            System.out.println("HashMap: " + hashMap);
-            System.out.println(hashMap.get("ACT Composite 33"));
+            map = convertJsonToMap(rootNode);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return map;
     }
 
     private static Map<String, Object> convertJsonToMap(JsonNode node) {
