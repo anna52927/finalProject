@@ -21,11 +21,12 @@ public class Student {
         this.extraCurriculars = extraCurriculars;
         this.essay = essay;
         this.firstGen = firstGen;
-        preference = collegePreferenceGen(collegeRank);
+        preference = collegePref2(collegeRank);
 
     }
 
     //would take in the list of colleges ranked TAKES IN STRING TO TEST
+    //WILL HAVE TO CHANGE
     //also doing all 8 colleges
     public static ArrayList<String> collegePreferenceGen(ArrayList<String> collegeRank) {
         Random random = new Random();
@@ -144,4 +145,56 @@ public class Student {
 
 
     }
+    public static ArrayList<String> collegePref2(ArrayList<String> collegeRank){
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Integer> collegePercents = new ArrayList<>();
+        collegePercents.add(40);
+        collegePercents.add(17);
+        collegePercents.add(13);
+        collegePercents.add(10);
+        collegePercents.add(5);
+        collegePercents.add(5);
+        collegePercents.add(5);
+        collegePercents.add(5);
+
+        for(int i = 0; i < 8; i++ ){
+            int probAdd = 0;
+            int collegeIndexRemove = 0;
+
+            Random random = new Random();
+            int prob = random.nextInt(1, 100);
+
+            for(int j = 0; j < collegePercents.size(); j++){
+                System.out.println(collegePercents.get(j));
+                System.out.println(prob);
+                System.out.println(probAdd);
+                if (j == 0 && prob >= collegePercents.get(0)){
+                    System.out.println(prob);
+                    list.add(collegeRank.get(0));
+                }
+
+                //probAdd + 1 represents lower limit and other one is upper
+                else if (prob <= (probAdd + 1) && prob <= collegePercents.get(j)) {
+                    list.add(collegeRank.get(j));
+                    collegeIndexRemove = j;
+                }
+                probAdd = probAdd + collegePercents.get(j);
+            }
+            probAdd = probAdd - collegePercents.get(collegeIndexRemove);
+            collegeRank.remove(collegeIndexRemove);
+            collegePercents.remove(collegeIndexRemove);
+            System.out.println(probAdd);
+            System.out.println("2");
+
+            for(int k = 0; k < collegePercents.size(); k++){
+                float newProb = (float) collegePercents.get(k) /probAdd * 100;
+                collegePercents.set(k, (int) newProb);
+            }
+        }
+        System.out.println(list);
+        return list;
+    }
+    /*public static College decide(ArrayList<College> collegeAct){
+        return collegeAct.get(0);
+    }*/
 }
