@@ -7,9 +7,9 @@ public class AdmissionsOffice {
     private College self;  //idk what to name this
     private Map<String,Object> importance;  //ranked table of importance
 
-    public AdmissionsOffice(Map<String,Object> importance, College college){
+    public AdmissionsOffice(College college){
         this.self = college; //wow, this line looks cursed
-        this.importance = importance;
+        importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants, String round){

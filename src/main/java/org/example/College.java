@@ -9,12 +9,13 @@ public class College {
     private ArrayList<Student> alumni;
     public AdmissionsOffice admissions;
 
-    public College(String name,int capacity, AdmissionsOffice admissions){
+    public College(String name,int capacity){
         this.capacity = capacity;
         this.name = name;
         this.admissions = admissions;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
+        admissions = new AdmissionsOffice(this);
         //potential spot to put the admin constuctor
     }
 
