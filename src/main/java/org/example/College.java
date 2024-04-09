@@ -3,14 +3,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class College {
-    private String name;
+    public String name;
     public int capacity;
     private ArrayList<Student> attendingStudents;
     private ArrayList<Student> alumni;
+    public AdmissionsOffice admissions;
 
-    public College(String name,int capacity){
+    public College(String name,int capacity, AdmissionsOffice admissions){
         this.capacity = capacity;
         this.name = name;
+        this.admissions = admissions;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         //potential spot to put the admin constuctor
