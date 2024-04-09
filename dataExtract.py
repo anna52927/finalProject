@@ -17,8 +17,12 @@ def collectData():
     dataSets = []
     starts = []
     sentinels = []
-    zip(school,dataSets,starts,sentinels)
+    delayStart = []
+    delaySentinel = []
     
+    for school in schools:
+        for (dataSet,start,sentinel,delayStart,delaySentinel) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels)):
+            organize(school,dataSet,start,sentinel)
 
 #coverts data from pdf to csv
 #returns file name
