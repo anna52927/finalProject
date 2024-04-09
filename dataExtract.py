@@ -12,6 +12,14 @@ except ModuleNotFoundError:
     subprocess.call([sys.executable, '-m', 'pip', 'install', 'tabulate'])
     import tabula
 
+def collectData():
+    schools = []
+    dataSets = []
+    starts = []
+    sentinels = []
+    zip(school,dataSets,starts,sentinels)
+    
+
 #coverts data from pdf to csv
 #returns file name
 def dataConvert(fileName,schoolName):
