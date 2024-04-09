@@ -12,7 +12,7 @@ public class AdmissionsOffice {
         this.importance = importance;
     }
 
-    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants){
+    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants, String round){
         for (Student applicant:
                 applicants) {
             applicant.setScore(evaluateApplicant(applicant)); //needs setScore method
@@ -22,8 +22,12 @@ public class AdmissionsOffice {
     }
 
     public double evaluateApplicant(Student applicant){
-        //Kein bock drauf
-        //wirklich keine laune
-        return 4.0;
+        int score = 0;
+        for(Map.Entry<String,Object> entry : importance.entrySet()){
+            String key = entry.getKey();
+            int collegeVal = (int)entry.getValue();
+            score += applicant.basicVals.get(key) * collegeVal; //need corresponding student hashMap
+        }
+        return score;
     }
 }

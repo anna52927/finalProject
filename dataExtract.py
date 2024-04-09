@@ -6,9 +6,10 @@ import csv,json,os
 #auto install if tabula not present
 try:
     import tabula
-except ImportError:
-    os.system('pip install jpype1')
-    os.system('pip install tabulate')
+except ModuleNotFoundError:
+    import sys,subprocess
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'jpype1'])
+    subprocess.call([sys.executable, '-m', 'pip', 'install', 'tabulate'])
     import tabula
 
 #coverts data from pdf to csv
