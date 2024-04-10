@@ -12,6 +12,21 @@ except ModuleNotFoundError:
     subprocess.call([sys.executable, '-m', 'pip', 'install', 'tabulate'])
     import tabula
 
+def collectData():
+    schools = ['brown','yale','harvard','princeton','cornell','dartmouth','columbia','upenn']
+    dataSets = ['importantMetrics']
+    starts = ['Very Important']
+    sentinels = ["Level of applicant's interest"]
+    delayStarts = [0]
+    delaySentinels = [0]
+    importanceTables = [True]
+    
+    for school in schools:
+        dataConvert(school+"CDS.pdf",school)
+        for (dataSet,start,sentinel,dStart,dSentinel,iTable) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables)):
+            filename = organize(school,dataSet,start,sentinel,delayStart=dstart,delaySentinel=dSentinel)
+            dictJSON(extract(filename,importanceTable=iTable))
+
 #coverts data from pdf to csv
 #returns file name
 def dataConvert(fileName,schoolName):
