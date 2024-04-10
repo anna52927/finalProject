@@ -13,16 +13,19 @@ except ModuleNotFoundError:
     import tabula
 
 def collectData():
-    schools = []
-    dataSets = []
-    starts = []
-    sentinels = []
-    delayStart = []
-    delaySentinel = []
+    schools = ['brown','yale','harvard','princeton','cornell','dartmouth','columbia','upenn']
+    dataSets = ['importantMetrics']
+    starts = ['Very Important']
+    sentinels = ["Level of applicant's interest"]
+    delayStarts = [0]
+    delaySentinels = [0]
+    importanceTables = [True]
     
     for school in schools:
-        for (dataSet,start,sentinel,delayStart,delaySentinel) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels)):
-            organize(school,dataSet,start,sentinel)
+        dataConvert(school+"CDS.pdf",school)
+        for (dataSet,start,sentinel,dStart,dSentinel,iTable) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables)):
+            filename = organize(school,dataSet,start,sentinel,delayStart=dstart,delaySentinel=dSentinel)
+            dictJSON(extract(filename,importanceTable=iTable))
 
 #coverts data from pdf to csv
 #returns file name
