@@ -17,8 +17,20 @@ public class AdmissionsOffice {
                 applicants) {
             applicant.setScore(evaluateApplicant(applicant)); //needs setScore method
         }
-        //sort algorithm (steal from test)
-        return applicants[:capacity-1] //however you do this in java (python superiority moment)
+        int n = applicants.size();
+        Student swap;
+
+        while (n > 1){
+            for (int i = 0; i < n - 1; i++) {
+                if (applicants.get(i).getScore() < applicants.get(i+1).getScore()){
+                    swap = applicants.get(i+1);
+                    applicants.set(i+1,applicants.get(i));
+                    applicants.set(i,swap);
+                }
+            }
+            n--;
+        }
+        return applicants.subList(0,self.capacity); //however you do this in java (python superiority moment)
     }
 
     public double evaluateApplicant(Student applicant){
