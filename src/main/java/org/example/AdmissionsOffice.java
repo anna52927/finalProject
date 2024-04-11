@@ -30,7 +30,13 @@ public class AdmissionsOffice {
             }
             n--;
         }
-        return applicants.subList(0,self.capacity); //however you do this in java (python superiority moment)
+
+        ArrayList<Student> admittedStudents = new ArrayList<>();
+        //list slicing (python superiority moment)
+        for (int i = 0; i < self.capacity; i++) {
+            admittedStudents.add(applicants.get(i));
+        }
+        return admittedStudents;
     }
 
     public double evaluateApplicant(Student applicant){
@@ -38,7 +44,7 @@ public class AdmissionsOffice {
         for(Map.Entry<String,Object> entry : importance.entrySet()){
             String key = entry.getKey();
             int collegeVal = (int)entry.getValue();
-            score += applicant.basicVals.get(key) * collegeVal; //need corresponding student hashMap
+            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
         }
         return score;
     }
