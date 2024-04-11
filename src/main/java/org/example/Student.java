@@ -11,8 +11,10 @@ public class Student {
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
+    private double score;
 
     public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, ArrayList<College> collegeRank) {
+        score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
         studentInfo.put("Class Rank", classRank);
         studentInfo.put("Academic GPA", GPA);
@@ -93,5 +95,13 @@ public class Student {
 
     public ArrayList<College> getList(){
         return preference;
+    }
+
+    public void setScore(double score){
+        this.score = score;
+    }
+
+    public double getScore(){
+        return score;
     }
 }
