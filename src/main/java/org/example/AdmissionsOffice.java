@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdmissionsOffice {
@@ -35,6 +37,13 @@ public class AdmissionsOffice {
         //list slicing (python superiority moment)
         for (int i = 0; i < self.capacity; i++) {
             admittedStudents.add(applicants.get(i));
+        }
+
+        //check diversity
+        HashMap<String,Integer> schoolDiversity = new HashMap<>();
+        for (Student applicant :
+                applicants) {
+            schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
         }
         return admittedStudents;
     }

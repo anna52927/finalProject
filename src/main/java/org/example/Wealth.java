@@ -15,7 +15,7 @@ public class Wealth {
     public Wealth(int money, int tuition, int PubIm){
         this.money = money;
         TUITION = tuition;
-        this.PubIm = PubIm;
+        this.pubIm = PubIm;
     }
 
     public void payTuition(int numStu){

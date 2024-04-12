@@ -9,8 +9,7 @@ public class Student {
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
     protected String major;
-    protected int diversity;
-
+    protected String diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
