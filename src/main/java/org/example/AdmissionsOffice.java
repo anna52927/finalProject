@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AdmissionsOffice {
@@ -30,7 +32,20 @@ public class AdmissionsOffice {
             }
             n--;
         }
-        return applicants.subList(0,self.capacity); //however you do this in java (python superiority moment)
+
+        ArrayList<Student> admittedStudents = new ArrayList<>();
+        //list slicing (python superiority moment)
+        for (int i = 0; i < self.capacity; i++) {
+            admittedStudents.add(applicants.get(i));
+        }
+
+        //check diversity
+        HashMap<String,Integer> schoolDiversity = new HashMap<>();
+        for (Student applicant :
+                applicants) {
+            schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
+        }
+        return admittedStudents;
     }
 
     public double evaluateApplicant(Student applicant){
@@ -38,7 +53,7 @@ public class AdmissionsOffice {
         for(Map.Entry<String,Object> entry : importance.entrySet()){
             String key = entry.getKey();
             int collegeVal = (int)entry.getValue();
-            score += applicant.basicVals.get(key) * collegeVal; //need corresponding student hashMap
+            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
         }
         return score;
     }

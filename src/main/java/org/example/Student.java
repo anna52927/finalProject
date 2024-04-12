@@ -8,11 +8,15 @@ import java.util.Random;
 public class Student {
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
+    protected String major;
+    protected String diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
+    private double score;
 
     public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, ArrayList<College> collegeRank) {
+        score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
         studentInfo.put("Class Rank", classRank);
         studentInfo.put("Academic GPA", GPA);
@@ -42,15 +46,13 @@ public class Student {
         ArrayList<Integer> collegePercents = new ArrayList<>();
         //can change these if we want
         collegePercents.add(40);
+        collegePercents.add(20);
         collegePercents.add(17);
         collegePercents.add(13);
-        collegePercents.add(10);
-        collegePercents.add(5);
-        collegePercents.add(5);
         collegePercents.add(5);
         collegePercents.add(5);
 
-        for(int i = 0; i < 8; i++ ){
+        for(int i = 0; i < 6; i++ ){
             int probAdd = 0;
             int collegeIndexRemove = 0;
 
@@ -86,12 +88,31 @@ public class Student {
         return list;
     }
 
-    //will this list already be ranked probably not
+    //will this list already be ranked probably not  figure out
     public College decide(ArrayList<College> collegeAct) {
-        return collegeAct.get(0);
+        int min = 5;
+        for (College college : collegeAct) {
+            for (int j = 0; j < preference.size(); j++) {
+                if ((college == preference.get(j) && j < min)) {
+                    min = j;
+                }
+            }
+        }
+        return preference.get(min);
     }
 
     public ArrayList<College> getList(){
         return preference;
+    }
+
+    public HashMap<String, Integer> getHashMap(){
+        return studentInfo;
+    }
+    public void setScore(double score){
+        this.score = score;
+    }
+
+    public double getScore(){
+        return score;
     }
 }
