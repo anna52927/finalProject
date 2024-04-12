@@ -14,9 +14,9 @@ except ModuleNotFoundError:
 
 def collectData():
     schools = ['brown','yale','harvard','princeton','cornell','dartmouth','columbia','upenn']
-    dataSets = ['importantMetrics']
+    dataSets = ['ImportantMetrics']
     starts = ['Very Important']
-    sentinels = ["Level of applicant's interest"]
+    sentinels = ["Level of applicant\u2019s interest"]
     delayStarts = [0]
     delaySentinels = [0]
     importanceTables = [True]
@@ -24,8 +24,8 @@ def collectData():
     for school in schools:
         dataConvert(school+"CDS.pdf",school)
         for (dataSet,start,sentinel,dStart,dSentinel,iTable) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables)):
-            filename = organize(school,dataSet,start,sentinel,delayStart=dstart,delaySentinel=dSentinel)
-            dictJSON(extract(filename,importanceTable=iTable))
+            filename = organize(school,dataSet,start,sentinel,delayStart=dStart,delaySentinel=dSentinel)
+            dictJSON(extract(filename,importanceTable=iTable),filename.replace("csv","json"))
 
 #coverts data from pdf to csv
 #returns file name

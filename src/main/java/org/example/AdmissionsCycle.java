@@ -21,13 +21,15 @@ public class AdmissionsCycle {
     private ArrayList<Student> students;
     private ArrayList<College> colleges;
     private String round;
+    private int year;
 
 
 
-    public AdmissionsCycle(ArrayList<Student> students, ArrayList<College> colleges){
+    public AdmissionsCycle(ArrayList<Student> students, ArrayList<College> colleges, int year){
         this.students = students;
         this.colleges = colleges;
         round = "ED";
+        this.year = year;
 
     }
     /*
@@ -107,6 +109,7 @@ public class AdmissionsCycle {
 
     }*/
     public void earlyRound2() {
+        round = "ED";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 
         // Initialize the applicants lists for each college

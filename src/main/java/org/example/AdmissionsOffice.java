@@ -17,8 +17,26 @@ public class AdmissionsOffice {
                 applicants) {
             applicant.setScore(evaluateApplicant(applicant)); //needs setScore method
         }
-        //sort algorithm (steal from test)
-        return applicants[:capacity-1] //however you do this in java (python superiority moment)
+        int n = applicants.size();
+        Student swap;
+
+        while (n > 1){
+            for (int i = 0; i < n - 1; i++) {
+                if (applicants.get(i).getScore() < applicants.get(i+1).getScore()){
+                    swap = applicants.get(i+1);
+                    applicants.set(i+1,applicants.get(i));
+                    applicants.set(i,swap);
+                }
+            }
+            n--;
+        }
+
+        ArrayList<Student> admittedStudents = new ArrayList<>();
+        //list slicing (python superiority moment)
+        for (int i = 0; i < self.capacity; i++) {
+            admittedStudents.add(applicants.get(i));
+        }
+        return admittedStudents;
     }
 
     public double evaluateApplicant(Student applicant){
@@ -26,7 +44,7 @@ public class AdmissionsOffice {
         for(Map.Entry<String,Object> entry : importance.entrySet()){
             String key = entry.getKey();
             int collegeVal = (int)entry.getValue();
-            score += applicant.basicVals.get(key) * collegeVal; //need corresponding student hashMap
+            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
         }
         return score;
     }
