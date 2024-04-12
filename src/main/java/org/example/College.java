@@ -29,5 +29,9 @@ public class College {
         alumni.add(student);
     }
 
+    public ArrayList<Student> getAttendingStudents(){
+        return attendingStudents;
+    }
+
 }
 
