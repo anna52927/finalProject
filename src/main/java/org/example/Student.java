@@ -8,6 +8,9 @@ import java.util.Random;
 public class Student {
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
+    protected String major;
+    protected int diversity;
+
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
@@ -86,7 +89,7 @@ public class Student {
         return list;
     }
 
-    //will this list already be ranked probably not
+    //will this list already be ranked probably not  figure out
     public College decide(ArrayList<College> collegeAct) {
         return collegeAct.get(0);
     }
@@ -94,4 +97,7 @@ public class Student {
     public ArrayList<College> getList(){
         return preference;
     }
+
+    //make a get hashmap
+    //make it so only 6 schools because columbia and upenn suck
 }
