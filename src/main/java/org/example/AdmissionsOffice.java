@@ -48,11 +48,11 @@ public class AdmissionsOffice {
         return admittedStudents;
     }
 
-    public double evaluateApplicant(Student applicant){
+    public double evaluateApplicant(Student applicant) {
         int score = 0;
-        for(Map.Entry<String,Object> entry : importance.entrySet()){
+        for (Map.Entry<String, Object> entry : importance.entrySet()) {
             String key = entry.getKey();
-            int collegeVal = (int)entry.getValue();
+            int collegeVal = (int) entry.getValue();
             score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
         }
         return score;

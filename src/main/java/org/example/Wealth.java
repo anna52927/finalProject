@@ -111,13 +111,16 @@ public class Wealth {
     public void receiveDonations(ArrayList<Student> alumni){
         Random random = new Random();
         int totalDonation = 0;
+
         final double MAJORSAL0 = 100000; // Major average salary
         final double MAJORSAL1 = 80000;
         final double MAJORSAL2 = 60000;
         final double MAJORSAL3 = 50000;
         final double donationRate = .2;
+
         final double pubImWeight = .01;
         final double salaryPercent = .01;
+
         HashMap<Integer, Double> majorSal = new HashMap<>();
         majorSal.put(0, MAJORSAL0);
         majorSal.put(1, MAJORSAL1);
