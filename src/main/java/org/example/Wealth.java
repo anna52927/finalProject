@@ -6,6 +6,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Wealth {
     private int money;
@@ -15,7 +16,7 @@ public class Wealth {
     public Wealth(int money, int tuition, int PubIm){
         this.money = money;
         TUITION = tuition;
-        this.PubIm = PubIm;
+        this.pubIm = PubIm;
     }
 
     public void payTuition(int numStu){
@@ -107,11 +108,33 @@ public class Wealth {
 
 
     }
-    public void receiveDonations(ArrayList<Student> alumni, ArrayList<Student> students){
+    public void receiveDonations(ArrayList<Student> alumni){
+        Random random = new Random();
+        int totalDonation = 0;
+        final double MAJORSAL0 = 100000; // Major average salary
+        final double MAJORSAL1 = 80000;
+        final double MAJORSAL2 = 60000;
+        final double MAJORSAL3 = 50000;
+        final double donationRate = .2;
+        final double pubImWeight = .01;
+        final double salaryPercent = .01;
+        HashMap<Integer, Double> majorSal = new HashMap<>();
+        majorSal.put(0, MAJORSAL0);
+        majorSal.put(1, MAJORSAL1);
+        majorSal.put(2, MAJORSAL2);
+        majorSal.put(3, MAJORSAL3);
 
-        //go through alumni donations by major expected salary (ability to give)
-        //go through almni donations by pubim (willingness to give)
+        for (Student alum : alumni) {
+            double checkRate= random.nextDouble();
+            if (checkRate<=donationRate) {
+                double pay = majorSal.get(alum.getMajor()); // Get alum's salary based on major
+                double pubImRate = (((double) pubIm) / 100) * pubImWeight;
+                double donation = pay * pubImRate * salaryPercent;
+                totalDonation += donation;
+            }
+        }
+
+
     }
-
 
 }
