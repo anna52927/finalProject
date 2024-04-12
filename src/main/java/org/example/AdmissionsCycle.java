@@ -121,7 +121,7 @@ public class AdmissionsCycle {
         for (Student student : students) {
             if (!student.getList().isEmpty()) {
                 College college = student.getList().get(0);
-                String collegeName = college.getName().toUpperCase();
+                String collegeName = college.name.toUpperCase();
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);
                 collegeApplicants.add(student);
             }
@@ -130,7 +130,7 @@ public class AdmissionsCycle {
         // Consider applicants for each college and remove attending students from the main list
         for (int i = 0; i < colleges.size(); i++) {
             String collegeName = String.valueOf((char) ('A' + i));
-            ArrayList<Student> attendingStudents = colleges.get(i).considerApplicants(applicantsMap.get(collegeName), round);
+            ArrayList<Student> attendingStudents = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
             students.removeAll(attendingStudents);
         }
 
@@ -235,7 +235,7 @@ public class AdmissionsCycle {
         for (Student student : students) {
             for (int j = 1; j < 2 && j < student.getList().size(); j++) {
                 College college = student.getList().get(j);
-                String collegeName = college.getName().toUpperCase();
+                String collegeName = college.name.toUpperCase();
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);
                 if (collegeApplicants != null) {
                     collegeApplicants.add(student);
@@ -246,7 +246,7 @@ public class AdmissionsCycle {
         ArrayList<ArrayList<Student>> acceptedLists = new ArrayList<>();
         for (int i = 0; i < colleges.size(); i++) {
             String collegeName = String.valueOf((char) ('A' + i));
-            ArrayList<Student> accepted = colleges.get(i).considerApplicants(applicantsMap.get(collegeName), round);
+            ArrayList<Student> accepted = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
             acceptedLists.add(accepted);
         }
 
@@ -264,7 +264,7 @@ public class AdmissionsCycle {
     }
     public void calculateWealth(){
         for (College college : colleges){
-            college.getWealth.payTuition(college.getEnrolledStudents.size());
+            college.getWealth.payTuition(college.getAttendingStudents().size());
         }
 
     }
