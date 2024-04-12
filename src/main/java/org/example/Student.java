@@ -47,15 +47,13 @@ public class Student {
         ArrayList<Integer> collegePercents = new ArrayList<>();
         //can change these if we want
         collegePercents.add(40);
+        collegePercents.add(20);
         collegePercents.add(17);
         collegePercents.add(13);
-        collegePercents.add(10);
-        collegePercents.add(5);
-        collegePercents.add(5);
         collegePercents.add(5);
         collegePercents.add(5);
 
-        for(int i = 0; i < 8; i++ ){
+        for(int i = 0; i < 6; i++ ){
             int probAdd = 0;
             int collegeIndexRemove = 0;
 
@@ -93,15 +91,24 @@ public class Student {
 
     //will this list already be ranked probably not  figure out
     public College decide(ArrayList<College> collegeAct) {
-        return collegeAct.get(0);
+        int min = 5;
+        for (College college : collegeAct) {
+            for (int j = 0; j < preference.size(); j++) {
+                if ((college == preference.get(j) && j < min)) {
+                    min = j;
+                }
+            }
+        }
+        return preference.get(min);
     }
 
     public ArrayList<College> getList(){
         return preference;
     }
-    
-    //make a get hashmap
-    //make it so only 6 schools because columbia and upenn suck
+
+    public HashMap<String, Integer> getHashMap(){
+        return studentInfo;
+    }
     public void setScore(double score){
         this.score = score;
     }
