@@ -8,15 +8,15 @@ public class College {
     private ArrayList<Student> attendingStudents;
     private ArrayList<Student> alumni;
     public AdmissionsOffice admissions;
+    private Wealth wealth;
 
-    public College(String name,int capacity){
+    public College(String name,int capacity,int tuition,int pubIm){
         this.capacity = capacity;
         this.name = name;
-        this.admissions = admissions;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         admissions = new AdmissionsOffice(this);
-        //potential spot to put the admin constuctor
+        wealth = new Wealth(0,tuition,pubIm);
     }
 
     public void enroll(Student student){
@@ -31,6 +31,10 @@ public class College {
 
     public ArrayList<Student> getAttendingStudents(){
         return attendingStudents;
+    }
+
+    public Wealth getWealth(){
+        return wealth;
     }
 
 }
