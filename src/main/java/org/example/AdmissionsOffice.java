@@ -61,4 +61,8 @@ public class AdmissionsOffice {
         }
         return score;
     }
+
+    public Map<Integer,Double> getAcceptanceRate(){
+        return acceptanceRate;
+    }
 }
