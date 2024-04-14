@@ -8,9 +8,11 @@ import java.util.Map;
 public class AdmissionsOffice {
     private College self;  //idk what to name this
     private Map<String,Object> importance;  //ranked table of importance
+    private Map<Integer,Double> acceptanceRate;
 
     public AdmissionsOffice(College college){
         this.self = college; //wow, this line looks cursed
+        acceptanceRate = new HashMap<>();
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
     }
 
@@ -45,6 +47,8 @@ public class AdmissionsOffice {
                 applicants) {
             schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
         }
+        acceptanceRate.put(applicants.get(0).getYear(),(double) admittedStudents.size()/applicants.size());
+
         return admittedStudents;
     }
 
