@@ -12,8 +12,18 @@ package org.example;
 /*4/8 notes:
 * - College has wealth as parameter
 *  - College has methods getWealth and getEnrolledStudents
-*  */
+* 4/13 notes:
+*  - don't have any sort of consideration of financial aid in calculating weath
+*  - thinking about calculating money. the calculateWealth method only calculates the expected
+* wealth gained in one year. i think it might be useful to have a method which calulates the
+* whole expected wealth gain for one specific class of students, as students and then as
+* alums, so the impact of each accepted class can be seen more easily.
+*  - just a note about running it, each time you want a new admissionsCycle, so each year,
+* you have to initialize a new instance of AdmissionsCycle, you can't just use the same one
+* year to year, because the year field needs to be updated.
+* */
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -32,6 +42,7 @@ public class AdmissionsCycle {
         this.year = year;
 
     }
+
     /*
     public void earlyRound(){
        for(int i = 0; i<students.size(); i++){
@@ -45,8 +56,10 @@ public class AdmissionsCycle {
        }
     }
 
-     *//*
-    public void earlyRound2(){ //all applicants passed into consideration
+
+    public void earlyRound2(){
+
+    //all applicants passed into consideration
         ArrayList<Student> Aapplicants = new ArrayList<Student>();
         ArrayList<Student> Bapplicants = new ArrayList<Student>();
         ArrayList<Student> Capplicants = new ArrayList<Student>();
@@ -108,12 +121,13 @@ public class AdmissionsCycle {
         //update college for student (what college student is going to from student perspective)
 
     }*/
+
     public void earlyRound2() {
         round = "ED";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 
         // Initialize the applicants lists for each college
-        for (char c = 'A'; c <= 'H'; c++) {
+        for (char c = 'A'; c <= 'F'; c++) {
             applicantsMap.put(String.valueOf(c), new ArrayList<>());
         }
 
@@ -135,7 +149,8 @@ public class AdmissionsCycle {
         }
 
         // Update college for each attending student (if needed)
-    }/*
+    }
+    /*
     public void regularRound(){
         round = "RA";
         ArrayList<Student> Aapplicants = new ArrayList<Student>();
@@ -228,12 +243,12 @@ public class AdmissionsCycle {
         round = "RA";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 
-        for (char c = 'A'; c <= 'H'; c++) {
+        for (char c = 'A'; c <= 'F'; c++) {
             applicantsMap.put(String.valueOf(c), new ArrayList<>());
         }
 
         for (Student student : students) {
-            for (int j = 1; j < 2 && j < student.getList().size(); j++) {
+            for (int j = 1; j < 2 && j < student.getList().size(); j++) { //how many colleges to apply to in ED round?
                 College college = student.getList().get(j);
                 String collegeName = college.name.toUpperCase();
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);
@@ -262,11 +277,33 @@ public class AdmissionsCycle {
             students.remove(student);
         }
     }
-    public void calculateWealth(){
+    public void calculateWealthPerYear(){
         for (College college : colleges){
+
             college.getWealth.payTuition(college.getAttendingStudents().size());
+            college.getWealth.updatePubIm(college.getAttendingStudents(), year);
+            college.getWealth.receiveDonations(college.getAlumni());
         }
 
+    }
+    public void calculateWealthPerClass(int classYear){
+        //HashMap<String, ArrayList<Student>> classOf_ = new HashMap<>();
+        for (College college : colleges){//makes a list of all the students of one singular class year
+            ArrayList<Student> sameYearStudents = new ArrayList<>();
+            for(Student student : college.getAttendingStudents()){
+                if (student.getYear() == classYear){
+                    sameYearStudents.add(student);
+                }
+            }
+            //classOf_.put(college.name, sameYearStudents);
+
+            for(int i=0;i<4;i++){//pays tuition for all four years of that class
+                college.getWealth.payTuition(sameYearStudents.size());
+            }
+            college.getWealth.updatePubIm(college.getAttendingStudents(), classYear);
+            //note for lizzie: add wealth method for donations over time
+            //add acceptance rate into pubim factor (will be hard in this method)
+        }
     }
 
 

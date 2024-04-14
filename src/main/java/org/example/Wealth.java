@@ -13,10 +13,10 @@ public class Wealth {
     private final int TUITION;
     private int pubIm; //public image, on a scale (1-10?, 1-100?)
 
-    public Wealth(int money, int tuition, int PubIm){
+    public Wealth(int money, int tuition, int pubIm){
         this.money = money;
         TUITION = tuition;
-        this.pubIm = PubIm;
+        this.pubIm = pubIm;
     }
 
     public void payTuition(int numStu){
@@ -136,7 +136,11 @@ public class Wealth {
                 totalDonation += donation;
             }
         }
+        money = money + totalDonation;
 
+    }
+
+    public void payTuitionAllFourYears(){
 
     }
 
