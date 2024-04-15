@@ -22,7 +22,20 @@ public class Wealth {
     public void payTuition(int numStu){
         money = money + (numStu * TUITION);
     }
-    public void updatePubIm(ArrayList<Student> students, int year){
+    public void updatePubIm(ArrayList<Student> students, int year, HashMap<Integer, Double> acceptanceRate){
+        int pubImChange = 0;
+
+        double goalAcceptanceRate = acceptanceRate.get(0);
+        double currentAcceptanceRate = acceptanceRate.get(year);
+        double rateChange = goalAcceptanceRate - currentAcceptanceRate;
+        if (rateChange > 0){ //current accpectance rate smaller than goal, so positive public image change
+            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*20));//mess with weight there
+        }
+        else if (rateChange < 0){ //currept acceptance rate is bigger than goal, so negative affect on pubim
+            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*20));//mess with weight there
+        }
+
+
         final double MAJORDISREQ0 = .25; //what distribution of majors the public finds okay
         final double MAJORDISREQ1 = .25;
         final double MAJORDISREQ2 = .25;
@@ -46,10 +59,10 @@ public class Wealth {
 
 
         ArrayList<Student> firstYears = new ArrayList<>();
-        int pubImChange = 0;
+
 
         for (Student student : students){
-            if (student.getYear() = year){
+            if (student.getHashMap().get("Application Year") == year){
                 firstYears.add(student);
             }
         }
@@ -80,8 +93,8 @@ public class Wealth {
 
         int[] diversityCounts = new int[4]; // 0, 1, 2, 3
         for (Student student : firstYears) {
-            int firstGen = student.getFirstGen();
-            diversityCounts[firstGen]++;//assuming firstGen opperates on 0-3 scale of diversity
+            int diversity = student.getDiversity();
+            diversityCounts[diversity]++;//assuming firstGen opperates on 0-3 scale of diversity
         }
         for (int i=0; i<majorCounts.length; i++){
             int div = diversityCounts[i];
@@ -140,7 +153,39 @@ public class Wealth {
 
     }
 
-    public void payTuitionAllFourYears(){
+    public void receiveClassCumulativeDonations(ArrayList<Student> alumni){
+        Random random = new Random();
+        int totalDonation = 0;
+
+        final double MAJORSAL0 = 100000; // Major average salary
+        final double MAJORSAL1 = 80000;
+        final double MAJORSAL2 = 60000;
+        final double MAJORSAL3 = 50000;
+        final double raiseRate = 1.04;
+        final double donationRate = .2;
+
+        final double pubImWeight = .01;
+        final double salaryPercent = .01;
+
+        HashMap<Integer, Double> majorSal = new HashMap<>();
+        majorSal.put(0, MAJORSAL0);
+        majorSal.put(1, MAJORSAL1);
+        majorSal.put(2, MAJORSAL2);
+        majorSal.put(3, MAJORSAL3);
+
+        for(int i = 0; i<50; i++){
+            for (Student alum : alumni) {
+                double checkRate = random.nextDouble();
+                if (checkRate <= donationRate) {
+                    double pay = majorSal.get(alum.getMajor()) * (Math.pow(raiseRate,i));
+                    ; // Get alum's salary based on major
+                    double pubImRate = (((double) pubIm) / 100) * pubImWeight;
+                    double donation = pay * pubImRate * salaryPercent;
+                    totalDonation += donation;
+                }
+            }
+        }
+        money = money + totalDonation;
 
     }
 
