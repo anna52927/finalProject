@@ -291,7 +291,7 @@ public class AdmissionsCycle {
         for (College college : colleges){//makes a list of all the students of one singular class year
             ArrayList<Student> sameYearStudents = new ArrayList<>();
             for(Student student : college.getAttendingStudents()){
-                if (student.getYear() == classYear){
+                if (student.getHashMap().get("Application Year") == classYear){
                     sameYearStudents.add(student);
                 }
             }

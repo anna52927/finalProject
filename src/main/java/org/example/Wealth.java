@@ -49,7 +49,7 @@ public class Wealth {
         int pubImChange = 0;
 
         for (Student student : students){
-            if (student.getYear() = year){
+            if (student.getHashMap().get("Application Year") == year){
                 firstYears.add(student);
             }
         }
@@ -80,7 +80,7 @@ public class Wealth {
 
         int[] diversityCounts = new int[4]; // 0, 1, 2, 3
         for (Student student : firstYears) {
-            int firstGen = student.getFirstGen();
+            int firstGen = student.getHashMap().get("First generation");
             diversityCounts[firstGen]++;//assuming firstGen opperates on 0-3 scale of diversity
         }
         for (int i=0; i<majorCounts.length; i++){

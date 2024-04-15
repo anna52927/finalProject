@@ -3,19 +3,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-//field for what cycle they are admitted in
+//make setters and getters in CHATGPT
 
 public class Student {
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
-    protected String major;
+    protected int major;
     protected String diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
     private double score;
 
-    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, ArrayList<College> collegeRank) {
+    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
         studentInfo.put("Class Rank", classRank);
@@ -25,9 +25,9 @@ public class Student {
         studentInfo.put("Recommendation(s)", recommendations);
         studentInfo.put("Interview",interview);
         studentInfo.put("Extracurricular activities",extraCurriculars);
-        studentInfo.put("Talent/Ability",talent);
+        studentInfo.put("Talent/ability",talent);
         studentInfo.put("Character/personal qualities",character);
-        studentInfo.put("First Generation",firstGen);
+        studentInfo.put("First generation",firstGen);
         studentInfo.put("Alumni/ae relation",alumniRelation);
         studentInfo.put("Geographical residence",geoRes);
         studentInfo.put("State residency",stateRes);
@@ -37,11 +37,12 @@ public class Student {
         studentInfo.put("Work experience",workExp);
         studentInfo.put("Level of applicant's interest",levelInt);
         studentInfo.put("Application Cycle",cycleNumber);
-        preference = collegePref2(collegeRank);
+        studentInfo.put("Application Year", year);
+        preference = collegePrefGen(collegeRank);
 
     }
 
-    public ArrayList<College> collegePref2(ArrayList<College> collegeRank){
+    public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
         ArrayList<College> list = new ArrayList<>();
         ArrayList<Integer> collegePercents = new ArrayList<>();
         //can change these if we want
@@ -88,7 +89,6 @@ public class Student {
         return list;
     }
 
-    //will this list already be ranked probably not  figure out
     public College decide(ArrayList<College> collegeAct) {
         int min = 5;
         for (College college : collegeAct) {
@@ -101,13 +101,17 @@ public class Student {
         return preference.get(min);
     }
 
-    public ArrayList<College> getList(){
-        return preference;
-    }
 
     public HashMap<String, Integer> getHashMap(){
         return studentInfo;
     }
+    public ArrayList<College> getList(){
+        return preference;
+    }
+
+    //Is major a String or Int for now?
+    public int getMajor(){return major;}
+
     public void setScore(double score){
         this.score = score;
     }
