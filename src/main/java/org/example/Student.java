@@ -9,7 +9,7 @@ public class Student {
 
     //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
     protected int major;
-    protected String diversity;
+    protected int diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
@@ -108,6 +108,7 @@ public class Student {
     public ArrayList<College> getList(){
         return preference;
     }
+    public int getDiversity(){return diversity;}
 
     //Is major a String or Int for now?
     public int getMajor(){return major;}

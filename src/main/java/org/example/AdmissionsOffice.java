@@ -42,12 +42,12 @@ public class AdmissionsOffice {
         }
 
         //check diversity
-        HashMap<String,Integer> schoolDiversity = new HashMap<>();
+        HashMap<Integer,Integer> schoolDiversity = new HashMap<>();
         for (Student applicant :
                 applicants) {
             schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
         }
-        acceptanceRate.put(applicants.get(0).getYear(),(double) admittedStudents.size()/applicants.size());
+        acceptanceRate.put(applicants.get(0).getHashMap().get("Application Year"),(double) admittedStudents.size()/applicants.size());
 
         return admittedStudents;
     }
