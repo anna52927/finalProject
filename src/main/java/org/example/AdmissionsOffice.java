@@ -10,9 +10,10 @@ public class AdmissionsOffice {
     private Map<String,Object> importance;  //ranked table of importance
     private Map<Integer,Double> acceptanceRate;
 
-    public AdmissionsOffice(College college){
+    public AdmissionsOffice(College college, double initialAcceptanceRate){
         this.self = college; //wow, this line looks cursed
         acceptanceRate = new HashMap<>();
+        acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
     }
 
