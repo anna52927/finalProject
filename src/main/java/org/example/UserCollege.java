@@ -10,6 +10,8 @@ public class UserCollege {
     private ArrayList<Student> attendingStudents;
     private ArrayList<Student> alumni;
     private Wealth wealth;
+    //need to make subclass of admissions office that does everything for user college
+    //make a financial aid budget
     public UserCollege(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int capacity,int tuition,int pubIm) {
         userCollegeInfo.put("Rigor of secondary school record", rigor);
         userCollegeInfo.put("Class Rank", classRank);
@@ -82,6 +84,8 @@ public class UserCollege {
 
         System.out.println("Enter your college's capacity: ");
         capacity = scanner.nextInt();
+
+        //major requirments
 
         scanner.close();
     }
