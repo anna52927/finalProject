@@ -8,7 +8,7 @@ import java.util.Map;
 public class AdmissionsOffice {
     private College self;  //idk what to name this
     private Map<String,Object> importance;  //ranked table of importance
-    private Map<Integer,Double> acceptanceRate;
+    private HashMap<Integer,Double> acceptanceRate;
 
     public AdmissionsOffice(College college, double initialAcceptanceRate){
         this.self = college; //wow, this line looks cursed
@@ -63,7 +63,7 @@ public class AdmissionsOffice {
         return score;
     }
 
-    public Map<Integer,Double> getAcceptanceRate(){
+    public HashMap<Integer,Double> getAcceptanceRate(){
         return acceptanceRate;
     }
 }

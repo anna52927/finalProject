@@ -37,5 +37,8 @@ public class College {
         return wealth;
     }
 
+    public ArrayList<Student> getAlumni(){
+        return alumni;
+    }
 }
 
