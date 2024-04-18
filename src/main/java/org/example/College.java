@@ -15,7 +15,7 @@ public class College {
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
-        admissions = new AdmissionsOffice(this);
+        admissions = new AdmissionsOffice(this,0);
         wealth = new Wealth(0,tuition,pubIm);
     }
 

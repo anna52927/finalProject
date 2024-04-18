@@ -85,7 +85,7 @@ public class UserCollege {
         System.out.println("Enter your college's capacity: ");
         capacity = scanner.nextInt();
 
-        //major requirments
+        //major requirements
 
         scanner.close();
     }
