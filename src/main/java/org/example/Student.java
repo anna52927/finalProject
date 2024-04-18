@@ -3,11 +3,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-//make setters and getters in CHATGPT
+
 
 public class Student {
 
-    //references the College objects when its made will be a list maybe for now i'll make it a string to be able to see how it works
     protected int major;
     protected int diversity;
     protected ArrayList<College> preference;
