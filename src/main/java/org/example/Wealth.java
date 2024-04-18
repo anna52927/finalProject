@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Wealth {
-    private int money;
+    public int money;
     private final int TUITION;
     private int pubIm; //public image, on a scale (1-10?, 1-100?)
 
