@@ -4,16 +4,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class UserCollege {
+public class UserCollege extends College{
     HashMap<String, Integer> userCollegeInfo = new HashMap<>();
     public int capacity;
     private ArrayList<Student> attendingStudents;
     private ArrayList<Student> alumni;
     private Wealth wealth;
-    public int fAidBudget;
-    //need to make subclass of admissions office that does everything for user college
+    public int finAidBudget;
+
+    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate) {
+        super(name, capacity, tuition, pubIm, initialAcceptanceRate);
+        attendingStudents = new ArrayList<Student>();
+        alumni = new ArrayList<Student>();
+        wealth = new Wealth(0,tuition,pubIm);
+        //will have to create an admissions office outside of this constructor because
+        //needs user college info to set first before an admissions office is created
+    }
+
     //make a financial aid budget
-    public UserCollege(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int capacity,int tuition,int pubIm) {
+
+    public void setDefaultUserCollege(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int capacity,int tuition,int pubIm) {
         userCollegeInfo.put("Rigor of secondary school record", rigor);
         userCollegeInfo.put("Class Rank", classRank);
         userCollegeInfo.put("Academic GPA", GPA);
@@ -33,13 +43,6 @@ public class UserCollege {
         userCollegeInfo.put("Volunteer work",volunteerWork);
         userCollegeInfo.put("Work experience",workExp);
         userCollegeInfo.put("Level of applicant's interest",levelInt);
-
-        this.capacity = capacity;
-        attendingStudents = new ArrayList<Student>();
-        alumni = new ArrayList<Student>();
-        wealth = new Wealth(0,tuition,pubIm);
-
-
     }
 
     public void chooseCollegeInfo(){
@@ -91,14 +94,6 @@ public class UserCollege {
         scanner.close();
     }
 
-    public void enroll(Student student){
-        attendingStudents.add(student);
-    }
-
-    public void graduate(Student student){
-        attendingStudents.remove(student);
-        alumni.add(student);
-    }
 
     //Questions about UserCollege
     //where is the users wealth calculated?
