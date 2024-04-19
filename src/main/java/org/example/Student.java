@@ -6,7 +6,6 @@ import java.util.Random;
 
 
 public class Student {
-
     protected int major;
     protected int diversity;
     protected ArrayList<College> preference;
@@ -37,8 +36,13 @@ public class Student {
         studentInfo.put("Level of applicant's interest",levelInt);
         studentInfo.put("Application Cycle",cycleNumber);
         studentInfo.put("Application Year", year);
-        preference = collegePrefGen(collegeRank);
+        preference = collegePrefGen2(collegeRank);
 
+    }
+
+
+    public ArrayList<College> collegePrefGen2(ArrayList<College> collegeRank){
+        return collegeRank;
     }
 
     public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
@@ -60,10 +64,13 @@ public class Student {
             int prob = random.nextInt(100)+1;
             for(int j = 0; j < collegePercents.size(); j++){
                 if (j == 0 && prob <= collegePercents.get(0)){
+                    System.out.println(collegeRank);
                     list.add(collegeRank.get(0));
                 }
                 //probAdd + 1 represents lower limit and other one is upper
-                else if (prob >= (probAdd + 1) && prob <= (collegePercents.get(j) + probAdd)) {
+                else if (prob >= (probAdd + 1) && prob <= (collegePercents.get(j) + probAdd) && (collegeRank.size() != 0)) {
+                    System.out.println("college percent = " + collegePercents);
+                    System.out.println("college rank = " + collegeRank );
                     list.add(collegeRank.get(j));
                     collegeIndexRemove = j;
                 }

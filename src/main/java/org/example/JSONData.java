@@ -14,7 +14,6 @@ import java.util.Map;
 public class JSONData {
 
     public static Map<String,Object> JSONImport(String filename) {
-        System.out.println(filename);
         File jsonFile = new File("yaleImportantMetrics.json"); // Replace with the path to your JSON file
         Map<String, Object> map = new HashMap<>();
 
