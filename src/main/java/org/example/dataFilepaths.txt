@@ -1,0 +1,8 @@
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\brownImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\columbiaImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\cornellImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\dartmouthImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\harvardImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\princetonImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\upennImportantMetrics.json
+C:\Users\felix\OneDrive\Documents\GitHub\finalProject\cdsData\yaleImportantMetrics.json

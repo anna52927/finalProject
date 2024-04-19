@@ -56,15 +56,25 @@ public class AdmissionsCycle {
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 
         // Initialize the applicants lists for each college
-        for (char c = 'A'; c <= 'F'; c++) {
-            applicantsMap.put(String.valueOf(c), new ArrayList<>());
-        }
+        applicantsMap.put("yale", new ArrayList<>());
+        applicantsMap.put("brown", new ArrayList<>());
+        applicantsMap.put("harvard", new ArrayList<>());
+        applicantsMap.put("dartmouth", new ArrayList<>());
+        applicantsMap.put("princeton", new ArrayList<>());
+        applicantsMap.put("cornell", new ArrayList<>());
+        ArrayList<String> collegeNames = new ArrayList<>();
+        collegeNames.add("yale");
+        collegeNames.add("brown");
+        collegeNames.add("harvard");
+        collegeNames.add("dartmouth");
+        collegeNames.add("princeton");
+        collegeNames.add("cornell");
 
         // Group applicants based on their first college choice
         for (Student student : students) {
             if (!student.getList().isEmpty()) {
                 College college = student.getList().get(0);
-                String collegeName = college.name.toUpperCase();
+                String collegeName = college.name;
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);
                 collegeApplicants.add(student);
             }
@@ -72,7 +82,7 @@ public class AdmissionsCycle {
 
         // Consider applicants for each college and remove attending students from the main list
         for (int i = 0; i < colleges.size(); i++) {
-            String collegeName = String.valueOf((char) ('A' + i));
+            String collegeName = collegeNames.get(i);
             ArrayList<Student> attendingStudents = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
             students.removeAll(attendingStudents);
         }
@@ -82,16 +92,28 @@ public class AdmissionsCycle {
 
     public void regularRound() {
         round = "RA";
+        ArrayList<String> collegeNames = new ArrayList<>();
+        collegeNames.add("yale");
+        collegeNames.add("brown");
+        collegeNames.add("harvard");
+        collegeNames.add("dartmouth");
+        collegeNames.add("princeton");
+        collegeNames.add("cornell");
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
+        applicantsMap.put("yale", new ArrayList<>());
+        applicantsMap.put("brown", new ArrayList<>());
+        applicantsMap.put("harvard", new ArrayList<>());
+        applicantsMap.put("dartmouth", new ArrayList<>());
+        applicantsMap.put("princeton", new ArrayList<>());
+        applicantsMap.put("cornell", new ArrayList<>());
 
-        for (char c = 'A'; c <= 'F'; c++) {
-            applicantsMap.put(String.valueOf(c), new ArrayList<>());
-        }
+
+
 
         for (Student student : students) {
             for (int j = 1; j < 2 && j < student.getList().size(); j++) { //how many colleges to apply to in ED round?
                 College college = student.getList().get(j);
-                String collegeName = college.name.toUpperCase();
+                String collegeName = college.name;
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);
                 if (collegeApplicants != null) {
                     collegeApplicants.add(student);
@@ -101,7 +123,7 @@ public class AdmissionsCycle {
 
         ArrayList<ArrayList<Student>> acceptedLists = new ArrayList<>();
         for (int i = 0; i < colleges.size(); i++) {
-            String collegeName = String.valueOf((char) ('A' + i));
+            String collegeName = collegeNames.get(i);
             ArrayList<Student> accepted = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
             acceptedLists.add(accepted);
         }
@@ -143,6 +165,7 @@ public class AdmissionsCycle {
             }
             college.getWealth().updatePubIm(college.getAttendingStudents(), classYear, college.admissions.getAcceptanceRate());
             college.getWealth().receiveClassCumulativeDonations(sameYearStudents);
+            System.out.println("the wealth for " + college.name + " is " + college.getWealth().money);
         }
     }
 

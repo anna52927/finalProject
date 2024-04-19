@@ -10,12 +10,12 @@ public class College {
     public AdmissionsOffice admissions;
     private Wealth wealth;
 
-    public College(String name,int capacity,int tuition,int pubIm){
+    public College(String name,int capacity,int tuition,int pubIm, double initialAcceptanceRate){
         this.capacity = capacity;
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
-        admissions = new AdmissionsOffice(this,0);
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate);
         wealth = new Wealth(0,tuition,pubIm);
     }
 
