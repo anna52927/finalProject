@@ -56,19 +56,10 @@ public class AdmissionsCycle {
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 
         // Initialize the applicants lists for each college
-        applicantsMap.put("yale", new ArrayList<>());
-        applicantsMap.put("brown", new ArrayList<>());
-        applicantsMap.put("harvard", new ArrayList<>());
-        applicantsMap.put("dartmouth", new ArrayList<>());
-        applicantsMap.put("princeton", new ArrayList<>());
-        applicantsMap.put("cornell", new ArrayList<>());
-        ArrayList<String> collegeNames = new ArrayList<>();
-        collegeNames.add("yale");
-        collegeNames.add("brown");
-        collegeNames.add("harvard");
-        collegeNames.add("dartmouth");
-        collegeNames.add("princeton");
-        collegeNames.add("cornell");
+        for (College college: colleges){
+            applicantsMap.put(college.name, new ArrayList<>());
+        }
+
 
         // Group applicants based on their first college choice
         for (Student student : students) {
@@ -81,35 +72,25 @@ public class AdmissionsCycle {
         }
 
         // Consider applicants for each college and remove attending students from the main list
-        for (int i = 0; i < colleges.size(); i++) {
-            String collegeName = collegeNames.get(i);
-            ArrayList<Student> attendingStudents = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
+        for (College college: colleges) {
+            String collegeName = college.name;
+            ArrayList<Student> attendingStudents = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
             students.removeAll(attendingStudents);
         }
-
-        // Update college for each attending student (if needed)
     }
 
     public void regularRound() {
         round = "RA";
-        ArrayList<String> collegeNames = new ArrayList<>();
-        collegeNames.add("yale");
-        collegeNames.add("brown");
-        collegeNames.add("harvard");
-        collegeNames.add("dartmouth");
-        collegeNames.add("princeton");
-        collegeNames.add("cornell");
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
-        applicantsMap.put("yale", new ArrayList<>());
-        applicantsMap.put("brown", new ArrayList<>());
-        applicantsMap.put("harvard", new ArrayList<>());
-        applicantsMap.put("dartmouth", new ArrayList<>());
-        applicantsMap.put("princeton", new ArrayList<>());
-        applicantsMap.put("cornell", new ArrayList<>());
+
+        // Initialize the applicants lists for each college
+        for (College college: colleges){
+            applicantsMap.put(college.name, new ArrayList<>());
+        }
 
 
 
-
+        //add students applying to each school to a list of applicants
         for (Student student : students) {
             for (int j = 1; j < 2 && j < student.getList().size(); j++) { //how many colleges to apply to in ED round?
                 College college = student.getList().get(j);
@@ -121,13 +102,16 @@ public class AdmissionsCycle {
             }
         }
 
+        //collects a list of each list of accepted students
         ArrayList<ArrayList<Student>> acceptedLists = new ArrayList<>();
-        for (int i = 0; i < colleges.size(); i++) {
-            String collegeName = collegeNames.get(i);
-            ArrayList<Student> accepted = colleges.get(i).admissions.considerApplicants(applicantsMap.get(collegeName), round);
+        for (College college : colleges) {
+            String collegeName = college.name;
+            ArrayList<Student> accepted = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
             acceptedLists.add(accepted);
         }
 
+        //each student receives a list of their accepted colleges and decides which to attened
+        //they are enrolled and removed from the applicant pool
         for (Student student : students) {
             ArrayList<College> acceptedColleges = new ArrayList<>();
             for (int i = 0; i < acceptedLists.size(); i++) {
@@ -168,8 +152,25 @@ public class AdmissionsCycle {
             System.out.println("the wealth for " + college.name + " is " + college.getWealth().money);
         }
     }
-
-
+    //CHATGPT HELL YEAH BABYYYYYY RAHHHHHHHHH
+    public ArrayList<College> orderColleges(){
+        ArrayList<College> collegesRanked = new ArrayList<>(colleges); // Assume 'colleges' is a class member containing the initial list
+        boolean swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < collegesRanked.size() - 1; i++) {
+                College current = collegesRanked.get(i);
+                College next = collegesRanked.get(i + 1);
+                if (current.getWealth().pubIm < next.getWealth().pubIm) {
+                    // Swap current and next
+                    collegesRanked.set(i, next);
+                    collegesRanked.set(i + 1, current);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+        return collegesRanked;
+    }
 
 }
 

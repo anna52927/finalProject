@@ -11,7 +11,7 @@ import java.util.Random;
 public class Wealth {
     public int money;
     private final int TUITION;
-    private int pubIm; //public image, on a scale (1-10?, 1-100?)
+    public int pubIm; //public image, on a scale (1-10?, 1-100?)
 
     public Wealth(int money, int tuition, int pubIm){
         this.money = money;
