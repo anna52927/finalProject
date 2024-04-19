@@ -20,12 +20,14 @@ def collectData():
     delayStarts = [0]
     delaySentinels = [0]
     importanceTables = [True]
+    filepaths = []
     
     for school in schools:
         dataConvert(school+"CDS.pdf",school)
         for (dataSet,start,sentinel,dStart,dSentinel,iTable) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables)):
             filename = organize(school,dataSet,start,sentinel,delayStart=dStart,delaySentinel=dSentinel)
-            dictJSON(extract(filename,importanceTable=iTable),filename.replace("csv","json"))
+            filepaths.append(dictJSON(extract(filename,importanceTable=iTable),filename.replace("csv","json")))
+    createFilepaths(filepaths)
 
 #coverts data from pdf to csv
 #returns file name
@@ -152,3 +154,19 @@ def dictJSON(dictionary, filename):
     with open(filename, 'w') as json_file:
         json.dump(dictionary, json_file, indent=4)
         return os.path.join(os.getcwd(),filename)
+
+#made by Felix again
+def createFilepaths(filepaths):
+    indexFilepath = os.path.dirname(os.getcwd()) + r"\src\main\java\org\example\dataFilepaths.txt"
+    with open(indexFilepath, 'w') as f:
+        for filepath in filepaths:
+            print(filepath,file=f)
+
+def fetchFilepaths():
+    indexFilepath = os.path.dirname(os.getcwd()) + r"\src\main\java\org\example\dataFilepaths.txt"
+    with open(indexFilepath, 'w') as indexFile:
+        for (root,_,files) in os.walk(os.getcwd()):
+            for f in files:
+                if "json" in f:
+                    print(os.path.join(root,f),file=indexFile)
+    
