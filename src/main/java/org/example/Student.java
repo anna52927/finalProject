@@ -16,7 +16,7 @@ public class Student {
     public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
-        studentInfo.put("Class Rank", classRank);
+        studentInfo.put("Class rank", classRank);
         studentInfo.put("Academic GPA", GPA);
         studentInfo.put("Standardized test scores", SAT);
         studentInfo.put("Application Essay", essay);
@@ -33,7 +33,7 @@ public class Student {
         studentInfo.put("Racial/ethnic status",raceEthnicStatus);
         studentInfo.put("Volunteer work",volunteerWork);
         studentInfo.put("Work experience",workExp);
-        studentInfo.put("Level of applicant's interest",levelInt);
+        studentInfo.put("Level of applicant\u2019s interest",levelInt);
         studentInfo.put("Application Cycle",cycleNumber);
         studentInfo.put("Application Year", year);
         preference = collegePrefGen2(collegeRank);

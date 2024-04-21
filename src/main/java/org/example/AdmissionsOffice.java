@@ -57,8 +57,9 @@ public class AdmissionsOffice {
         int score = 0;
         for (Map.Entry<String, Object> entry : importance.entrySet()) {
             String key = entry.getKey();
-            int collegeVal = (int) entry.getValue();
-            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
+            Map<String,Integer> collegeVal = (Map<String,Integer>)entry.getValue();
+            System.out.println(key);
+            score += applicant.studentInfo.get(key) * collegeVal.get("value"); //need corresponding student hashMap
         }
         return score;
     }
