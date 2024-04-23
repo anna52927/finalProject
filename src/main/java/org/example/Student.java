@@ -7,7 +7,7 @@ import java.util.Random;
 
 
 public class Student {
-    protected int major;
+    protected String major;
     protected int diversity;
     protected ArrayList<College> preference;
     //Hash Map
@@ -126,7 +126,7 @@ public class Student {
     public int getDiversity(){return diversity;}
 
     //Is major a String or Int for now?
-    public int getMajor(){return major;}
+    public String getMajor(){return major;}
 
     public void setScore(double score){
         this.score = score;
