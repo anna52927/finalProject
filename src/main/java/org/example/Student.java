@@ -1,5 +1,6 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -36,64 +37,72 @@ public class Student {
         studentInfo.put("Level of applicant\u2019s interest",levelInt);
         studentInfo.put("Application Cycle",cycleNumber);
         studentInfo.put("Application Year", year);
-        preference = collegePrefGen2(collegeRank);
+        preference = collegePrefGen(collegeRank);
 
     }
 
 
-    public ArrayList<College> collegePrefGen2(ArrayList<College> collegeRank){
-        return collegeRank;
-    }
-
+    //I FIGURED OUT THE ISSUE. COLLEGE RANK SENDS IN THE LIST AND NOT A COPY SO WHEN I REMOVE SOMETHING FROM IT REMOVES IT FOREVER. TOTALLY FORGOT ABOUT THAT
     public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
         ArrayList<College> list = new ArrayList<>();
-        ArrayList<Integer> collegePercents = new ArrayList<>();
-        //can change these if we want
-        collegePercents.add(40);
-        collegePercents.add(20);
-        collegePercents.add(17);
-        collegePercents.add(13);
-        collegePercents.add(5);
-        collegePercents.add(5);
+        ArrayList<Integer> collegePercents = new ArrayList<>(Arrays.asList(0,0,0,0,0,0));
+        ArrayList<Integer> copyCollegeRank = new ArrayList<>(Arrays.asList(0,1,2,3,4,5));
 
-        for(int i = 0; i < 6; i++ ){
-            int probAdd = 0;
-            int collegeIndexRemove = 0;
+
+        for(int k = 0; k < 6; k++){
+            double pubImTotal = 0; //the denominator for the fraction
+            int hundredCheck = 0; //makes sure it adds up to 100 random number is in range
+
+            //adding up all public images
+            for (Integer integer : copyCollegeRank) {
+                pubImTotal = pubImTotal + collegeRank.get(integer).getWealth().pubIm;
+            }
+
+            //sets the new percentages with their public image / pubImTotal
+            for(int j = 0; j < copyCollegeRank.size(); j++ ){
+                collegePercents.set(j, (int) Math.round(((collegeRank.get(copyCollegeRank.get(j)).getWealth().pubIm) / pubImTotal) * 100.0));
+                hundredCheck = hundredCheck + collegePercents.get(j);
+            }
+
+            //checks if hundred, if not adds or subtracts from top school
+            if (hundredCheck != 100){
+                if(hundredCheck > 100){
+                    collegePercents.set(0, (collegePercents.get(0) - (hundredCheck - 100)));
+                }
+                else{
+                    collegePercents.set(0, (collegePercents.get(0) + (100 - hundredCheck)));
+                }
+            }
+
 
             Random random = new Random();
-            int prob = random.nextInt(100)+1;
-            for(int j = 0; j < collegePercents.size(); j++){
-                if (j == 0 && prob <= collegePercents.get(0)){
-                    System.out.println(collegeRank);
-                    list.add(collegeRank.get(0));
-                }
-                //probAdd + 1 represents lower limit and other one is upper
-                else if (prob >= (probAdd + 1) && prob <= (collegePercents.get(j) + probAdd) && (collegeRank.size() != 0)) {
-                    System.out.println("college percent = " + collegePercents);
-                    System.out.println("college rank = " + collegeRank );
-                    list.add(collegeRank.get(j));
-                    collegeIndexRemove = j;
-                }
-                probAdd = probAdd + collegePercents.get(j);
-            }
-            probAdd = probAdd - collegePercents.get(collegeIndexRemove);
-            collegeRank.remove(collegeIndexRemove);
-            collegePercents.remove(collegeIndexRemove);
+            int randomNumber = random.nextInt(100) + 1;
+            double probAdd = 0; //the bottom range
+            int collegeIndexRemove = 0; // tells which index to remove from the copy and percent lists
 
-            //sometimes the percentage doesn't add up to 100 (fixes it)
-            int hundredCheck = 0;
-            for(int k = 0; k < collegePercents.size(); k++){
-                float newProb = (float) collegePercents.get(k) /probAdd * 100;
-                collegePercents.set(k, (int) newProb);
-                hundredCheck = hundredCheck + collegePercents.get(k);
+            for(int l = 0; l < collegePercents.size(); l++){
+                if (l == 0 && randomNumber <= collegePercents.get(0)){
+                    //System.out.println("college percent = " + collegePercents);
+                    //System.out.println("college rank = " + collegeRank );
+                    list.add(collegeRank.get(copyCollegeRank.get(0)));
+                }
+                else if (randomNumber >= (probAdd + 0.01) && randomNumber <= (collegePercents.get(l) + probAdd)) {
+                    //System.out.println("college percent = " + collegePercents);
+                    //System.out.println("college rank = " + collegeRank );
+                    list.add(collegeRank.get(copyCollegeRank.get(l)));
+                    collegeIndexRemove = l;
+                }
+                probAdd = probAdd + collegePercents.get(l);
+
             }
-            if (hundredCheck < 100 && hundredCheck != 0){
-                collegePercents.set(0, (collegePercents.get(0) + (100 - hundredCheck)));
-            }
+            copyCollegeRank.remove(collegeIndexRemove);
+            collegePercents.remove(collegeIndexRemove);
         }
-        System.out.println(list);
+
+        System.out.println("End List: " + list);
         return list;
     }
+
 
     public College decide(ArrayList<College> collegeAct) {
         int min = 5;
