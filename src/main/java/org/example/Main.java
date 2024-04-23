@@ -11,7 +11,6 @@ public class Main {
         colleges.add(new College("dartmouth",9,2000000,20,0.04));
         colleges.add(new College("princeton",4000,2000000,19,0.04));
         colleges.add(new College("cornell",2000,2000000,18,0.04));
-        
 
         ArrayList<Student> students = new ArrayList<>();
         students.add(new Student(1,2,3,1,2,1,3,0,1,2,3,1,2,0,0,1,2,3,2,1,2024,colleges));
