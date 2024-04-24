@@ -15,7 +15,7 @@ except ModuleNotFoundError:
 def collectData():
     schools = ['brown','yale','harvard','princeton','cornell','dartmouth','columbia','upenn']
     dataSets = ['ImportantMetrics','MajorDistribution']
-    starts = ['Very Important','Diploma/Certificates']
+    starts = ['Very Important','Bachelor’s']
     sentinels = ["Level of applicant\u2019s interest",'Other']
     delayStarts = [0,0]
     delaySentinels = [0,0]

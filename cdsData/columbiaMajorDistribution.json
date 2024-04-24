@@ -1,0 +1,276 @@
+{
+    "": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": "to Include"
+    },
+    "Agriculture": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 1.0
+    },
+    "Natural resources and conservation": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0037,
+        "Categories": 3.0
+    },
+    "Architecture": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.005600000000000001,
+        "Categories": 4.0
+    },
+    "Area, ethnic, and gender studies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.039900000000000005,
+        "Categories": 5.0
+    },
+    "Communication/journalism": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 9.0
+    },
+    "Communication technologies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 10.0
+    },
+    "Computer and information sciences": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1452,
+        "Categories": 11.0
+    },
+    "Personal and culinary services": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 12.0
+    },
+    "Education": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 13.0
+    },
+    "Engineering": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.14150000000000001,
+        "Categories": 14.0
+    },
+    "Engineering technologies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 15.0
+    },
+    "Foreign languages, literatures, and linguistics": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0408,
+        "Categories": 16.0
+    },
+    "Family and consumer sciences": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 19.0
+    },
+    "Law/legal studies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 22.0
+    },
+    "English": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.045,
+        "Categories": 23.0
+    },
+    "Liberal arts/general studies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0005,
+        "Categories": 24.0
+    },
+    "Library science": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 25.0
+    },
+    "Biological/life sciences": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0664,
+        "Categories": 26.0
+    },
+    "Mathematics and statistics": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.065,
+        "Categories": 27.0
+    },
+    "Military science and military technologies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": "28 and 29"
+    },
+    "Interdisciplinary studies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0218,
+        "Categories": 30.0
+    },
+    "Parks and recreation": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 31.0
+    },
+    "Philosophy and religious studies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0255,
+        "Categories": 38.0
+    },
+    "Theology and religious vocations": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 39.0
+    },
+    "Physical sciences": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0302,
+        "Categories": 40.0
+    },
+    "Science technologies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "Categories": 41.0
+    },
+    "Psychology": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.054299999999999994,
+        "Categories": 42.0
+    },
+    "Category": {
+        "Category": "Diploma/\nCertificates",
+        "": "Associate",
+        "Associate": "Bachelor\u2019s",
+        "Bachelor\u2019s": "CIP 2020\nCategories\nto Include"
+    },
+    "Homeland Security, law enforcement, firefighting, and protec-\ntive services": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 43.0
+    },
+    "Public administration and social services": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 44.0
+    },
+    "Social sciences": {
+        "Category": "",
+        "": "",
+        "Associate": 0.2232,
+        "Bachelor\u2019s": 45.0
+    },
+    "Construction trades": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 46.0
+    },
+    "Mechanic and repair technologies": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 47.0
+    },
+    "Precision production": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 48.0
+    },
+    "Transportation and materials moving": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 49.0
+    },
+    "Visual and performing arts": {
+        "Category": "",
+        "": "",
+        "Associate": 0.051,
+        "Bachelor\u2019s": 50.0
+    },
+    "Health professions and related programs": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 51.0
+    },
+    "Business/marketing": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": 52.0
+    },
+    "History": {
+        "Category": "",
+        "": "",
+        "Associate": 0.0404,
+        "Bachelor\u2019s": 54.0
+    },
+    "Other": {
+        "Category": "",
+        "": "",
+        "Associate": "",
+        "Bachelor\u2019s": ""
+    }
+}
