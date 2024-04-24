@@ -5,7 +5,6 @@ import java.util.HashMap;
 //
 public class Main {
     public static void main(String[] args) {
-        HashMap<String,Integer> majors = ;
             
         ArrayList<College> colleges = new ArrayList<>();
         colleges.add(new College("yale",400,2000000,30,0.04));
