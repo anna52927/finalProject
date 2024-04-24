@@ -51,7 +51,7 @@ public class AdmissionsCycle {
 
 
 
-    public void earlyRound2() {
+    public void earlyRound() {
         round = "ED";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
 

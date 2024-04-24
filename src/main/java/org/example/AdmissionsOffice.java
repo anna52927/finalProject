@@ -17,8 +17,13 @@ public class AdmissionsOffice {
     private int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
     private double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,HashMap<String,Integer> majorDistributions,HashMap<Integer,Integer> diversityDistributions){
         this.self = college; //wow, this line looks cursed
+        this.majorCutoff = majorCutoff;
+        this.diversityCutoff = diversityCutoff;
+        this.EDAdmitCapacity = EDAdmitCapacity;
+        this.diversityDistributions = diversityDistributions;
+        this.majorDistributions = majorDistributions;
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
@@ -79,7 +84,6 @@ public class AdmissionsOffice {
         for (Map.Entry<String, Object> entry : importance.entrySet()) {
             String key = entry.getKey();
             Map<String,Integer> collegeVal = (Map<String,Integer>)entry.getValue();
-            System.out.println(key);
             score += applicant.studentInfo.get(key) * collegeVal.get("value"); //need corresponding student hashMap
         }
         return score;

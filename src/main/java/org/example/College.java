@@ -1,5 +1,6 @@
 package org.example;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class College {
@@ -10,12 +11,12 @@ public class College {
     public AdmissionsOffice admissions;
     private Wealth wealth;
 
-    public College(String name,int capacity,int tuition,int pubIm, double initialAcceptanceRate){
+    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, int EDAdmitCapacity, HashMap<String,Integer> majorDistributions,HashMap<Integer,Integer> diversityDistributions){
         this.capacity = capacity;
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate);
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,majorDistributions,diversityDistributions);
         wealth = new Wealth(0,tuition,pubIm);
     }
 

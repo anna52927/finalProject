@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class JSONData {
+public class  JSONData {
 
     public static Map<String,Object> JSONImport(String filename) {
         File jsonFile = new File(filename); // Replace with the path to your JSON file

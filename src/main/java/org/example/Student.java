@@ -14,7 +14,7 @@ public class Student {
     HashMap<String, Integer> studentInfo = new HashMap<>();
     private double score;
 
-    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank) {
+    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank, String major) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
         studentInfo.put("Class rank", classRank);
@@ -38,6 +38,7 @@ public class Student {
         studentInfo.put("Application Cycle",cycleNumber);
         studentInfo.put("Application Year", year);
         preference = collegePrefGen(collegeRank);
+        this.major = major;
 
     }
 
@@ -49,6 +50,7 @@ public class Student {
         ArrayList<Integer> copyCollegeRank = new ArrayList<>(Arrays.asList(0,1,2,3,4,5));
 
 
+        //have to change to seven so edit everything to fit
         for(int k = 0; k < 6; k++){
             double pubImTotal = 0; //the denominator for the fraction
             int hundredCheck = 0; //makes sure it adds up to 100 random number is in range
@@ -99,7 +101,7 @@ public class Student {
             collegePercents.remove(collegeIndexRemove);
         }
 
-        System.out.println("End List: " + list);
+        //System.out.println("End List: " + list);
         return list;
     }
 
