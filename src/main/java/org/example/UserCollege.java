@@ -88,6 +88,7 @@ public class UserCollege extends College{
 
         System.out.println("Enter your college's capacity: ");
         capacity = scanner.nextInt();
+        //Major distribution college stuff
 
         //major requirements
 

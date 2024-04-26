@@ -40,11 +40,11 @@ public class Wealth {
         final double MAJORDISREQ1 = .25;
         final double MAJORDISREQ2 = .25;
         final double MAJORDISREQ3 = .25;
-        HashMap<Integer, Double> majorDisReq = new HashMap<>();
-        majorDisReq.put(0, MAJORDISREQ0);
-        majorDisReq.put(1, MAJORDISREQ1);
-        majorDisReq.put(2, MAJORDISREQ2);
-        majorDisReq.put(3, MAJORDISREQ3);
+        HashMap<String, Double> majorDisReq = new HashMap<>();
+        majorDisReq.put("Humanities", MAJORDISREQ0);
+        majorDisReq.put("Art", MAJORDISREQ1);
+        majorDisReq.put("Math", MAJORDISREQ2);
+        majorDisReq.put("Science", MAJORDISREQ3);
 
 
         final double DIVDISREQ0 = .25;
@@ -52,10 +52,10 @@ public class Wealth {
         final double DIVDISREQ2 = .25;
         final double DIVDISREQ3 = .25;
         HashMap<Integer, Double> divDisReq = new HashMap<>();
-        majorDisReq.put(0, DIVDISREQ0);
-        majorDisReq.put(1, DIVDISREQ1);
-        majorDisReq.put(2, DIVDISREQ2);
-        majorDisReq.put(3, DIVDISREQ3);
+        divDisReq.put(0, DIVDISREQ0);
+        divDisReq.put(1, DIVDISREQ1);
+        divDisReq.put(2, DIVDISREQ2);
+        divDisReq.put(3, DIVDISREQ3);
 
 
         ArrayList<Student> firstYears = new ArrayList<>();
@@ -67,15 +67,21 @@ public class Wealth {
             }
         }
 
-        int[] majorCounts = new int[4]; // 0, 1, 2, 3
+        HashMap<String, Integer> majorCounts = new HashMap<String, Integer>(); // 0, 1, 2, 3
         for (Student student : firstYears) {
-            int major = student.getMajor();
-            majorCounts[major]++;
+            String major = student.getMajor();
+            if (!majorCounts.containsKey(major)){
+                majorCounts.put(major, 0);
+            }
+
+            majorCounts.put(major, majorCounts.get(major)+1);
+
         }
-        for (int i=0; i<majorCounts.length; i++){
-            int major = majorCounts[i];
-            double classPercent = ((double) major) / firstYears.size();
-            double percentOff = (classPercent - majorDisReq.get(i)); //not sure about this bit
+        for (HashMap.Entry<String, Integer> entry : majorCounts.entrySet()) {
+            String major = entry.getKey();
+            int numberOfPeopleInMajor = entry.getValue();
+            double classPercent = ((double) numberOfPeopleInMajor) / firstYears.size();
+            double percentOff = (classPercent - majorDisReq.get(major)); //not sure about this bit
             //this is all subjective
             if (percentOff < .1 && 0 < percentOff){
                 pubImChange = pubImChange + 1;
@@ -128,6 +134,7 @@ public class Wealth {
         Random random = new Random();
         int totalDonation = 0;
 
+
         final double MAJORSAL0 = 100000; // Major average salary
         final double MAJORSAL1 = 80000;
         final double MAJORSAL2 = 60000;
@@ -137,11 +144,11 @@ public class Wealth {
         final double pubImWeight = .01;
         final double salaryPercent = .01;
 
-        HashMap<Integer, Double> majorSal = new HashMap<>();
-        majorSal.put(0, MAJORSAL0);
-        majorSal.put(1, MAJORSAL1);
-        majorSal.put(2, MAJORSAL2);
-        majorSal.put(3, MAJORSAL3);
+        HashMap<String, Double> majorSal = new HashMap<>();
+        majorSal.put("Humanities", MAJORSAL0);
+        majorSal.put("Art", MAJORSAL1);
+        majorSal.put("Math", MAJORSAL2);
+        majorSal.put("Science", MAJORSAL3);
 
         for (Student alum : alumni) {
             double checkRate= random.nextDouble();
@@ -170,11 +177,11 @@ public class Wealth {
         final double pubImWeight = .01;
         final double salaryPercent = .01;
 
-        HashMap<Integer, Double> majorSal = new HashMap<>();
-        majorSal.put(0, MAJORSAL0);
-        majorSal.put(1, MAJORSAL1);
-        majorSal.put(2, MAJORSAL2);
-        majorSal.put(3, MAJORSAL3);
+        HashMap<String, Double> majorSal = new HashMap<>();
+        majorSal.put("Humanities", MAJORSAL0);
+        majorSal.put("Art", MAJORSAL1);
+        majorSal.put("Math", MAJORSAL2);
+        majorSal.put("Science", MAJORSAL3);
 
         for(int i = 0; i<50; i++){
             for (Student alum : alumni) {

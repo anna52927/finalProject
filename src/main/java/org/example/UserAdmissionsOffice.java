@@ -60,7 +60,7 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         int score = 0;
         for (Map.Entry<String, Integer> entry : importance.entrySet()) {
             String key = entry.getKey();
-            int collegeVal = (int) entry.getValue();
+            int collegeVal =  entry.getValue();
             score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
         }
         return score;

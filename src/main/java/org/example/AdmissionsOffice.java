@@ -9,18 +9,38 @@ public class AdmissionsOffice {
     private College self;  //idk what to name this
     private Map<String,Object> importance;  //ranked table of importance
     private HashMap<Integer,Double> acceptanceRate;
+    private ArrayList<Student> admittedStudents;
+    private HashMap<String,Integer> majorDistributions;
+    private HashMap<Integer,Integer> diversityDistributions;
+    private int majorCutoff; //max # of students a major can go over, sacrifices diversity
+    private int diversityCutoff; //opposite of majorCutoff
+    private int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
+    private double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,HashMap<String,Integer> majorDistributions,HashMap<Integer,Integer> diversityDistributions){
         this.self = college; //wow, this line looks cursed
+        this.majorCutoff = majorCutoff;
+        this.diversityCutoff = diversityCutoff;
+        this.EDAdmitCapacity = EDAdmitCapacity;
+        this.diversityDistributions = diversityDistributions;
+        this.majorDistributions = majorDistributions;
         acceptanceRate = new HashMap<>();
+        admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
     }
 
-    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants, String round){
+    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
+        int capacity;
+        if(round.equals("ED")){
+            capacity = (int) (self.capacity * EDAdmitCapacity);
+        } else {
+            capacity = self.capacity;
+        }
+
         for (Student applicant:
                 applicants) {
-            applicant.setScore(evaluateApplicant(applicant)); //needs setScore method
+            applicant.setScore(evaluateApplicant(applicant));
         }
         int n = applicants.size();
         Student swap;
@@ -36,19 +56,25 @@ public class AdmissionsOffice {
             n--;
         }
 
-        ArrayList<Student> admittedStudents = new ArrayList<>();
         //list slicing (python superiority moment)
-        for (int i = 0; i < self.capacity; i++) {
-            admittedStudents.add(applicants.get(i));
+        int i = 0;
+        while(admittedStudents.size() < self.capacity && i < applicants.size()){
+            Student student = applicants.get(i);
+            String major = student.getMajor();
+            int diversity = student.getDiversity();
+            if(majorDistributions.get(major) > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
+                admittedStudents.add(student);
+                majorDistributions.put(major, majorDistributions.get(major) - 1);
+                diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
+            }
+            i++;
         }
 
-        //check diversity
-        HashMap<Integer,Integer> schoolDiversity = new HashMap<>();
-        for (Student applicant :
-                applicants) {
-            schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
+        if(round.equals("ED")){
+            EDApplied = applicants.size();
+        } else {
+            acceptanceRate.put(applicants.get(0).getHashMap().get("Application Year"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
         }
-        acceptanceRate.put(applicants.get(0).getHashMap().get("Application Year"),(double) admittedStudents.size()/applicants.size());
 
         return admittedStudents;
     }
@@ -57,10 +83,15 @@ public class AdmissionsOffice {
         int score = 0;
         for (Map.Entry<String, Object> entry : importance.entrySet()) {
             String key = entry.getKey();
-            int collegeVal = (int) entry.getValue();
-            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
+            Map<String,Integer> collegeVal = (Map<String,Integer>)entry.getValue();
+            score += applicant.studentInfo.get(key) * collegeVal.get("value"); //need corresponding student hashMap
         }
         return score;
+    }
+
+    public void resetRound(){
+        admittedStudents.clear();
+        EDApplied = 0;
     }
 
     public HashMap<Integer,Double> getAcceptanceRate(){
