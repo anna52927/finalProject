@@ -10,13 +10,16 @@ public class College {
     private ArrayList<Student> alumni;
     public AdmissionsOffice admissions;
     private Wealth wealth;
+    public int EDAdmitCapacity;
 
-    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, int EDAdmitCapacity, HashMap<String,Integer> majorDistributions,HashMap<Integer,Integer> diversityDistributions){
+
+    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, double EDAdmitPercent){
         this.capacity = capacity;
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,majorDistributions,diversityDistributions);
+        EDAdmitCapacity = (int)EDAdmitPercent * capacity;
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
         wealth = new Wealth(0,tuition,pubIm);
     }
 

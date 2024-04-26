@@ -10,14 +10,14 @@ public class AdmissionsOffice {
     private Map<String,Object> importance;  //ranked table of importance
     private HashMap<Integer,Double> acceptanceRate;
     private ArrayList<Student> admittedStudents;
-    private HashMap<String,Integer> majorDistributions;
-    private HashMap<Integer,Integer> diversityDistributions;
+    private Map<String,Object> majorDistributions;
+    private Map<Integer,Integer> diversityDistributions;
     private int majorCutoff; //max # of students a major can go over, sacrifices diversity
     private int diversityCutoff; //opposite of majorCutoff
     private int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
     private double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,HashMap<String,Integer> majorDistributions,HashMap<Integer,Integer> diversityDistributions){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
@@ -28,9 +28,11 @@ public class AdmissionsOffice {
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
+        majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
+        System.out.println(applicants.size());
         int capacity;
         if(round.equals("ED")){
             capacity = (int) (self.capacity * EDAdmitCapacity);
@@ -62,10 +64,13 @@ public class AdmissionsOffice {
             Student student = applicants.get(i);
             String major = student.getMajor();
             int diversity = student.getDiversity();
-            if(majorDistributions.get(major) > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
+            Map<String,Object> majorMap = (Map<String,Object>)majorDistributions.get(major);
+            Map<String,Object> bachelorMap = (Map<String,Object>)majorMap.get("Bachelor\u2019s");
+            //&& diversityDistributions.get(diversity) > majorCutoff
+            if((int)((double)bachelorMap.getOrDefault("value",0.00)) * capacity > diversityCutoff) {
                 admittedStudents.add(student);
-                majorDistributions.put(major, majorDistributions.get(major) - 1);
-                diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
+                majorDistributions.put(major, (int)majorDistributions.get(major) - 1);
+                //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
         }

@@ -1,0 +1,275 @@
+{
+    "Agriculture": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 1.0
+    },
+    "Natural resources and conservation": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 3.0
+    },
+    "Architecture": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.01,
+        "CIP 2020 Categories to Include": 4.0
+    },
+    "Area, ethnic, and gender studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.02,
+        "CIP 2020 Categories to Include": 5.0
+    },
+    "Communication/journalism": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 9.0
+    },
+    "Communication technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 10.0
+    },
+    "Computer and information sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.14,
+        "CIP 2020 Categories to Include": 11.0
+    },
+    "Personal and culinary services": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 12.0
+    },
+    "Education": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 13.0
+    },
+    "Engineering": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.18,
+        "CIP 2020 Categories to Include": 14.0
+    },
+    "Engineering technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 15.0
+    },
+    "Foreign languages, literatures, and linguistics": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.03,
+        "CIP 2020 Categories to Include": 16.0
+    },
+    "Family and consumer sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 19.0
+    },
+    "Law/legal studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 22.0
+    },
+    "English": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.03,
+        "CIP 2020 Categories to Include": 23.0
+    },
+    "Liberal arts/general studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 24.0
+    },
+    "Library science": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 25.0
+    },
+    "Biological/life sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1,
+        "CIP 2020 Categories to Include": 26.0
+    },
+    "Mathematics and statistics": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.03,
+        "CIP 2020 Categories to Include": 27.0
+    },
+    "Military science and military technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": "28 & 29"
+    },
+    "Interdisciplinary studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "<1%",
+        "CIP 2020 Categories to Include": 30.0
+    },
+    "Parks and recreation": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 31.0
+    },
+    "Philosophy and religious studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.02,
+        "CIP 2020 Categories to Include": 38.0
+    },
+    "Theology and religious vocations": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 39.0
+    },
+    "Physical sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.06,
+        "CIP 2020 Categories to Include": 40.0
+    },
+    "Science technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 41.0
+    },
+    "Psychology": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.03,
+        "CIP 2020 Categories to Include": 42.0
+    },
+    "Homeland Security, law enforcement, firefighting,": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 43.0
+    },
+    "Pub lic adminis tration and social services": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1,
+        "CIP 2020 Categories to Include": 44.0
+    },
+    "Social sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.2,
+        "CIP 2020 Categories to Include": 45.0
+    },
+    "Construction trades": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 46.0
+    },
+    "Mechanic and repair technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 47.0
+    },
+    "Precision production": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 48.0
+    },
+    "Transportation and materials moving": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 49.0
+    },
+    "Visual and performing arts": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.02,
+        "CIP 2020 Categories to Include": 50.0
+    },
+    "Health professions and related programs": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 51.0
+    },
+    "Business/marketing": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": 52.0
+    },
+    "History": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.05,
+        "CIP 2020 Categories to Include": 54.0
+    },
+    "Other": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "CIP 2020 Categories to Include": ""
+    }
+}

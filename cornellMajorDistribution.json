@@ -1,0 +1,282 @@
+{
+    "": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": "to Include"
+    },
+    "Agriculture": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1042,
+        "": 1.0
+    },
+    "Natural resources and conservation": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.025,
+        "": 3.0
+    },
+    "Architecture": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0253,
+        "": 4.0
+    },
+    "Area, ethnic, and gender studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0097,
+        "": 5.0
+    },
+    "Communication/journalism": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0226,
+        "": 9.0
+    },
+    "Communication technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 10.0
+    },
+    "Computer and information sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1702,
+        "": 11.0
+    },
+    "Personal and culinary services": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 12.0
+    },
+    "Education": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 13.0
+    },
+    "Engineering": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.131,
+        "": 14.0
+    },
+    "Engineering technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 15.0
+    },
+    "Foreign languages, literatures, and linguistics": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.009000000000000001,
+        "": 16.0
+    },
+    "Family and consumer sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0226,
+        "": 19.0
+    },
+    "Law/legal studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 22.0
+    },
+    "English": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.01,
+        "": 23.0
+    },
+    "Liberal arts/general studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0042,
+        "": 24.0
+    },
+    "Library science": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 25.0
+    },
+    "Biological/life sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.1281,
+        "": 26.0
+    },
+    "Mathematics and statistics": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0161,
+        "": 27.0
+    },
+    "Military science and military technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": "28 & 29"
+    },
+    "Interdisciplinary studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0118,
+        "": 30.0
+    },
+    "Parks and recreation": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 31.0
+    },
+    "Philosophy and religious studies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.004699999999999999,
+        "": 38.0
+    },
+    "Theology and religious vocations": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 39.0
+    },
+    "Physical sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0271,
+        "": 40.0
+    },
+    "Science technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 41.0
+    },
+    "Psychology": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0155,
+        "": 42.0
+    },
+    "Homeland Security, law enforcement, firefighting,": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 43.0
+    },
+    "Public administration and social services": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0176,
+        "": 44.0
+    },
+    "Social sciences": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.08130000000000001,
+        "": 45.0
+    },
+    "Construction trades": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 46.0
+    },
+    "Mechanic and repair technologies": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 47.0
+    },
+    "Precision production": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 48.0
+    },
+    "Transportation and materials moving": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": 49.0
+    },
+    "Visual and performing arts": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.014499999999999999,
+        "": 50.0
+    },
+    "Health professions and related programs": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0068000000000000005,
+        "": 51.0
+    },
+    "Business/marketing": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.13419999999999999,
+        "": 52.0
+    },
+    "History": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": 0.0084,
+        "": 54.0
+    },
+    "Other": {
+        "Category": "",
+        "Diploma/Certificates": "",
+        "Associate": "",
+        "Bachelor\u2019s": "",
+        "": ""
+    }
+}

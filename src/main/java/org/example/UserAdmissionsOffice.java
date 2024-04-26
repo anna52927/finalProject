@@ -1,4 +1,4 @@
-
+/*
 package org.example;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
     private Map<String,Integer> importance;
     private HashMap<Integer,Double> acceptanceRate;
     public UserAdmissionsOffice(UserCollege college, double initialAcceptanceRate){
-        super(college, initialAcceptanceRate);
+        super(college, initialAcceptanceRate,college.majorCutoff,college.diversityCutoff,college.EDAdmitCapacity);
         acceptanceRate = new HashMap<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = college.userCollegeInfo;
@@ -67,3 +67,5 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
     }
 
 }
+
+ */

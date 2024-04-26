@@ -12,8 +12,8 @@ public class UserCollege extends College{
     private Wealth wealth;
     public int finAidBudget;
 
-    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate) {
-        super(name, capacity, tuition, pubIm, initialAcceptanceRate);
+    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent) {
+        super(name, capacity, tuition, pubIm, initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitPercent);
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         wealth = new Wealth(0,tuition,pubIm);
