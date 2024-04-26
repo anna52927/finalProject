@@ -99,7 +99,7 @@ public class Wealth {
             int diversity = student.getDiversity();
             diversityCounts[diversity]++;//assuming firstGen opperates on 0-3 scale of diversity
         }
-        for (int i=0; i<majorCounts.length; i++){
+        for (int i=0; i<diversityCounts.length; i++){
             int div = diversityCounts[i];
             double classPercent = ((double) div) / firstYears.size();
             double percentOff = (classPercent - divDisReq.get(i)); //not sure about this bit
