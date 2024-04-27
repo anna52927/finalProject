@@ -152,20 +152,4 @@ def extractImportanceTable(filepath):
 def dictJSON(dictionary, filename):
     with open(filename, 'w') as json_file:
         json.dump(dictionary, json_file, indent=4)
-        return os.path.join(os.getcwd(),filename)
-
-#made by Felix again
-def createFilepaths(filepaths):
-    indexFilepath = os.path.dirname(os.getcwd()) + r"\src\main\java\org\example\dataFilepaths.txt"
-    with open(indexFilepath, 'w') as f:
-        for filepath in filepaths:
-            print(filepath,file=f)
-
-def fetchFilepaths():
-    indexFilepath = os.path.dirname(os.getcwd()) + r"\src\main\java\org\example\dataFilepaths.txt"
-    with open(indexFilepath, 'w') as indexFile:
-        for (root,_,files) in os.walk(os.getcwd()):
-            for f in files:
-                if "json" in f:
-                    print(os.path.join(root,f),file=indexFile)
-    
+        return os.path.join(os.getcwd(),filename)    
