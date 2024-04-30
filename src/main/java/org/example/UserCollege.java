@@ -23,7 +23,7 @@ public class UserCollege extends College{
 
     //make a financial aid budget
 
-    public void setDefaultUserCollege(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int capacity,int tuition,int pubIm) {
+    public void setDefaultUserCollege(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt) {
         userCollegeInfo.put("Rigor of secondary school record", rigor);
         userCollegeInfo.put("Class Rank", classRank);
         userCollegeInfo.put("Academic GPA", GPA);

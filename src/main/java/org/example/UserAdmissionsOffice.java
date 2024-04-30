@@ -1,16 +1,26 @@
-/*
+
 package org.example;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class UserAdmissionsOffice extends AdmissionsOffice {
-    private College self;
-    private Map<String,Integer> importance;
+    private UserCollege self;  //idk what to name this
+    private Map<String,Integer> importance;  //ranked table of importance
     private HashMap<Integer,Double> acceptanceRate;
-    public UserAdmissionsOffice(UserCollege college, double initialAcceptanceRate){
-        super(college, initialAcceptanceRate,college.majorCutoff,college.diversityCutoff,college.EDAdmitCapacity);
+    private ArrayList<Student> admittedStudents;
+    private Map<String,Object> majorDistributions;
+    private Map<Integer,Integer> diversityDistributions;
+    private int majorCutoff; //max # of students a major can go over, sacrifices diversity
+    private int diversityCutoff; //opposite of majorCutoff
+    private int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
+    private double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
+
+
+    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
         acceptanceRate = new HashMap<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = college.userCollegeInfo;
@@ -20,52 +30,14 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         //college class. Could change what the constructor takes in
 
     }
-    public ArrayList<Student> considerApplicants(ArrayList<Student> applicants, String round){
-        for (Student applicant:
-                applicants) {
-            applicant.setScore(evaluateApplicant(applicant)); //needs setScore method
-        }
-        int n = applicants.size();
-        Student swap;
 
-        while (n > 1){
-            for (int i = 0; i < n - 1; i++) {
-                if (applicants.get(i).getScore() < applicants.get(i+1).getScore()){
-                    swap = applicants.get(i+1);
-                    applicants.set(i+1,applicants.get(i));
-                    applicants.set(i,swap);
-                }
-            }
-            n--;
-        }
-
-        ArrayList<Student> admittedStudents = new ArrayList<>();
-        //list slicing (python superiority moment)
-        for (int i = 0; i < self.capacity; i++) {
-            admittedStudents.add(applicants.get(i));
-        }
-
-        //check diversity
-        HashMap<Integer,Integer> schoolDiversity = new HashMap<>();
-        for (Student applicant :
-                applicants) {
-            schoolDiversity.put(applicant.diversity,schoolDiversity.getOrDefault(applicant.diversity,0)+1);
-        }
-        acceptanceRate.put(applicants.get(0).getHashMap().get("Application Year"),(double) admittedStudents.size()/applicants.size());
-
-        return admittedStudents;
+    public void chooseAdmissionsOfficeInfo(){
+        Scanner scanner = new Scanner(System.in);
+        //ADD IN A BUCNH OF STATEMENTS ASKING ABOUT MAJOR DISTRIBUTIONS, DIVERSITY DISTRIBUTIONS
+        //major cutoff, diversity cutoff, ed admit capacity
     }
 
-    public double evaluateApplicant(Student applicant) {
-        int score = 0;
-        for (Map.Entry<String, Integer> entry : importance.entrySet()) {
-            String key = entry.getKey();
-            int collegeVal =  entry.getValue();
-            score += applicant.studentInfo.get(key) * collegeVal; //need corresponding student hashMap
-        }
-        return score;
-    }
+
 
 }
 
- */
