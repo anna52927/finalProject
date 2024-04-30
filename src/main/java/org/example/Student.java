@@ -89,8 +89,6 @@ public class Student {
                     list.add(collegeRank.get(copyCollegeRank.get(0)));
                 }
                 else if (randomNumber >= (probAdd + 0.01) && randomNumber <= (collegePercents.get(l) + probAdd)) {
-                    //System.out.println("college percent = " + collegePercents);
-                    //System.out.println("college rank = " + collegeRank );
                     list.add(collegeRank.get(copyCollegeRank.get(l)));
                     collegeIndexRemove = l;
                 }
