@@ -92,7 +92,7 @@ public class AdmissionsCycle {
 
         //add students applying to each school to a list of applicants
         for (Student student : students) {
-            for (int j = 1; j < 2 && j < student.getList().size(); j++) { //how many colleges to apply to in ED round?
+            for (int j = 1; j < 7 && j < student.getList().size(); j++) { //how many colleges to apply to in ED round?
                 College college = student.getList().get(j);
                 String collegeName = college.name;
                 ArrayList<Student> collegeApplicants = applicantsMap.get(collegeName);

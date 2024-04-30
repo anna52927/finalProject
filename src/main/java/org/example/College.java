@@ -6,8 +6,8 @@ import java.util.Map;
 public class College {
     public String name;
     public int capacity;
-    private ArrayList<Student> attendingStudents;
-    private ArrayList<Student> alumni;
+    public ArrayList<Student> attendingStudents;
+    public ArrayList<Student> alumni;
     public AdmissionsOffice admissions;
     private Wealth wealth;
     public int EDAdmitCapacity;

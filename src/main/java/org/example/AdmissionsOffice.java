@@ -29,6 +29,17 @@ public class AdmissionsOffice {
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
         majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
+            Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
+            Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
+            Object value = valueMap.get("value");
+            if (value.equals("") || value.equals("<1%")){
+                value = 0.0;
+            }
+            value = (double)value * college.capacity;
+            int value2 = ((Double) value).intValue();
+            valueMap.put("value",value2);
+        }
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
@@ -67,9 +78,9 @@ public class AdmissionsOffice {
             Map<String,Object> majorMap = (Map<String,Object>)majorDistributions.get(major);
             Map<String,Object> bachelorMap = (Map<String,Object>)majorMap.get("Bachelor\u2019s");
             //&& diversityDistributions.get(diversity) > majorCutoff
-            if((int)((double)bachelorMap.getOrDefault("value",0.00)) * capacity > diversityCutoff) {
+            if((int)bachelorMap.get("value") > diversityCutoff) {
                 admittedStudents.add(student);
-                majorDistributions.put(major, (int)majorDistributions.get(major) - 1);
+                bachelorMap.put("value", (int)bachelorMap.get("value") - 1);
                 //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
