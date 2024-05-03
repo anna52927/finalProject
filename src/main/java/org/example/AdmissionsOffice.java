@@ -43,7 +43,7 @@ public class AdmissionsOffice {
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
-        System.out.println(applicants.size());
+        //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
         if(round.equals("ED")){
             capacity = (int) (self.capacity * EDAdmitCapacity);
@@ -89,9 +89,10 @@ public class AdmissionsOffice {
         if(round.equals("ED")){
             EDApplied = applicants.size();
         } else {
-            acceptanceRate.put(applicants.get(0).getHashMap().get("Application Year"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
-        }
+            //changed application year to application cycle
+            acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
 
+        }
         return admittedStudents;
     }
 

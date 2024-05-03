@@ -75,6 +75,9 @@ public class AdmissionsCycle {
         for (College college: colleges) {
             String collegeName = college.name;
             ArrayList<Student> attendingStudents = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
+            for (Student student: attendingStudents){
+                college.enroll(student);
+            }
             students.removeAll(attendingStudents);
         }
     }
@@ -112,33 +115,44 @@ public class AdmissionsCycle {
 
         //each student receives a list of their accepted colleges and decides which to attened
         //they are enrolled and removed from the applicant pool
+        ArrayList<Student> acceptedStudents = new ArrayList<>();
         for (Student student : students) {
             ArrayList<College> acceptedColleges = new ArrayList<>();
+            boolean studentAcceptance = false;
+
             for (int i = 0; i < acceptedLists.size(); i++) {
                 if (acceptedLists.get(i).contains(student)) {
                     acceptedColleges.add(colleges.get(i));
+                    studentAcceptance = true;
                 }
             }
-            College attendingCollege = student.decide(acceptedColleges);
-            attendingCollege.enroll(student);
-            students.remove(student);
+            if (studentAcceptance){
+                College attendingCollege = student.decide(acceptedColleges);
+                attendingCollege.enroll(student);
+                acceptedStudents.add(student);
+            }
         }
+        students.removeAll(acceptedStudents);
     }
     public void calculateWealthPerYear(){
+        //add graduation thingy
         for (College college : colleges){
 
             college.getWealth().payTuition(college.getAttendingStudents().size());
             college.getWealth().updatePubIm(college.getAttendingStudents(), year, college.admissions.getAcceptanceRate());
             college.getWealth().receiveDonations(college.getAlumni());
+            System.out.println("the wealth for " + college.name + " is " + college.getWealth().money);
         }
 
     }
+
     public void calculateWealthPerClass(int classYear){
         //HashMap<String, ArrayList<Student>> classOf_ = new HashMap<>();
         for (College college : colleges){//makes a list of all the students of one singular class year
+            //System.out.println("this many attend: " + college.attendingStudents.size());
             ArrayList<Student> sameYearStudents = new ArrayList<>();
             for(Student student : college.getAttendingStudents()){
-                if (student.getHashMap().get("Application Year") == classYear){
+                if (student.getHashMap().get("Application Cycle") == classYear){
                     sameYearStudents.add(student);
                 }
             }

@@ -160,10 +160,12 @@ public class Wealth {
             }
         }
         money = money + totalDonation;
+        System.out.println(totalDonation);
 
     }
 
     public void receiveClassCumulativeDonations(ArrayList<Student> alumni){
+        //System.out.println(alumni.size());
         Random random = new Random();
         int totalDonation = 0;
 
@@ -178,7 +180,7 @@ public class Wealth {
         final double salaryPercent = .01;
 
         HashMap<String, Double> majorSal = new HashMap<>();
-        majorSal.put("Humanities", MAJORSAL0);
+        majorSal.put("English", MAJORSAL0);
         majorSal.put("Art", MAJORSAL1);
         majorSal.put("Math", MAJORSAL2);
         majorSal.put("Science", MAJORSAL3);
@@ -195,6 +197,7 @@ public class Wealth {
                 }
             }
         }
+        System.out.println(totalDonation);
         money = money + totalDonation;
 
     }
