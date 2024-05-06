@@ -89,6 +89,7 @@ public class AdmissionsOffice {
         if(round.equals("ED")){
             EDApplied = applicants.size();
         } else {
+
             //changed application year to application cycle
             acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
 

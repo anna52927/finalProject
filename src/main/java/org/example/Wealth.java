@@ -29,11 +29,13 @@ public class Wealth {
         double currentAcceptanceRate = acceptanceRate.get(year);
         double rateChange = goalAcceptanceRate - currentAcceptanceRate;
         if (rateChange > 0){ //current accpectance rate smaller than goal, so positive public image change
-            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*20));//mess with weight there
+            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*1));//mess with weight there
         }
         else if (rateChange < 0){ //currept acceptance rate is bigger than goal, so negative affect on pubim
-            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*20));//mess with weight there
+            pubImChange = pubImChange + ((int)((rateChange/goalAcceptanceRate)*1));//mess with weight there
         }
+        System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
+        System.out.println("public image change after acceptance rate: ");
 
 
         final double MAJORDISREQ0 = .25; //what distribution of majors the public finds okay
@@ -41,10 +43,10 @@ public class Wealth {
         final double MAJORDISREQ2 = .25;
         final double MAJORDISREQ3 = .25;
         HashMap<String, Double> majorDisReq = new HashMap<>();
-        majorDisReq.put("Humanities", MAJORDISREQ0);
-        majorDisReq.put("Art", MAJORDISREQ1);
-        majorDisReq.put("Math", MAJORDISREQ2);
-        majorDisReq.put("Science", MAJORDISREQ3);
+        majorDisReq.put("English", MAJORDISREQ0);
+        majorDisReq.put("Agriculture", MAJORDISREQ1);
+        majorDisReq.put("Foreign languages, literatures, and linguistics", MAJORDISREQ2);
+        majorDisReq.put("Biological/life sciences", MAJORDISREQ3);
 
 
         final double DIVDISREQ0 = .25;
@@ -124,7 +126,8 @@ public class Wealth {
 
         }
 
-    pubIm = pubIm +pubImChange;
+        pubIm +=pubImChange;
+        System.out.println("Public Image: " + pubIm);
 
 
 
@@ -146,9 +149,9 @@ public class Wealth {
 
         HashMap<String, Double> majorSal = new HashMap<>();
         majorSal.put("Humanities", MAJORSAL0);
-        majorSal.put("Art", MAJORSAL1);
-        majorSal.put("Math", MAJORSAL2);
-        majorSal.put("Science", MAJORSAL3);
+        majorSal.put("Agriculture", MAJORSAL1);
+        majorSal.put("Foreign languages, literatures, and linguistics", MAJORSAL2);
+        majorSal.put("Biological/life sciences", MAJORSAL3);
 
         for (Student alum : alumni) {
             double checkRate= random.nextDouble();
@@ -181,9 +184,9 @@ public class Wealth {
 
         HashMap<String, Double> majorSal = new HashMap<>();
         majorSal.put("English", MAJORSAL0);
-        majorSal.put("Art", MAJORSAL1);
-        majorSal.put("Math", MAJORSAL2);
-        majorSal.put("Science", MAJORSAL3);
+        majorSal.put("Agriculture", MAJORSAL1);
+        majorSal.put("Foreign languages, literatures, and linguistics", MAJORSAL2);
+        majorSal.put("Biological/life sciences", MAJORSAL3);
 
         for(int i = 0; i<50; i++){
             for (Student alum : alumni) {
