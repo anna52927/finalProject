@@ -88,15 +88,14 @@ public class UserCollege extends College{
 
         System.out.println("Enter your college's capacity: ");
         capacity = scanner.nextInt();
-        //Major distribution college stuff
+        System.out.println("Enter your colleges tuition: ");
+        wealth.TUITION = scanner.nextInt();
+        System.out.println("Enter your colleges public image score: ");
+        wealth.pubIm = scanner.nextInt();
 
-        //major requirements
 
         scanner.close();
     }
 
-
-    //Questions about UserCollege
-    //where is the users wealth calculated?
 
 }
