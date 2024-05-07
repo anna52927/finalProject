@@ -43,7 +43,7 @@ public class Student {
     }
 
 
-    //I FIGURED OUT THE ISSUE. COLLEGE RANK SENDS IN THE LIST AND NOT A COPY SO WHEN I REMOVE SOMETHING FROM IT REMOVES IT FOREVER. TOTALLY FORGOT ABOUT THAT
+
     public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
         ArrayList<College> list = new ArrayList<>();
         ArrayList<Integer> collegePercents = new ArrayList<>(Arrays.asList(0,0,0,0,0,0));
