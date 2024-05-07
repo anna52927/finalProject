@@ -10,9 +10,9 @@ public class Main {
         ArrayList<College> colleges = new ArrayList<>();
         String[] subjects = {"English", "Agriculture", "Foreign languages, literatures, and linguistics", "Biological/life sciences"};
 
-        colleges.add(new College("yale",100,62250,30,0.04,-4,0,0.33));
+        colleges.add(new College("yale",100,62250,30,0.01,-4,0,0.33));
         colleges.add(new College("brown",100,65146,25,0.04,-1,-4,0.12));
-        colleges.add(new College("harvard",100,57261,24,25,0,0,0.21));
+        colleges.add(new College("harvard",100,57261,24,.25,0,0,0.21));
         colleges.add(new College("dartmouth",100,62658,20,0.04,-2,-1,0.23));
         colleges.add(new College("princeton",100,57410,19,0.04,-5,-3,0.12));
         colleges.add(new College("cornell",100,63200,18,0.04,-6,0,0.98));
@@ -40,8 +40,13 @@ public class Main {
         AdmissionsCycle cycle1 = new AdmissionsCycle(students, colleges, 1);
         cycle1.earlyRound();
         cycle1.regularRound();
-        cycle1.calculateWealthPerClass(1); //this does indeed calculate donations, but they are in most cases unfortunatly negative
+        cycle1.calculateWealthPerClass(1);
+        //this does indeed calculate donations, but they are in most cases unfortunatly negative
         //cycle1.calculateWealthPerYear(); //this doesn't calculate donations, because there are no almuni yet
+        ArrayList<College> rankedColleges= cycle1.orderCollegesByMoney();
+        for (College college : rankedColleges){
+            System.out.println(college.name);
+        }
 
 
 

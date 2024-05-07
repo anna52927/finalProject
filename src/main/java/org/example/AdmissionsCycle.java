@@ -111,6 +111,7 @@ public class AdmissionsCycle {
             String collegeName = college.name;
             ArrayList<Student> accepted = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
             acceptedLists.add(accepted);
+            //System.out.println("this many got accepted: " + accepted.size());
         }
 
         //each student receives a list of their accepted colleges and decides which to attened
@@ -150,6 +151,7 @@ public class AdmissionsCycle {
         //HashMap<String, ArrayList<Student>> classOf_ = new HashMap<>();
         for (College college : colleges){//makes a list of all the students of one singular class year
             //System.out.println("this many attend: " + college.attendingStudents.size());
+            //System.out.println("number of attending students: " + college.getAttendingStudents().size());
             ArrayList<Student> sameYearStudents = new ArrayList<>();
             for(Student student : college.getAttendingStudents()){
                 if (student.getHashMap().get("Application Cycle") == classYear){
@@ -167,7 +169,7 @@ public class AdmissionsCycle {
         }
     }
     //CHATGPT HELL YEAH BABYYYYYY RAHHHHHHHHH
-    public ArrayList<College> orderColleges(){
+    public ArrayList<College> orderCollegesByPubIm(){
         ArrayList<College> collegesRanked = new ArrayList<>(colleges); // Assume 'colleges' is a class member containing the initial list
         boolean swapped;
         do {
@@ -176,6 +178,24 @@ public class AdmissionsCycle {
                 College current = collegesRanked.get(i);
                 College next = collegesRanked.get(i + 1);
                 if (current.getWealth().pubIm < next.getWealth().pubIm) {
+                    // Swap current and next
+                    collegesRanked.set(i, next);
+                    collegesRanked.set(i + 1, current);
+                    swapped = true;
+                }
+            }
+        } while (swapped);
+        return collegesRanked;
+    }
+    public ArrayList<College> orderCollegesByMoney(){
+        ArrayList<College> collegesRanked = new ArrayList<>(colleges); // Assume 'colleges' is a class member containing the initial list
+        boolean swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < collegesRanked.size() - 1; i++) {
+                College current = collegesRanked.get(i);
+                College next = collegesRanked.get(i + 1);
+                if (current.getWealth().money < next.getWealth().money) {
                     // Swap current and next
                     collegesRanked.set(i, next);
                     collegesRanked.set(i + 1, current);
