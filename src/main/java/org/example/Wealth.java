@@ -4,19 +4,48 @@ package org.example;
 * parameters in the college class
 *  - need to verify with everyone college / wealth class interactions*/
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class Wealth {
     public int money;
     private final int TUITION;
     public int pubIm; //public image, on a scale (1-10?, 1-100?)
+    public HashMap<String, Double[]> majorInfo;
 
     public Wealth(int money, int tuition, int pubIm){
         this.money = money;
         TUITION = tuition;
         this.pubIm = pubIm;
+        this.majorInfo = new HashMap<>();
+        majorInfo.put("Agriculture", new Double[]{55000.0, 0.2});
+        majorInfo.put("Natural resources and conservation", new Double[]{56000.0, 0.2});
+        majorInfo.put("Architecture", new Double[]{70000.0, 0.2});
+        majorInfo.put("Area, ethnic, and gender studies", new Double[]{58000.0, 0.2});
+        majorInfo.put("Communication/journalism", new Double[]{57000.0, 0.2});
+        majorInfo.put("Computer and information sciences", new Double[]{90000.0, 0.2});
+        majorInfo.put("Education", new Double[]{50000.0, 0.2});
+        majorInfo.put("Engineering", new Double[]{97000.0, 0.2});
+        majorInfo.put("Foreign languages, literatures, and linguistics", new Double[]{59000.0, 0.2});
+        majorInfo.put("Family and consumer sciences", new Double[]{47000.0, 0.2});
+        majorInfo.put("English", new Double[]{56000.0, 0.2});
+        majorInfo.put("Liberal arts/general studies", new Double[]{54000.0, 0.2});
+        majorInfo.put("Biological/life sciences", new Double[]{70000.0, 0.2});
+        majorInfo.put("Mathematics and statistics", new Double[]{78000.0, 0.2});
+        majorInfo.put("Interdisciplinary studies", new Double[]{55000.0, 0.2});
+        majorInfo.put("Philosophy and religious studies", new Double[]{60000.0, 0.2});
+        majorInfo.put("Physical sciences", new Double[]{74000.0, 0.2});
+        majorInfo.put("Psychology", new Double[]{53000.0, 0.2});
+        majorInfo.put("Public administration and social services", new Double[]{50000.0, 0.2});
+        majorInfo.put("Social sciences", new Double[]{68000.0, 0.2});
+        majorInfo.put("Visual and performing arts", new Double[]{45000.0, 0.2});
+        majorInfo.put("Health professions and related programs", new Double[]{65000.0, 0.2});
+        majorInfo.put("Business/marketing", new Double[]{69000.0, 0.2});
+        majorInfo.put("History", new Double[]{63000.0, 0.2});
+
     }
 
     public void payTuition(int numStu){
@@ -142,28 +171,16 @@ public class Wealth {
     }
     public void receiveDonations(ArrayList<Student> alumni){
         Random random = new Random();
+
         int totalDonation = 0;
-
-
-        final double MAJORSAL0 = 100000; // Major average salary
-        final double MAJORSAL1 = 80000;
-        final double MAJORSAL2 = 60000;
-        final double MAJORSAL3 = 50000;
         final double donationRate = .2;
-
         final double pubImWeight = .001;
         final double salaryPercent = .05;
-
-        HashMap<String, Double> majorSal = new HashMap<>();
-        majorSal.put("Humanities", MAJORSAL0);
-        majorSal.put("Agriculture", MAJORSAL1);
-        majorSal.put("Foreign languages, literatures, and linguistics", MAJORSAL2);
-        majorSal.put("Biological/life sciences", MAJORSAL3);
 
         for (Student alum : alumni) {
             double checkRate= random.nextDouble();
             if (checkRate<=donationRate) {
-                double pay = majorSal.get(alum.getMajor()); // Get alum's salary based on major
+                double pay = majorInfo.get(alum.getMajor())[0]; // Get alum's salary based on major
                 double pubImRate = (((double) pubIm) / 100) * pubImWeight;
                 double donation = pay * pubImRate * salaryPercent;
                 totalDonation += donation;
@@ -179,28 +196,13 @@ public class Wealth {
         Random random = new Random();
         int totalDonation = 0;
 
-        final double MAJORSAL0 = 100000; // Major average salary
-        final double MAJORSAL1 = 80000;
-        final double MAJORSAL2 = 60000;
-        final double MAJORSAL3 = 50000;
+
         final double raiseRate = 1.04;
         final double donationRate = .2;
 
         final double pubImWeight = .001;
         final double salaryPercent = .05;
 
-        HashMap<String, Double> majorSal = new HashMap<>();
-        majorSal.put("English", MAJORSAL0);
-        majorSal.put("Agriculture", MAJORSAL1);
-        majorSal.put("Foreign languages, literatures, and linguistics", MAJORSAL2);
-        majorSal.put("Biological/life sciences", MAJORSAL3);
-
-
-        HashMap<String, Double> majorSpecialRate = new HashMap<>();
-        majorSpecialRate.put("English", .1);
-        majorSpecialRate.put("Agriculture", .1);
-        majorSpecialRate.put("Foreign languages, literatures, and linguistics", .001);
-        majorSpecialRate.put("Biological/life sciences", .03);
 
         HashMap<Student, Double> studentSalary = new HashMap<>();
 
@@ -213,12 +215,12 @@ public class Wealth {
 
             double averageAcademics = ((double)(alum.getHashMap().get("Rigor of secondary school record")+alum.getHashMap().get("Class rank")+alum.getHashMap().get("Academic GPA")+alum.getHashMap().get("Standardized test scores")+alum.getHashMap().get("Application Essay"))/5);
 
-            if (specialChecker<=majorSpecialRate.get(alum.getMajor())) {
+            if (specialChecker<=majorInfo.get(alum.getMajor())[1]) {
 
-                 salary = (majorSal.get(alum.getMajor())*10 + 20000 * random.nextGaussian()) ;
+                 salary = (majorInfo.get(alum.getMajor())[0]*10 + 20000 * random.nextGaussian()) ;
             }
             else{
-                 salary = (majorSal.get(alum.getMajor()) + 20000 * random.nextGaussian()) ;
+                 salary = (majorInfo.get(alum.getMajor())[0] + 20000 * random.nextGaussian()) ;
             }
             salary = salary + averageAcademics*10000;
             studentSalary.put(alum, salary);
