@@ -19,7 +19,9 @@ public class AdmissionsOffice {
     public double yieldRate;  //The most recent years yield rate
     public int admitCapacity; //The amount of students to admit (based off of yield)
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double yieldRate){
+
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity, boolean isUserAd,double yieldRate){
+
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
@@ -28,21 +30,35 @@ public class AdmissionsOffice {
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
-        importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-        majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+
 
         //Modifying the MajorDistributions map so that it reflects the capacity (int) for each major
-        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
-            Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
-            Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
+        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()) {
+            Map<String, Object> bachelorMap = (Map<String, Object>) entry.getValue();
+            Map<String, Object> valueMap = (Map<String, Object>) bachelorMap.get("Bachelor\u2019s");
             Object value = valueMap.get("value");
-            if (value.equals("") || value.equals("<1%")){
+            if (value.equals("") || value.equals("<1%")) {
                 value = 0.0;
             }
-            value = (double)value * college.capacity;
-            int value2 = ((Double) value).intValue();
-            valueMap.put("value",value2);
         }
+
+        if (!isUserAd){
+            importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
+            majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+            for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
+                Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
+                Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
+                Object value = valueMap.get("value");
+                if (value.equals("") || value.equals("<1%")){
+                    value = 0.0;
+                }
+                value = (double)value * college.capacity;
+                int value2 = ((Double) value).intValue();
+                valueMap.put("value",value2);
+
+            }
+        }
+
     }
 
     public void calculateCapacity(){

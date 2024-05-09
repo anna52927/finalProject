@@ -13,14 +13,22 @@ public class College {
     public int EDAdmitCapacity;
 
 
-    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, double EDAdmitPercent){
+    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, double EDAdmitPercent, boolean isUserCollege){
         this.capacity = capacity;
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         EDAdmitCapacity = (int)EDAdmitPercent * capacity;
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
+
         wealth = new Wealth(0,tuition,pubIm);
+        if (!isUserCollege){
+            System.out.println("ran");
+            admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity, false,0.0);
+            System.out.println(admissions.getAcceptanceRate());
+        }
+        else{
+            admissions = new UserAdmissionsOffice((UserCollege) this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,true);
+        }
     }
 
     public void enroll(Student student){
