@@ -17,7 +17,7 @@ public class AdmissionsOffice {
     public int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
     public double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity, boolean isUserAd){
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
@@ -27,20 +27,23 @@ public class AdmissionsOffice {
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
-        importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-        majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
 
-        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
-            Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
-            Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
-            Object value = valueMap.get("value");
-            if (value.equals("") || value.equals("<1%")){
-                value = 0.0;
+        if (!isUserAd){
+            importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
+            majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+            for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
+                Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
+                Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
+                Object value = valueMap.get("value");
+                if (value.equals("") || value.equals("<1%")){
+                    value = 0.0;
+                }
+                value = (double)value * college.capacity;
+                int value2 = ((Double) value).intValue();
+                valueMap.put("value",value2);
             }
-            value = (double)value * college.capacity;
-            int value2 = ((Double) value).intValue();
-            valueMap.put("value",value2);
         }
+
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){

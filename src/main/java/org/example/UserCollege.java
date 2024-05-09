@@ -14,10 +14,10 @@ public class UserCollege extends College{
     public UserAdmissionsOffice admissions;
 
     public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent, boolean isUserCollege) {
-        super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent );
+        super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent, isUserCollege );
         this.capacity = capacity;
         this.name = name;
-        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
+        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity, true);
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         wealth = new Wealth(0,tuition,pubIm);

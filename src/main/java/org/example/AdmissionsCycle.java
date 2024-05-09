@@ -72,8 +72,10 @@ public class AdmissionsCycle {
         }
 
         // Consider applicants for each college and remove attending students from the main list
+
         for (College college: colleges) {
             String collegeName = college.name;
+            System.out.println(college.admissions);
             ArrayList<Student> attendingStudents = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
             for (Student student: attendingStudents){
                 college.enroll(student);
