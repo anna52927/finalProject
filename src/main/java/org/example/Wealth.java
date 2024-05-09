@@ -1,8 +1,8 @@
 package org.example;
 /*4/8 notes:
-* - need to talk through with felix about how to store students as
-* parameters in the college class
-*  - need to verify with everyone college / wealth class interactions*/
+ * - need to talk through with felix about how to store students as
+ * parameters in the college class
+ *  - need to verify with everyone college / wealth class interactions*/
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,30 +21,30 @@ public class Wealth {
         TUITION = tuition;
         this.pubIm = pubIm;
         this.majorInfo = new HashMap<>();
-        majorInfo.put("Agriculture", new Double[]{55000.0, 0.2});
-        majorInfo.put("Natural resources and conservation", new Double[]{56000.0, 0.2});
-        majorInfo.put("Architecture", new Double[]{70000.0, 0.2});
-        majorInfo.put("Area, ethnic, and gender studies", new Double[]{58000.0, 0.2});
-        majorInfo.put("Communication/journalism", new Double[]{57000.0, 0.2});
-        majorInfo.put("Computer and information sciences", new Double[]{90000.0, 0.2});
-        majorInfo.put("Education", new Double[]{50000.0, 0.2});
-        majorInfo.put("Engineering", new Double[]{97000.0, 0.2});
-        majorInfo.put("Foreign languages, literatures, and linguistics", new Double[]{59000.0, 0.2});
-        majorInfo.put("Family and consumer sciences", new Double[]{47000.0, 0.2});
-        majorInfo.put("English", new Double[]{56000.0, 0.2});
-        majorInfo.put("Liberal arts/general studies", new Double[]{54000.0, 0.2});
-        majorInfo.put("Biological/life sciences", new Double[]{70000.0, 0.2});
-        majorInfo.put("Mathematics and statistics", new Double[]{78000.0, 0.2});
-        majorInfo.put("Interdisciplinary studies", new Double[]{55000.0, 0.2});
-        majorInfo.put("Philosophy and religious studies", new Double[]{60000.0, 0.2});
-        majorInfo.put("Physical sciences", new Double[]{74000.0, 0.2});
-        majorInfo.put("Psychology", new Double[]{53000.0, 0.2});
-        majorInfo.put("Public administration and social services", new Double[]{50000.0, 0.2});
-        majorInfo.put("Social sciences", new Double[]{68000.0, 0.2});
-        majorInfo.put("Visual and performing arts", new Double[]{45000.0, 0.2});
-        majorInfo.put("Health professions and related programs", new Double[]{65000.0, 0.2});
+        majorInfo.put("Agriculture", new Double[]{55000.0, 0.02});
+        majorInfo.put("Natural resources and conservation", new Double[]{56000.0, 0.01});
+        majorInfo.put("Architecture", new Double[]{70000.0, 0.08});
+        majorInfo.put("Area, ethnic, and gender studies", new Double[]{58000.0, 0.01});
+        majorInfo.put("Communication/journalism", new Double[]{57000.0, 0.05});
+        majorInfo.put("Computer and information sciences", new Double[]{90000.0, 0.1});
+        majorInfo.put("Education", new Double[]{50000.0, 0.01});
+        majorInfo.put("Engineering", new Double[]{97000.0, 0.1});
+        majorInfo.put("Foreign languages, literatures, and linguistics", new Double[]{59000.0, 0.05});
+        majorInfo.put("Family and consumer sciences", new Double[]{47000.0, 0.01});
+        majorInfo.put("English", new Double[]{56000.0, 0.05});
+        majorInfo.put("Liberal arts/general studies", new Double[]{54000.0, 0.05});
+        majorInfo.put("Biological/life sciences", new Double[]{70000.0, 0.1});
+        majorInfo.put("Mathematics and statistics", new Double[]{78000.0, 0.1});
+        majorInfo.put("Interdisciplinary studies", new Double[]{55000.0, 0.02});
+        majorInfo.put("Philosophy and religious studies", new Double[]{60000.0, 0.02});
+        majorInfo.put("Physical sciences", new Double[]{74000.0, 0.02});
+        majorInfo.put("Psychology", new Double[]{53000.0, 0.02});
+        majorInfo.put("Public administration and social services", new Double[]{50000.0, 0.02});
+        majorInfo.put("Social sciences", new Double[]{68000.0, 0.1});
+        majorInfo.put("Visual and performing arts", new Double[]{45000.0, 0.08});
+        majorInfo.put("Health professions and related programs", new Double[]{65000.0, 0.1});
         majorInfo.put("Business/marketing", new Double[]{69000.0, 0.2});
-        majorInfo.put("History", new Double[]{63000.0, 0.2});
+        majorInfo.put("History", new Double[]{63000.0, 0.0});
 
     }
 
@@ -69,6 +69,9 @@ public class Wealth {
         }
         //System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
         //System.out.println("public image change after acceptance rate: " +pubImChange);
+
+
+        //each college has majordistributions map
 
 
         final double MAJORDISREQ0 = .25; //what distribution of majors the public finds okay
@@ -217,10 +220,10 @@ public class Wealth {
 
             if (specialChecker<=majorInfo.get(alum.getMajor())[1]) {
 
-                 salary = (majorInfo.get(alum.getMajor())[0]*10 + 20000 * random.nextGaussian()) ;
+                salary = (majorInfo.get(alum.getMajor())[0]*10 + 20000 * random.nextGaussian()) ;
             }
             else{
-                 salary = (majorInfo.get(alum.getMajor())[0] + 20000 * random.nextGaussian()) ;
+                salary = (majorInfo.get(alum.getMajor())[0] + 20000 * random.nextGaussian()) ;
             }
             salary = salary + averageAcademics*10000;
             studentSalary.put(alum, salary);
