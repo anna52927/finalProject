@@ -29,6 +29,7 @@ public class AdmissionsOffice {
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
         majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+
         for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
             Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
             Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");

@@ -11,9 +11,13 @@ public class UserCollege extends College{
     private ArrayList<Student> alumni;
     private Wealth wealth;
     public int finAidBudget;
+    public UserAdmissionsOffice admissions;
 
-    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent) {
-        super(name, capacity, tuition, pubIm, initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitPercent);
+    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent, boolean isUserCollege) {
+        super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent );
+        this.capacity = capacity;
+        this.name = name;
+        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         wealth = new Wealth(0,tuition,pubIm);
