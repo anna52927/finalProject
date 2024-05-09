@@ -6,16 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdmissionsOffice {
-    private College self;  //idk what to name this
-    private Map<String,Object> importance;  //ranked table of importance
-    private HashMap<Integer,Double> acceptanceRate;
-    private ArrayList<Student> admittedStudents;
-    private Map<String,Object> majorDistributions;
-    private Map<Integer,Integer> diversityDistributions;
-    private int majorCutoff; //max # of students a major can go over, sacrifices diversity
-    private int diversityCutoff; //opposite of majorCutoff
-    private int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
-    private double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
+    public College self;  //idk what to name this
+    public Map<String,Object> importance;  //ranked table of importance
+    public HashMap<Integer,Double> acceptanceRate;
+    public ArrayList<Student> admittedStudents;
+    public Map<String,Object> majorDistributions;
+    public Map<Integer,Integer> diversityDistributions;
+    public int majorCutoff; //max # of students a major can go over, sacrifices diversity
+    public int diversityCutoff; //opposite of majorCutoff
+    public int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
+    public double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
 
     public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
         this.self = college; //wow, this line looks cursed
