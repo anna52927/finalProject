@@ -10,7 +10,7 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
     private Map<String,Integer> importance;  //ranked table of importance
 
     public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
-        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
+        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
         acceptanceRate = new HashMap<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = college.userCollegeInfo;

@@ -19,7 +19,7 @@ public class College {
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         EDAdmitCapacity = (int)EDAdmitPercent * capacity;
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
         wealth = new Wealth(0,tuition,pubIm);
     }
 

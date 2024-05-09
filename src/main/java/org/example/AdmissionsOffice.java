@@ -16,20 +16,22 @@ public class AdmissionsOffice {
     public int diversityCutoff; //opposite of majorCutoff
     public int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
     public double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
+    public double yieldRate;  //The most recent years yield rate
+    public int admitCapacity; //The amount of students to admit (based off of yield)
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double yieldRate){
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
         this.EDAdmitCapacity = EDAdmitCapacity;
-        this.diversityDistributions = diversityDistributions;
-        this.majorDistributions = majorDistributions;
+        this.yieldRate = yieldRate;
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
         majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
 
+        //Modifying the MajorDistributions map so that it reflects the capacity (int) for each major
         for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
             Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
             Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
@@ -43,13 +45,34 @@ public class AdmissionsOffice {
         }
     }
 
+    public void calculateCapacity(){
+        admitCapacity = (int)(self.capacity / yieldRate);
+    }
+
+    public void calculateYieldRate(){
+        //kinda janky, would have made more sense if we stored admitted students as an array of class arrays
+        //solche Sachen sind was schwierig wenn Mann den UML nicht veraendern kann und wenn da kein zentrale Struktur gibt (schwierig mit drei verschiedene Personen)
+        //hauptsache besser als nix
+        int year = admittedStudents.get(0).getHashMap().get("Application Cycle");
+        int count = 0;
+        for (Student student : self.attendingStudents) {
+            if(student.getHashMap().get("Application Cycle") == year){
+                count++;
+            }
+        }
+        yieldRate = (double)count/admittedStudents.size();
+    }
+
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
         //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
+        calculateYieldRate();
+        calculateCapacity();
+
         if(round.equals("ED")){
-            capacity = (int) (self.capacity * EDAdmitCapacity);
+            capacity = (int) (admitCapacity * EDAdmitCapacity);
         } else {
-            capacity = self.capacity;
+            capacity = admitCapacity;
         }
 
         for (Student applicant:
@@ -70,7 +93,6 @@ public class AdmissionsOffice {
             n--;
         }
 
-        //list slicing (python superiority moment)
         int i = 0;
         while(admittedStudents.size() < self.capacity && i < applicants.size()){
             Student student = applicants.get(i);
