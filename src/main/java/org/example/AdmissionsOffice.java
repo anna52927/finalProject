@@ -10,7 +10,7 @@ public class AdmissionsOffice {
     public Map<String,Object> importance;  //ranked table of importance
     public HashMap<Integer,Double> acceptanceRate;
     public ArrayList<Student> admittedStudents;
-    public Map<String,Object> majorDistributions;
+    public HashMap<String,Object> majorDistributions;
     public Map<Integer,Integer> diversityDistributions;
     public int majorCutoff; //max # of students a major can go over, sacrifices diversity
     public int diversityCutoff; //opposite of majorCutoff
@@ -30,35 +30,24 @@ public class AdmissionsOffice {
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
-
-
-        //Modifying the MajorDistributions map so that it reflects the capacity (int) for each major
-        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()) {
-            Map<String, Object> bachelorMap = (Map<String, Object>) entry.getValue();
-            Map<String, Object> valueMap = (Map<String, Object>) bachelorMap.get("Bachelor\u2019s");
-            Object value = valueMap.get("value");
-            if (value.equals("") || value.equals("<1%")) {
-                value = 0.0;
-            }
-        }
+        majorDistributions = new HashMap<String, Object>();
 
         if (!isUserAd){
             importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-            majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
-            for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
-                Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
-                Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
-                Object value = valueMap.get("value");
-                if (value.equals("") || value.equals("<1%")){
+            Map<String,Object> rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+            // Chat GPTified code
+            for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
+                Map<String, Object> majorMap = (Map<String, Object>) entry.getValue();
+                Map<String, Object> bachelorMap = (Map<String, Object>) majorMap.get("Bachelor\u2019s");
+                Object value = bachelorMap.get("value");
+                if (value.equals("") || value.equals("<1%")) {
                     value = 0.0;
                 }
-                value = (double)value * college.capacity;
-                int value2 = ((Double) value).intValue();
-                valueMap.put("value",value2);
-
+                double calculatedValue = (double) value * college.capacity;
+                int intValue = (int) calculatedValue;
+                majorDistributions.put(entry.getKey(), intValue);
             }
         }
-
     }
 
     public void calculateCapacity(){
