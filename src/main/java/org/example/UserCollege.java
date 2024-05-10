@@ -13,16 +13,14 @@ public class UserCollege extends College{
     public int finAidBudget;
     public UserAdmissionsOffice admissions;
 
-    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent, boolean isUserCollege) {
-        super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent, isUserCollege );
+    public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent) {
+        super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent);
         this.capacity = capacity;
         this.name = name;
-        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity, true);
+        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         wealth = new Wealth(0,tuition,pubIm);
-        //will have to create an admissions office outside of this constructor because
-        //needs user college info to set first before an admissions office is created
     }
 
     //make a financial aid budget
@@ -51,6 +49,7 @@ public class UserCollege extends College{
 
     public void chooseCollegeInfo(){
         Scanner scanner = new Scanner(System.in);
+        /*
         System.out.println("Enter how much you consider the rigor of secondary school record: ");
         userCollegeInfo.put("Rigor of secondary school record", scanner.nextInt());
         System.out.println("Enter how much you consider class rank: ");
@@ -89,6 +88,7 @@ public class UserCollege extends College{
         userCollegeInfo.put("Work experience", scanner.nextInt());
         System.out.println("Enter how much you consider the applicant's interest: ");
         userCollegeInfo.put("Level of applicant's interest", scanner.nextInt());
+        */
 
         System.out.println("Enter your college's capacity: ");
         capacity = scanner.nextInt();
@@ -96,6 +96,8 @@ public class UserCollege extends College{
         wealth.TUITION = scanner.nextInt();
         System.out.println("Enter your colleges public image score: ");
         wealth.pubIm = scanner.nextInt();
+
+        admissions.chooseAdmissionsOfficeInfo();
 
 
         scanner.close();
