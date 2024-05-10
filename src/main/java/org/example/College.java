@@ -21,7 +21,7 @@ public class College {
         EDAdmitCapacity = (int)EDAdmitPercent * capacity;
 
         wealth = new Wealth(0,tuition,pubIm);
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,true,0.0);
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
         System.out.println(admissions.getAcceptanceRate());
 
 

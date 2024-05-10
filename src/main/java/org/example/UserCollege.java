@@ -17,7 +17,7 @@ public class UserCollege extends College{
         super(name, capacity, tuition, pubIm, initialAcceptanceRate, majorCutoff, diversityCutoff, EDAdmitPercent);
         this.capacity = capacity;
         this.name = name;
-        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,true);
+        admissions = new UserAdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity);
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         wealth = new Wealth(0,tuition,pubIm);
