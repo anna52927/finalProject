@@ -10,8 +10,9 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
     private Map<String,Integer> importance;  //ranked table of importance
 
 
-    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity, boolean isUserAd){
-        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity, isUserAd,0.0);
+
+    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
         acceptanceRate = new HashMap<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = college.userCollegeInfo;
@@ -31,9 +32,10 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         System.out.println("What is the diversity cutoff number: ");
         diversityCutoff = scanner.nextInt();
         System.out.println("Enter the percentage of applicants that will be let in ED: ");
-        EDAdmitCapacity = scanner.nextInt();
+        EDAdmitCapacity = scanner.nextDouble();
 
         //major distributions fill hash map
+        /*
         System.out.println("Enter the percentage of students that can major in Agriculture: ");
         majorDistributions.put("Agriculture",scanner.nextDouble());
         System.out.println("Enter the percentage of students that can major in Natural resources and conservation: ");
@@ -110,6 +112,7 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         majorDistributions.put("Business/marketing",scanner.nextDouble());
         System.out.println("Enter the percentage of students that can major in History: ");
         majorDistributions.put("History",scanner.nextDouble());
+         */
 
         scanner.close();
         //What's going on with diversity distributions

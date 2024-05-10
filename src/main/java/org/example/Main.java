@@ -11,13 +11,13 @@ public class Main {
         String[] subjects = {"Agriculture", "Natural resources and conservation", "Architecture", "Area, ethnic, and gender studies", "Communication/journalism", "Computer and information sciences", "Education", "Engineering", "Foreign languages, literatures, and linguistics","Family and consumer sciences","English","Liberal arts/general studies","Biological/life sciences","Mathematics and statistics","Interdisciplinary studies","Philosophy and religious studies","Physical sciences","Psychology","Public administration and social services","Social sciences","Visual and performing arts","Health professions and related programs","Business/marketing","History"};
 
 
-        colleges.add(new College("yale",100,62250,30,0.01,-4,0,0.33,false));
-        colleges.add(new College("brown",100,65146,25,0.04,-1,-4,0.12,false));
-        colleges.add(new College("harvard",100,57261,24,.25,0,0,0.21, false));
-        colleges.add(new College("dartmouth",100,62658,20,0.04,-2,-1,0.23, false));
-        colleges.add(new College("princeton",100,57410,19,0.04,-5,-3,0.12, false));
-        colleges.add(new College("cornell",100,57410,22,0.04,-5,-3,0.12, false));
-        colleges.add(new UserCollege("UserCollege", 0,0,0,0,0,0,0, true));
+        colleges.add(new College("yale",100,62250,30,0.01,-4,0,0.33));
+        colleges.add(new College("brown",100,65146,25,0.04,-1,-4,0.12));
+        colleges.add(new College("harvard",100,57261,24,.25,0,0,0.21));
+        colleges.add(new College("dartmouth",100,62658,20,0.04,-2,-1,0.23));
+        colleges.add(new College("princeton",100,57410,19,0.04,-5,-3,0.12));
+        colleges.add(new College("cornell",100,57410,22,0.04,-5,-3,0.12));
+        colleges.add(new UserCollege("UserCollege", 0,0,0,0,0,0,0));
 
         ((UserCollege)colleges.get(6)).chooseCollegeInfo();
 
