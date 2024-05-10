@@ -9,7 +9,7 @@ public class Main {
             
         ArrayList<College> colleges = new ArrayList<>();
         String[] subjects = {"Agriculture", "Natural resources and conservation", "Architecture", "Area, ethnic, and gender studies", "Communication/journalism", "Computer and information sciences", "Education", "Engineering", "Foreign languages, literatures, and linguistics","Family and consumer sciences","English","Liberal arts/general studies","Biological/life sciences","Mathematics and statistics","Interdisciplinary studies","Philosophy and religious studies","Physical sciences","Psychology","Public administration and social services","Social sciences","Visual and performing arts","Health professions and related programs","Business/marketing","History"};
-        System.out.println(subjects.length);
+
 
         colleges.add(new College("yale",100,62250,30,0.01,-4,0,0.33,false));
         colleges.add(new College("brown",100,65146,25,0.04,-1,-4,0.12,false));
