@@ -142,7 +142,7 @@ public class AdmissionsCycle {
         for (College college : colleges){
 
             college.getWealth().payTuition(college.getAttendingStudents().size());
-            college.getWealth().updatePubIm(college.getAttendingStudents(), year, college.admissions.getAcceptanceRate());
+            college.getWealth().updatePubIm(college.getAttendingStudents(), year, college.admissions.getAcceptanceRate(), college);
             college.getWealth().receiveDonations(college.getAlumni());
             System.out.println("the wealth for " + college.name + " is " + college.getWealth().money);
         }
@@ -165,7 +165,7 @@ public class AdmissionsCycle {
             for(int i=0;i<4;i++){//pays tuition for all four years of that class
                 college.getWealth().payTuition(sameYearStudents.size());
             }
-            college.getWealth().updatePubIm(college.getAttendingStudents(), classYear, college.admissions.getAcceptanceRate());
+            college.getWealth().updatePubIm(college.getAttendingStudents(), classYear, college.admissions.getAcceptanceRate(), college);
             college.getWealth().receiveClassCumulativeDonations(sameYearStudents);
             System.out.println("the wealth for " + college.name + " is " + college.getWealth().money);
         }

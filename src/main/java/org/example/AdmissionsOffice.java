@@ -10,47 +10,80 @@ public class AdmissionsOffice {
     public Map<String,Object> importance;  //ranked table of importance
     public HashMap<Integer,Double> acceptanceRate;
     public ArrayList<Student> admittedStudents;
-    public Map<String,Object> majorDistributions;
+    public HashMap<String,Object> majorDistributions;
     public Map<Integer,Integer> diversityDistributions;
     public int majorCutoff; //max # of students a major can go over, sacrifices diversity
     public int diversityCutoff; //opposite of majorCutoff
     public int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
     public double EDAdmitCapacity;  //percentage of total capacity to be filled by ED
+    public double yieldRate;  //The most recent years yield rate
+    public int admitCapacity; //The amount of students to admit (based off of yield)
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity, boolean isUserAd,double yieldRate){
+
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
         this.EDAdmitCapacity = EDAdmitCapacity;
-        this.diversityDistributions = diversityDistributions;
-        this.majorDistributions = majorDistributions;
+        this.yieldRate = yieldRate;
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
+        majorDistributions = new HashMap<String, Object>();
 
-        importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-        majorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
-        for(Map.Entry<String,Object> entry : majorDistributions.entrySet()){
-            Map<String,Object> bachelorMap =  (Map<String,Object>)entry.getValue();
-            Map<String,Object> valueMap = (Map<String,Object>)bachelorMap.get("Bachelor\u2019s");
-            Object value = valueMap.get("value");
-            if (value.equals("") || value.equals("<1%")){
-                value = 0.0;
-            }
-            value = (double)value * college.capacity;
-            int value2 = ((Double) value).intValue();
-            valueMap.put("value",value2);
-            }
+        /*
+        WICHTIGE HINWEIS FUER FELIX (deswegen es ist auf Deutsch geschrieben)
+        Die Kapazitaetsvariable muss in 2 Variablen geteilt wegen die Neuberechnung von die Kapazitaet
+        majorDistributions muss auch jede Runde neu berechnet -- am besten durch eine calculateMajorDistributions Methode
+         */
 
+        if (!isUserAd){
+            importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
+            Map<String,Object> rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+            // Chat GPTified code
+            for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
+                Map<String, Object> majorMap = (Map<String, Object>) entry.getValue();
+                Map<String, Object> bachelorMap = (Map<String, Object>) majorMap.get("Bachelor\u2019s");
+                Object value = bachelorMap.get("value");
+                if (value.equals("") || value.equals("<1%")) {
+                    value = 0.0;
+                }
+                double calculatedValue = (double) value * college.capacity;
+                int intValue = (int) calculatedValue;
+                majorDistributions.put(entry.getKey(), intValue);
+            }
+        }
+    }
+
+    public void calculateCapacity(){
+        admitCapacity = (int)(self.capacity / yieldRate);
+    }
+
+    public void calculateYieldRate(){
+        //kinda janky, would have made more sense if we stored admitted students as an array of class arrays
+        //solche Sachen sind was schwierig wenn Mann den UML nicht veraendern kann und wenn da kein zentrale Struktur gibt (schwierig mit drei verschiedene Personen)
+        //hauptsache besser als nix
+        int year = admittedStudents.get(0).getHashMap().get("Application Cycle");
+        int count = 0;
+        for (Student student : self.attendingStudents) {
+            if(student.getHashMap().get("Application Cycle") == year){
+                count++;
+            }
+        }
+        yieldRate = (double)count/admittedStudents.size();
     }
 
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
         //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
+        calculateYieldRate();
+        calculateCapacity();
+
         if(round.equals("ED")){
-            capacity = (int) (self.capacity * EDAdmitCapacity);
+            capacity = (int) (admitCapacity * EDAdmitCapacity);
         } else {
-            capacity = self.capacity;
+            capacity = admitCapacity;
         }
 
         for (Student applicant:
@@ -71,7 +104,6 @@ public class AdmissionsOffice {
             n--;
         }
 
-        //list slicing (python superiority moment)
         int i = 0;
         while(admittedStudents.size() < self.capacity && i < applicants.size()){
             Student student = applicants.get(i);
