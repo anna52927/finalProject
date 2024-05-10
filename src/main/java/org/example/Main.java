@@ -17,9 +17,9 @@ public class Main {
         colleges.add(new College("dartmouth",100,62658,20,0.04,-2,-1,0.23));
         colleges.add(new College("princeton",100,57410,19,0.04,-5,-3,0.12));
         colleges.add(new College("cornell",100,57410,22,0.04,-5,-3,0.12));
-        colleges.add(new UserCollege("UserCollege", 0,0,0,0,0,0,0));
+       // colleges.add(new UserCollege("UserCollege", 0,0,0,0,0,0,0));
 
-        ((UserCollege)colleges.get(6)).chooseCollegeInfo();
+        //((UserCollege)colleges.get(6)).chooseCollegeInfo();
 
 
 
