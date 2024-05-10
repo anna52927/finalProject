@@ -32,6 +32,12 @@ public class AdmissionsOffice {
         acceptanceRate.put(0,initialAcceptanceRate);
         majorDistributions = new HashMap<String, Object>();
 
+        /*
+        WICHTIGE HINWEIS FUER FELIX (deswegen es ist auf Deutsch geschrieben)
+        Die Kapazitaetsvariable muss in 2 Variablen geteilt wegen die Neuberechnung von die Kapazitaet
+        majorDistributions muss auch jede Runde neu berechnet -- am besten durch eine calculateMajorDistributions Methode
+         */
+
         if (!isUserAd){
             importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
             Map<String,Object> rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
