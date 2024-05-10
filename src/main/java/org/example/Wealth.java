@@ -51,8 +51,9 @@ public class Wealth {
     public void payTuition(int numStu){
         money = money + (numStu * TUITION);
     }
-    public void updatePubIm(ArrayList<Student> students, int year, HashMap<Integer, Double> acceptanceRate){
+    public void updatePubIm(ArrayList<Student> students, int year, HashMap<Integer, Double> acceptanceRate, College college){
         int pubImChange = 0;
+
 
         double goalAcceptanceRate = acceptanceRate.get(0);
         double currentAcceptanceRate = acceptanceRate.get(year);
@@ -74,15 +75,8 @@ public class Wealth {
         //each college has majordistributions map
 
 
-        final double MAJORDISREQ0 = .25; //what distribution of majors the public finds okay
-        final double MAJORDISREQ1 = .25;
-        final double MAJORDISREQ2 = .25;
-        final double MAJORDISREQ3 = .25;
-        HashMap<String, Double> majorDisReq = new HashMap<>();
-        majorDisReq.put("English", MAJORDISREQ0);
-        majorDisReq.put("Agriculture", MAJORDISREQ1);
-        majorDisReq.put("Foreign languages, literatures, and linguistics", MAJORDISREQ2);
-        majorDisReq.put("Biological/life sciences", MAJORDISREQ3);
+
+        HashMap<String, Object> majorDisReq = college.admissions.majorDistributions; //#@!R$@!G#T#!@?!!!!
 
 
         final double DIVDISREQ0 = .25;
@@ -120,20 +114,19 @@ public class Wealth {
         for (HashMap.Entry<String, Integer> entry : majorCounts.entrySet()) {
             String major = entry.getKey();
             int numberOfPeopleInMajor = entry.getValue();
-            double classPercent = ((double) numberOfPeopleInMajor) / firstYears.size();
-            double percentOff = (classPercent - majorDisReq.get(major)); //not sure about this bit
+            double numberOff = (numberOfPeopleInMajor - (Double)majorDisReq.get(major)); //not sure about this bit
             //System.out.println(percentOff);
             //this is all subjective
             //System.out.println("pubImChange before: " + pubImChange);
-            if (percentOff < .1 && 0 < percentOff){
+            if (numberOff < .1 && 0 < numberOff){
                 pubImChange = pubImChange + 1;
-            } else if (percentOff < .2 && .1 < percentOff) {
+            } else if (numberOff < .2 && .1 < numberOff) {
                 pubImChange = pubImChange - 1;
-            } else if (percentOff < .4 && .2 < percentOff) {
+            } else if (numberOff < .4 && .2 < numberOff) {
                 pubImChange = pubImChange - 2;
-            } else if (percentOff < .6 && .4 < percentOff) {
+            } else if (numberOff < .6 && .4 < numberOff) {
                 pubImChange = pubImChange - 3;
-            } else if (percentOff <= 1 && .6 < percentOff) {
+            } else if (numberOff <= 1 && .6 < numberOff) {
                 pubImChange = pubImChange - 5;
             }
             //System.out.println("pubImChange after: " + pubImChange);
@@ -164,8 +157,24 @@ public class Wealth {
             }
 
         }
+        double averageAcademics = 0;
+        double totalAcademics = 0;
+        for (Student student: students){
+            totalAcademics += ((double)(student.getHashMap().get("Rigor of secondary school record")+student.getHashMap().get("Class rank")+student.getHashMap().get("Academic GPA")+student.getHashMap().get("Standardized test scores")+student.getHashMap().get("Application Essay")+student.getHashMap().get("Talent/ability")))/6;
+        }
+        averageAcademics = totalAcademics/students.size();
+        pubImChange += averageAcademics *2;
 
         pubIm +=pubImChange;
+
+        double averageSport = 0;
+        int totalSport = 0;
+        for (Student student: students){
+            totalSport += student.getHashMap().get("Extracurricular activities");
+        }
+        averageSport = totalSport/students.size();
+        pubImChange += averageSport *2;
+
         //System.out.println("Public Image: " + pubIm);
 
 
@@ -183,9 +192,26 @@ public class Wealth {
         for (Student alum : alumni) {
             double checkRate= random.nextDouble();
             if (checkRate<=donationRate) {
-                double pay = majorInfo.get(alum.getMajor())[0]; // Get alum's salary based on major
+
+                double salary = 0;
+                double specialChecker = random.nextDouble();
+
+                double averageAcademics = ((double)(alum.getHashMap().get("Rigor of secondary school record")+alum.getHashMap().get("Class rank")+alum.getHashMap().get("Academic GPA")+alum.getHashMap().get("Standardized test scores")+alum.getHashMap().get("Application Essay"))/5);
+
+                if (specialChecker<=majorInfo.get(alum.getMajor())[1]) {
+
+                    salary = (majorInfo.get(alum.getMajor())[0]*10 + 20000 * random.nextGaussian()) ;
+                }
+                else{
+                    salary = (majorInfo.get(alum.getMajor())[0] + 20000 * random.nextGaussian()) ;
+                }
+                salary = salary + averageAcademics*10000;
+
+
+
+                // Get alum's salary based on major
                 double pubImRate = (((double) pubIm) / 100) * pubImWeight;
-                double donation = pay * pubImRate * salaryPercent;
+                double donation = salary * pubImRate * salaryPercent;
                 totalDonation += donation;
             }
         }
@@ -202,7 +228,6 @@ public class Wealth {
 
         final double raiseRate = 1.04;
         final double donationRate = .2;
-
         final double pubImWeight = .001;
         final double salaryPercent = .05;
 
