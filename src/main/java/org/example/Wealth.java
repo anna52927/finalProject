@@ -76,7 +76,7 @@ public class Wealth {
 
 
 
-        HashMap<String, Object> majorDisReq = college.admissions.majorDistributions; //#@!R$@!G#T#!@?!!!!
+        HashMap<String,Integer> majorDisReq = college.admissions.majorDistributions; //updated to Integer -- Felix
 
 
         final double DIVDISREQ0 = .25;
@@ -114,7 +114,7 @@ public class Wealth {
         for (HashMap.Entry<String, Integer> entry : majorCounts.entrySet()) {
             String major = entry.getKey();
             int numberOfPeopleInMajor = entry.getValue();
-            double numberOff = (numberOfPeopleInMajor - (Double)majorDisReq.get(major)); //not sure about this bit
+            double numberOff = (numberOfPeopleInMajor - (int)majorDisReq.get(major)); //not sure about this bit -- updated to int (Felix)
             //System.out.println(percentOff);
             //this is all subjective
             //System.out.println("pubImChange before: " + pubImChange);

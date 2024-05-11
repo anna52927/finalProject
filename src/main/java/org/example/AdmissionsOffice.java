@@ -10,7 +10,8 @@ public class AdmissionsOffice {
     public Map<String,Object> importance;  //ranked table of importance
     public HashMap<Integer,Double> acceptanceRate;
     public ArrayList<Student> admittedStudents;
-    public HashMap<String,Object> majorDistributions;
+    public Map<String,Object> rawMajorDistributions;
+    public HashMap<String,Integer> majorDistributions;
     public Map<Integer,Integer> diversityDistributions;
     public int majorCutoff; //max # of students a major can go over, sacrifices diversity
     public int diversityCutoff; //opposite of majorCutoff
@@ -20,17 +21,17 @@ public class AdmissionsOffice {
     public int admitCapacity; //The amount of students to admit (based off of yield)
 
 
-    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double yieldRate){
+    public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double initialYieldRate){
 
         this.self = college; //wow, this line looks cursed
         this.majorCutoff = majorCutoff;
         this.diversityCutoff = diversityCutoff;
         this.EDAdmitCapacity = EDAdmitCapacity;
-        this.yieldRate = yieldRate;
+        this.yieldRate = initialYieldRate;
         acceptanceRate = new HashMap<>();
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
-        majorDistributions = new HashMap<String, Object>();
+        majorDistributions = new HashMap<String,Integer>();
 
         /*
         WICHTIGE HINWEIS FUER FELIX (deswegen es ist auf Deutsch geschrieben)
@@ -40,20 +41,9 @@ public class AdmissionsOffice {
 
 
         importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-        Map<String,Object> rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
-        // Chat GPTified code
-        for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
-            Map<String, Object> majorMap = (Map<String, Object>) entry.getValue();
-            Map<String, Object> bachelorMap = (Map<String, Object>) majorMap.get("Bachelor\u2019s");
-            Object value = bachelorMap.get("value");
-            if (value.equals("") || value.equals("<1%")) {
-                value = 0.0;
-            }
-            double calculatedValue = (double) value * college.capacity;
-            int intValue = (int) calculatedValue;
-            majorDistributions.put(entry.getKey(), intValue);
-        }
-
+        rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+        calculateCapacity();
+        calculateMajorDistributions();
     }
 
     public void calculateCapacity(){
@@ -74,11 +64,31 @@ public class AdmissionsOffice {
         yieldRate = (double)count/admittedStudents.size();
     }
 
+    public void calculateMajorDistributions(){
+        // Chat GPTified code (modified by ChatGPT)
+        for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
+            Map<String, Object> majorMap = (Map<String, Object>) entry.getValue();
+            Map<String, Object> bachelorMap = (Map<String, Object>) majorMap.get("Bachelor\u2019s");
+            Object value = bachelorMap.get("value");
+            if (value.equals("") || value.equals("<1%")) {
+                value = 0.0;
+            }
+            double calculatedValue = (double) value * admitCapacity;
+            int intValue = (int) calculatedValue;
+            majorDistributions.put(entry.getKey(), intValue);
+        }
+    }
+
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
         //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
-        calculateYieldRate();
+
+        //avoid running in the first round
+        if(!self.attendingStudents.isEmpty()) {
+            calculateYieldRate();
+        }
         calculateCapacity();
+        calculateMajorDistributions();
 
         if(round.equals("ED")){
             capacity = (int) (admitCapacity * EDAdmitCapacity);
@@ -109,12 +119,11 @@ public class AdmissionsOffice {
             Student student = applicants.get(i);
             String major = student.getMajor();
             int diversity = student.getDiversity();
-            Map<String,Object> majorMap = (Map<String,Object>)majorDistributions.get(major);
-            Map<String,Object> bachelorMap = (Map<String,Object>)majorMap.get("Bachelor\u2019s");
+            int value = majorDistributions.get(major);
             //&& diversityDistributions.get(diversity) > majorCutoff
-            if((int)bachelorMap.get("value") > diversityCutoff) {
+            if(value > diversityCutoff) {
                 admittedStudents.add(student);
-                bachelorMap.put("value", (int)bachelorMap.get("value") - 1);
+                majorDistributions.put("value", majorDistributions.get(major) - 1);
                 //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
@@ -128,6 +137,7 @@ public class AdmissionsOffice {
             acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
 
         }
+
         return admittedStudents;
     }
 
