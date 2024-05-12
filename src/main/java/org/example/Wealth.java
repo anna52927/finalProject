@@ -10,12 +10,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The Wealth class represents financial attributes and methods for managing
+ * the financial aspects of a college, such as tuition, donations, and public image changes.
+ */
 public class Wealth {
-    public int money;
-    public int TUITION;
-    public int pubIm; //public image, on a scale (1-10?, 1-100?)
-    public HashMap<String, Double[]> majorInfo;
+    public int money; // Total money available
+    public int TUITION; // Tuition fee per student
+    public int pubIm; // Public image, possibly on a scale like 1-100
+    public HashMap<String, Double[]> majorInfo; // Stores earning potential and volatility by major
 
+
+    /**
+     * Constructor to initialize the Wealth object with specified money, tuition, and public image values.
+     * Also initializes majorInfo with default values.
+     */
     public Wealth(int money, int tuition, int pubIm){
         this.money = money;
         TUITION = tuition;
@@ -48,9 +57,22 @@ public class Wealth {
 
     }
 
+    /**
+     * Increases the total money by the product of the number of students and tuition.
+     * @param numStu The number of students paying tuition.
+     */
     public void payTuition(int numStu){
         money = money + (numStu * TUITION);
     }
+
+    /**
+     * Updates the public image based on various metrics such as acceptance rates, diversity,
+     * academic performance, etc.
+     * @param students List of all students belonging to a certain college.
+     * @param year Current cycle year for acceptance rate calculation.
+     * @param acceptanceRate Map of historical acceptance rates.
+     * @param college Reference to the College object to access admissions information.
+     */
     public void updatePubIm(ArrayList<Student> students, int year, HashMap<Integer, Double> acceptanceRate, College college){
         int pubImChange = 0;
 
@@ -68,8 +90,8 @@ public class Wealth {
             //currept acceptance rate is bigger than goal, so negative affect on pubim
             pubImChange = pubImChange + ((int)((rateChange)*500));//mess with weight there
         }
-        //System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
-        //System.out.println("public image change after acceptance rate: " +pubImChange);
+        System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
+        System.out.println("public image change after acceptance rate: " +pubImChange);
 
 
         //each college has majordistributions map
@@ -118,19 +140,17 @@ public class Wealth {
             //System.out.println(percentOff);
             //this is all subjective
             //System.out.println("pubImChange before: " + pubImChange);
-            if (numberOff < .1 && 0 < numberOff){
+            if (numberOff < 2 && 0 < numberOff){
                 pubImChange = pubImChange + 1;
-            } else if (numberOff < .2 && .1 < numberOff) {
+            } else if (numberOff < 5) {
                 pubImChange = pubImChange - 1;
-            } else if (numberOff < .4 && .2 < numberOff) {
+            } else if (numberOff < 10) {
                 pubImChange = pubImChange - 2;
-            } else if (numberOff < .6 && .4 < numberOff) {
+            } else if (numberOff < 15) {
                 pubImChange = pubImChange - 3;
-            } else if (numberOff <= 1 && .6 < numberOff) {
+            } else {
                 pubImChange = pubImChange - 5;
             }
-            //System.out.println("pubImChange after: " + pubImChange);
-
         }
 
         int[] diversityCounts = new int[4]; // 0, 1, 2, 3
@@ -144,15 +164,15 @@ public class Wealth {
             double classPercent = ((double) div) / firstYears.size();
             double percentOff = (classPercent - divDisReq.get(i)); //not sure about this bit
             //this is all subjective
-            if (percentOff < .1 && 0 < percentOff){
+            if (percentOff < 2 && 0 < percentOff){
                 pubImChange = pubImChange + 1;
-            } else if (percentOff < .2 && .1 < percentOff) {
+            } else if (percentOff < 5) {
                 pubImChange = pubImChange - 1;
-            } else if (percentOff < .4 && .2 < percentOff) {
+            } else if (percentOff < 10) {
                 pubImChange = pubImChange - 2;
-            } else if (percentOff < .6 && .4 < percentOff) {
+            } else if (percentOff < 15) {
                 pubImChange = pubImChange - 5;
-            } else if (percentOff <= 1 && .6 < percentOff) {
+            } else {
                 pubImChange = pubImChange - 10;
             }
 
@@ -175,12 +195,17 @@ public class Wealth {
         averageSport = totalSport/students.size();
         pubImChange += averageSport *2;
 
-        //System.out.println("Public Image: " + pubIm);
+        System.out.println("Public Image Change: " + pubImChange);
 
 
 
 
     }
+    /**
+     * Calculates and adds potential donations from alumni based on their majors and earnings,
+     * influenced by public image.
+     * @param alumni List of alumni.
+     */
     public void receiveDonations(ArrayList<Student> alumni){
         Random random = new Random();
 
@@ -220,7 +245,11 @@ public class Wealth {
 
     }
 
-    public void receiveClassCumulativeDonations(ArrayList<Student> alumni){
+    /**
+     * Simulates the cumulative effect of class donations over a number of years, considering salary growth.
+     * @param specificClass List of one particular class year of students.
+     */
+    public void receiveClassCumulativeDonations(ArrayList<Student> specificClass){
         //System.out.println(alumni.size());
         Random random = new Random();
         int totalDonation = 0;
@@ -236,7 +265,7 @@ public class Wealth {
 
 
 
-        for (Student alum : alumni) {
+        for (Student alum : specificClass) {
 
             double salary = 0;
             double specialChecker = random.nextDouble();
@@ -257,7 +286,7 @@ public class Wealth {
 
 
         for(int i = 0; i<50; i++){
-            for (Student alum : alumni) {
+            for (Student alum : specificClass) {
                 double checkRate = random.nextDouble();
                 if (checkRate <= donationRate) {
                     double pay = (studentSalary.get(alum)  * (Math.pow(raiseRate,i)));
@@ -273,5 +302,67 @@ public class Wealth {
         money = money + totalDonation;
 
     }
+    /**
+     * Gets the total money available.
+     * @return The total money.
+     */
+    public int getMoney() {
+        return money;
+    }
 
+    /**
+     * Sets the total money available.
+     * @param money The total money to set.
+     */
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    /**
+     * Gets the tuition fee per student.
+     * @return The tuition fee.
+     */
+    public int getTUITION() {
+        return TUITION;
+    }
+
+    /**
+     * Sets the tuition fee per student.
+     * @param TUITION The tuition fee to set.
+     */
+    public void setTUITION(int TUITION) {
+        this.TUITION = TUITION;
+    }
+
+    /**
+     * Gets the public image score.
+     * @return The public image score.
+     */
+    public int getPubIm() {
+        return pubIm;
+    }
+
+    /**
+     * Sets the public image score.
+     * @param pubIm The public image score to set.
+     */
+    public void setPubIm(int pubIm) {
+        this.pubIm = pubIm;
+    }
+
+    /**
+     * Gets the major information map which includes earning potential and volatility.
+     * @return The map containing major information.
+     */
+    public HashMap<String, Double[]> getMajorInfo() {
+        return majorInfo;
+    }
+
+    /**
+     * Sets the major information map.
+     * @param majorInfo The map containing major information to set.
+     */
+    public void setMajorInfo(HashMap<String, Double[]> majorInfo) {
+        this.majorInfo = majorInfo;
+    }
 }

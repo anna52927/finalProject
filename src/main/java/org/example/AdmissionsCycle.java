@@ -33,14 +33,23 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// The AdmissionsCycle class handles the logic for a college admission cycle,
+// which includes managing early decision and regular admission rounds.
 public class AdmissionsCycle {
-    private ArrayList<Student> students;
-    private ArrayList<College> colleges;
-    private String round;
-    private int year;
+    private ArrayList<Student> students; // List of students participating in this admissions cycle
+    private ArrayList<College> colleges; // List of colleges participating in this admissions cycle
+    private String round; // Current admission round (ED or RA)
+    private int year; // Academic year for the admissions cycle
 
 
-
+    /**
+     * Constructor for AdmissionsCycle.
+     * Initializes a new admissions cycle with specified students, colleges, and year.
+     *
+     * @param students List of students participating in this admissions cycle.
+     * @param colleges List of colleges participating in this admissions cycle.
+     * @param year The current year of the admissions cycle.
+     */
     public AdmissionsCycle(ArrayList<Student> students, ArrayList<College> colleges, int year){
         this.students = students;
         this.colleges = colleges;
@@ -50,7 +59,10 @@ public class AdmissionsCycle {
     }
 
 
-
+    /**
+     * Conducts the early decision (ED) round of college admissions.
+     * Students apply to their first-choice college and may be accepted and enrolled.
+     */
     public void earlyRound() {
         round = "ED";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
@@ -75,7 +87,7 @@ public class AdmissionsCycle {
 
         for (College college: colleges) {
             String collegeName = college.name;
-            System.out.println(college.admissions);
+            //System.out.println(college.admissions);
             ArrayList<Student> attendingStudents = college.admissions.considerApplicants(applicantsMap.get(collegeName), round);
             for (Student student: attendingStudents){
                 college.enroll(student);
@@ -83,7 +95,10 @@ public class AdmissionsCycle {
             students.removeAll(attendingStudents);
         }
     }
-
+    /**
+     * Conducts the regular admission (RA) round of college admissions.
+     * Students apply to their next choices, and decisions are made accordingly.
+     */
     public void regularRound() {
         round = "RA";
         HashMap<String, ArrayList<Student>> applicantsMap = new HashMap<>();
@@ -137,6 +152,9 @@ public class AdmissionsCycle {
         }
         students.removeAll(acceptedStudents);
     }
+    /**
+     * Calculates the wealth generated per year by the current attending students and alums in each college.
+     */
     public void calculateWealthPerYear(){
         //add graduation thingy
         for (College college : colleges){
@@ -148,7 +166,11 @@ public class AdmissionsCycle {
         }
 
     }
-
+    /**
+     * Calculates the total expected wealth for one specific class from their time as students to their time as alumni.
+     *
+     * @param classYear The year of the class for which the wealth is being calculated.
+     */
     public void calculateWealthPerClass(int classYear){
         //HashMap<String, ArrayList<Student>> classOf_ = new HashMap<>();
         for (College college : colleges){//makes a list of all the students of one singular class year
@@ -171,6 +193,11 @@ public class AdmissionsCycle {
         }
     }
     //CHATGPT HELL YEAH BABYYYYYY RAHHHHHHHHH
+    /**
+     * Ranks colleges based on their public image score.
+     *
+     * @return A list of colleges sorted by public image.
+     */
     public ArrayList<College> orderCollegesByPubIm(){
         ArrayList<College> collegesRanked = new ArrayList<>(colleges); // Assume 'colleges' is a class member containing the initial list
         boolean swapped;
@@ -189,6 +216,11 @@ public class AdmissionsCycle {
         } while (swapped);
         return collegesRanked;
     }
+    /**
+     * Ranks colleges based on their monetary wealth.
+     *
+     * @return A list of colleges sorted by their financial status.
+     */
     public ArrayList<College> orderCollegesByMoney(){
         ArrayList<College> collegesRanked = new ArrayList<>(colleges); // Assume 'colleges' is a class member containing the initial list
         boolean swapped;
@@ -206,6 +238,69 @@ public class AdmissionsCycle {
             }
         } while (swapped);
         return collegesRanked;
+    }
+    /**
+     * Gets the list of students participating in this admissions cycle.
+     * @return A list of students.
+     */
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    /**
+     * Sets the list of students participating in this admissions cycle.
+     * @param students The list of students to set.
+     */
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+
+    /**
+     * Gets the list of colleges participating in this admissions cycle.
+     * @return A list of colleges.
+     */
+    public ArrayList<College> getColleges() {
+        return colleges;
+    }
+
+    /**
+     * Sets the list of colleges participating in this admissions cycle.
+     * @param colleges The list of colleges to set.
+     */
+    public void setColleges(ArrayList<College> colleges) {
+        this.colleges = colleges;
+    }
+
+    /**
+     * Gets the current admission round.
+     * @return The current round (ED or RA).
+     */
+    public String getRound() {
+        return round;
+    }
+
+    /**
+     * Sets the current admission round.
+     * @param round The admission round to set (ED or RA).
+     */
+    public void setRound(String round) {
+        this.round = round;
+    }
+
+    /**
+     * Gets the academic year for the admissions cycle.
+     * @return The academic year.
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * Sets the academic year for the admissions cycle.
+     * @param year The academic year to set.
+     */
+    public void setYear(int year) {
+        this.year = year;
     }
 
 }
