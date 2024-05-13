@@ -1,0 +1,47 @@
+{
+    "Nonresidents": [
+        252.0,
+        947.0,
+        1002.0
+    ],
+    "Hispanic/Latino": [
+        193.0,
+        852.0,
+        853.0
+    ],
+    "Black or African American, non-Hispanic": [
+        165.0,
+        665.0,
+        665.0
+    ],
+    "White, non-Hispanic": [
+        476.0,
+        2436.0,
+        2440.0
+    ],
+    "American Indian or Alaska Native, non-Hispanic": [
+        7.0,
+        20.0,
+        20.0
+    ],
+    "Asian, non-Hispanic": [
+        403.0,
+        1623.0,
+        1624.0
+    ],
+    "Native Hawaiian or other Pacific Islander, non-His": [
+        "anic5",
+        10.0,
+        10.0
+    ],
+    "Two or more races, non-Hispanic": [
+        123.0,
+        546.0,
+        547.0
+    ],
+    "Race and/or ethnicity unknown": [
+        20.0,
+        79.0,
+        79.0
+    ]
+}

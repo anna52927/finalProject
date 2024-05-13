@@ -14,19 +14,19 @@ except ModuleNotFoundError:
 
 def collectData():
     schools = ['brown','yale','harvard','princeton','cornell','dartmouth','columbia','upenn']
-    dataSets = ['ImportantMetrics','MajorDistribution']
-    starts = ['Very Important','Bachelor’s']
-    sentinels = ["Level of applicant\u2019s interest",'Other']
-    delayStarts = [0,0]
-    delaySentinels = [0,0]
-    importanceTables = [True,False]
-    filepaths = []
+    dataSets = ['ImportantMetrics','MajorDistribution','DiversityDistribution']
+    starts = ['Very Important','Bachelor’s','International']
+    sentinels = ["Level of applicant\u2019s interest",'Other','Race and/or ethnicity unknown']
+    delayStarts = [0,0,0]
+    delaySentinels = [0,0,0]
+    importanceTables = [True,False,False]
+    columnLabels = [True,True,False]
     
     for school in schools:
         dataConvert(school+"CDS.pdf",school)
-        for (dataSet,start,sentinel,dStart,dSentinel,iTable) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables)):
+        for (dataSet,start,sentinel,dStart,dSentinel,iTable,cLabel) in list(zip(dataSets,starts,sentinels,delayStarts,delaySentinels,importanceTables,columnLabels)):
             filename = organize(school,dataSet,start,sentinel,delayStart=dStart,delaySentinel=dSentinel)
-            dictJSON(extract(filename,importanceTable=iTable),filename.replace("csv","json"))
+            dictJSON(extract(filename,importanceTable=iTable,columnLabels=cLabel),filename.replace("csv","json"))
 
 #coverts data from pdf to csv
 #returns file name
