@@ -1,0 +1,41 @@
+{
+    "Nonresidents": [
+        "222 681",
+        694.0
+    ],
+    "Hispanic/Latino": [
+        "125 554",
+        554.0
+    ],
+    "Black or African American, non-Hispanic": [
+        "128 441",
+        441.0
+    ],
+    "White, non-Hispanic": [
+        "505 2,076",
+        2076.0
+    ],
+    "American Indian or Alaska Native, non-Hispanic": [
+        "2 7",
+        7.0
+    ],
+    "Asian, non-Hispanic": [
+        "375 1,299",
+        1299.0
+    ],
+    "Native Hawaiian or other Pacific Islander, non-Hisp": [
+        "",
+        "",
+        ""
+    ],
+    "Two or more races, non-Hispanic": [
+        108.0,
+        377.0,
+        377.0
+    ],
+    "Race and/or ethnicity unknown": [
+        30.0,
+        86.0,
+        86.0
+    ]
+}
