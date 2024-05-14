@@ -11,11 +11,12 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
 
 
 
-    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity){
+    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double intialYieldRate){
         super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
         acceptanceRate = new HashMap<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         importance = college.userCollegeInfo;
+        diversityDistributions = new HashMap<String,Integer>();
 
         //i dont know if we can make this a subclass now because the constructor in admissions
         //office takes in a college object but user college is its own thing separate from the
