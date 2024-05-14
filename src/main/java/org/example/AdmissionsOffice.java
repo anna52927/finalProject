@@ -141,12 +141,13 @@ public class AdmissionsOffice {
             String major = student.getMajor();
             String  diversity = student.getDiversity();
             int value = majorDistributions.get(major);
+            System.out.println(diversity);
+            System.out.println(diversityDistributions);
+            System.out.println(self.name);
             if(value > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
                 admittedStudents.add(student);
-                System.out.println(major);
-                System.out.println(self.name);
                 majorDistributions.put("value", majorDistributions.get(major) - 1);
-                //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
+                diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
         }
