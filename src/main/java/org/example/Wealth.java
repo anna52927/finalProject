@@ -83,15 +83,15 @@ public class Wealth {
         //System.out.println("rate change: " +rateChange);
         if (rateChange > 0){
             //current accpectance rate smaller than goal, so positive public image change
-            pubImChange = pubImChange + ((int)((rateChange)*500));//mess with weight there
+            pubImChange = pubImChange + ((int)((rateChange)*100));//mess with weight there
 
         }
         else if (rateChange < 0){
             //currept acceptance rate is bigger than goal, so negative affect on pubim
-            pubImChange = pubImChange + ((int)((rateChange)*500));//mess with weight there
+            pubImChange = pubImChange + ((int)((rateChange)*100));//mess with weight there
         }
-        System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
-        System.out.println("public image change after acceptance rate: " +pubImChange);
+        //System.out.println("goal acceptance rate: " +goalAcceptanceRate + ", acceptance rate = "+ currentAcceptanceRate);
+        //System.out.println("public image change after acceptance rate: " +pubImChange);
 
 
         //each college has majordistributions map
@@ -135,20 +135,19 @@ public class Wealth {
         //System.out.println(majorCounts);
         for (HashMap.Entry<String, Integer> entry : majorCounts.entrySet()) {
             String major = entry.getKey();
-            int numberOfPeopleInMajor = entry.getValue();
-            double numberOff = (numberOfPeopleInMajor - (int)majorDisReq.get(major)); //not sure about this bit -- updated to int (Felix)
-            //System.out.println(percentOff);
+            double numberOfPeopleInMajor = (double)entry.getValue();
+            double numberOff = (numberOfPeopleInMajor/firstYears.size() - majorDisReq.get(major)/(college.capacity/college.admissions.yieldRate)); //not sure about this bit -- updated to int (Felix)
+            //System.out.println(numberOff);
             //this is all subjective
-            //System.out.println("pubImChange before: " + pubImChange);
-            if (numberOff < 2 && 0 < numberOff){
+            if (numberOff < .01 && 0 < numberOff){
                 pubImChange = pubImChange + 1;
-            } else if (numberOff < 5) {
+            } else if (numberOff < .05 && 0 < numberOff) {
                 pubImChange = pubImChange - 1;
-            } else if (numberOff < 10) {
+            } else if (numberOff < .07 && 0 < numberOff) {
                 pubImChange = pubImChange - 2;
-            } else if (numberOff < 15) {
+            } else if (numberOff < .15 && 0 < numberOff) {
                 pubImChange = pubImChange - 3;
-            } else {
+            } else if (numberOff > .15){
                 pubImChange = pubImChange - 5;
             }
         }
@@ -183,7 +182,7 @@ public class Wealth {
             totalAcademics += ((double)(student.getHashMap().get("Rigor of secondary school record")+student.getHashMap().get("Class rank")+student.getHashMap().get("Academic GPA")+student.getHashMap().get("Standardized test scores")+student.getHashMap().get("Application Essay")+student.getHashMap().get("Talent/ability")))/6;
         }
         averageAcademics = totalAcademics/students.size();
-        pubImChange += averageAcademics *2;
+        pubImChange += averageAcademics *4;
 
         pubIm +=pubImChange;
 
@@ -193,7 +192,7 @@ public class Wealth {
             totalSport += student.getHashMap().get("Extracurricular activities");
         }
         averageSport = totalSport/students.size();
-        pubImChange += averageSport *2;
+        pubImChange += averageSport *4;
 
         System.out.println("Public Image Change: " + pubImChange);
 
