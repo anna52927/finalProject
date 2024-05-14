@@ -158,6 +158,11 @@ public class AdmissionsCycle {
     public void calculateWealthPerYear(){
         //add graduation thingy
         for (College college : colleges){
+            for(Student student:students){
+                if (student.getHashMap().get("Application Cycle")==year-4){
+                    college.graduate(student);
+                }
+            }
 
             college.getWealth().payTuition(college.getAttendingStudents().size());
             college.getWealth().updatePubIm(college.getAttendingStudents(), year, college.admissions.getAcceptanceRate(), college);
