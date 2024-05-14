@@ -147,7 +147,7 @@ public class AdmissionsOffice {
                 System.out.println(major);
                 System.out.println(self.name);
                 majorDistributions.put("value", majorDistributions.get(major) - 1);
-                diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
+                //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
         }
