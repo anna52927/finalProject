@@ -99,17 +99,7 @@ public class Wealth {
 
 
         HashMap<String,Integer> majorDisReq = college.admissions.majorDistributions; //updated to Integer -- Felix
-
-
-        final double DIVDISREQ0 = .25;
-        final double DIVDISREQ1 = .25;
-        final double DIVDISREQ2 = .25;
-        final double DIVDISREQ3 = .25;
-        HashMap<Integer, Double> divDisReq = new HashMap<>();
-        divDisReq.put(0, DIVDISREQ0);
-        divDisReq.put(1, DIVDISREQ1);
-        divDisReq.put(2, DIVDISREQ2);
-        divDisReq.put(3, DIVDISREQ3);
+        HashMap<String,Integer> divDisReq = college.admissions.diversityDistributions;
 
 
         ArrayList<Student> firstYears = new ArrayList<>();
@@ -129,7 +119,6 @@ public class Wealth {
             }
 
             majorCounts.put(major, majorCounts.get(major)+1);
-
         }
 
         //System.out.println(majorCounts);
@@ -152,37 +141,43 @@ public class Wealth {
             }
         }
 
-        int[] diversityCounts = new int[4]; // 0, 1, 2, 3
+        HashMap<String, Integer> diversityCounts = new HashMap<String, Integer>(); // 0, 1, 2, 3
         for (Student student : firstYears) {
-
-            int diversity = student.getDiversity();
-            diversityCounts[diversity]++;//assuming firstGen opperates on 0-3 scale of diversity
-        }
-        for (int i=0; i<diversityCounts.length; i++){
-            int div = diversityCounts[i];
-            double classPercent = ((double) div) / firstYears.size();
-            double percentOff = (classPercent - divDisReq.get(i)); //not sure about this bit
-            //this is all subjective
-            if (percentOff < 2 && 0 < percentOff){
-                pubImChange = pubImChange + 1;
-            } else if (percentOff < 5) {
-                pubImChange = pubImChange - 1;
-            } else if (percentOff < 10) {
-                pubImChange = pubImChange - 2;
-            } else if (percentOff < 15) {
-                pubImChange = pubImChange - 5;
-            } else {
-                pubImChange = pubImChange - 10;
+            String diversity = student.getDiversity();
+            if (!diversityCounts.containsKey(diversity)){
+                diversityCounts.put(diversity, 0);
             }
 
+            diversityCounts.put(diversity, diversityCounts.get(diversity)+1);
         }
+
+
+        for (HashMap.Entry<String, Integer> entry : diversityCounts.entrySet()) {
+            String diversity = entry.getKey();
+            double numberOfPeopleInDiv = (double)entry.getValue();
+            double numberOff = (numberOfPeopleInDiv/firstYears.size() - divDisReq.get(diversity)/(college.capacity/college.admissions.yieldRate)); //not sure about this bit -- updated to int (Felix)
+            //System.out.println(numberOff);
+            //this is all subjective
+            if (numberOff < .01 && 0 < numberOff){
+                pubImChange = pubImChange + 1;
+            } else if (numberOff < .05 && 0 < numberOff) {
+                pubImChange = pubImChange - 1;
+            } else if (numberOff < .07 && 0 < numberOff) {
+                pubImChange = pubImChange - 2;
+            } else if (numberOff < .15 && 0 < numberOff) {
+                pubImChange = pubImChange - 3;
+            } else if (numberOff > .15){
+                pubImChange = pubImChange - 5;
+            }
+        }
+
         double averageAcademics = 0;
         double totalAcademics = 0;
         for (Student student: students){
             totalAcademics += ((double)(student.getHashMap().get("Rigor of secondary school record")+student.getHashMap().get("Class rank")+student.getHashMap().get("Academic GPA")+student.getHashMap().get("Standardized test scores")+student.getHashMap().get("Application Essay")+student.getHashMap().get("Talent/ability")))/6;
         }
         averageAcademics = totalAcademics/students.size();
-        pubImChange += averageAcademics *4;
+        pubImChange += averageAcademics *5;
 
         pubIm +=pubImChange;
 
@@ -192,7 +187,7 @@ public class Wealth {
             totalSport += student.getHashMap().get("Extracurricular activities");
         }
         averageSport = totalSport/students.size();
-        pubImChange += averageSport *4;
+        pubImChange += averageSport *5;
 
         System.out.println("Public Image Change: " + pubImChange);
 

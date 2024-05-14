@@ -144,6 +144,8 @@ public class AdmissionsOffice {
             int value = majorDistributions.get(major);
             if(value > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
                 admittedStudents.add(student);
+                System.out.println(major);
+                System.out.println(self.name);
                 majorDistributions.put("value", majorDistributions.get(major) - 1);
                 diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
