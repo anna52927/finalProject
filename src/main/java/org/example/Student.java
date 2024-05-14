@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Student {
     protected String major;
-    protected int diversity;
+    protected String diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
@@ -123,7 +123,7 @@ public class Student {
     public ArrayList<College> getList(){
         return preference;
     }
-    public int getDiversity(){return diversity;}
+    public String getDiversity(){return diversity;}
 
     //Is major a String or Int for now?
     public String getMajor(){return major;}
