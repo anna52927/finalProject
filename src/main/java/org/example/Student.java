@@ -8,13 +8,13 @@ import java.util.Random;
 
 public class Student {
     protected String major;
-    protected int diversity;
+    protected String diversity;
     protected ArrayList<College> preference;
     //Hash Map
     HashMap<String, Integer> studentInfo = new HashMap<>();
     private double score;
 
-    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank, String major) {
+    public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank, String major, String diversity) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
         studentInfo.put("Class rank", classRank);
@@ -39,6 +39,8 @@ public class Student {
         studentInfo.put("Application Year", year);
         preference = collegePrefGen(collegeRank);
         this.major = major;
+        this.diversity = diversity;
+
 
     }
 
@@ -123,7 +125,7 @@ public class Student {
     public ArrayList<College> getList(){
         return preference;
     }
-    public int getDiversity(){return diversity;}
+    public String getDiversity(){return diversity;}
 
     //Is major a String or Int for now?
     public String getMajor(){return major;}
