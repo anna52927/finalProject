@@ -1,4 +1,5 @@
 package org.example;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -9,8 +10,8 @@ public class Main {
             
         ArrayList<College> colleges = new ArrayList<>();
         String[] subjects = {"Agriculture", "Natural resources and conservation", "Architecture", "Area, ethnic, and gender studies", "Communication/journalism", "Computer and information sciences", "Education", "Engineering", "Foreign languages, literatures, and linguistics","Family and consumer sciences","English","Liberal arts/general studies","Biological/life sciences","Mathematics and statistics","Interdisciplinary studies","Philosophy and religious studies","Physical sciences","Psychology","Public administration and social services","Social sciences","Visual and performing arts","Health professions and related programs","Business/marketing","History"};
-
-
+        String[] diversity = {"Nonresidents","Hispanic/Latino","Black or African American, non-Hispanic","White, non-Hispanic","American Indian or Alaska Native, non-Hispanic","Asian, non-Hispanic","Native Hawaiian or other Pacific Islander, non-Hispanic","Two or more races, non-Hispanic","Race and/or ethnicity unknown"};
+        double[] diversityNums = {};
         colleges.add(new College("yale",2000,62250,30,0.06,-4,0,0.33));
         colleges.add(new College("brown",2000,65146,25,0.06,-1,-4,0.12));
         colleges.add(new College("harvard",2000,57261,24,.06,0,0,0.21));
@@ -39,7 +40,7 @@ public class Main {
                     randomValues[4], randomValues[5], randomValues[6], randomValues[7], randomValues[8],
                     randomValues[9], randomValues[10], randomValues[11], randomValues[12], randomValues[13],
                     randomValues[14], randomValues[15], randomValues[16], randomValues[17], randomValues[18],
-                    1, 2024, colleges, subjects[random.nextInt(subjects.length)]));
+                    1, 2024, colleges, subjects[random.nextInt(subjects.length)],diversity[random.nextInt(diversity.length)]));
         }
 
 

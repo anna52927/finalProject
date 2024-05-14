@@ -33,6 +33,7 @@ public class AdmissionsOffice {
         admittedStudents = new ArrayList<>();
         acceptanceRate.put(0,initialAcceptanceRate);
         majorDistributions = new HashMap<String,Integer>();
+        diversityDistributions = new HashMap<String,Integer>();
 
         /*
         WICHTIGE HINWEIS FUER FELIX (deswegen es ist auf Deutsch geschrieben)
@@ -67,8 +68,6 @@ public class AdmissionsOffice {
 
     public void calculateYieldRate(){
         //kinda janky, would have made more sense if we stored admitted students as an array of class arrays
-        //solche Sachen sind was schwierig wenn Mann den UML nicht veraendern kann und wenn da kein zentrale Struktur gibt (schwierig mit drei verschiedene Personen)
-        //hauptsache besser als nix
         int year = admittedStudents.get(0).getHashMap().get("Application Cycle");
         int count = 0;
         for (Student student : self.attendingStudents) {
@@ -95,7 +94,7 @@ public class AdmissionsOffice {
     }
 
     public void calculateDiversityDistributions(){
-        for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
+        for (Map.Entry<String,Object> entry : rawDiversityDistributions.entrySet()) {
             double value = (double) entry.getValue() * admitCapacity;
             diversityDistributions.put(entry.getKey(), (int) value);
         }
@@ -140,7 +139,7 @@ public class AdmissionsOffice {
         while(admittedStudents.size() < self.capacity && i < applicants.size()){
             Student student = applicants.get(i);
             String major = student.getMajor();
-            int diversity = student.getDiversity();
+            String  diversity = student.getDiversity();
             int value = majorDistributions.get(major);
             if(value > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
                 admittedStudents.add(student);
