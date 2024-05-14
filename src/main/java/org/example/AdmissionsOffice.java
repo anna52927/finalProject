@@ -12,7 +12,8 @@ public class AdmissionsOffice {
     public ArrayList<Student> admittedStudents;
     public Map<String,Object> rawMajorDistributions;
     public HashMap<String,Integer> majorDistributions;
-    public Map<Integer,Integer> diversityDistributions;
+    public Map<String,Object> rawDiversityDistributions;
+    public HashMap<String,Integer> diversityDistributions;
     public int majorCutoff; //max # of students a major can go over, sacrifices diversity
     public int diversityCutoff; //opposite of majorCutoff
     public int EDApplied; //stored datum from ED rounds so accurate acceptance rate can be calculated
@@ -40,10 +41,24 @@ public class AdmissionsOffice {
          */
 
 
-        importance = JSONData.JSONImport(college.name + "ImportantMetrics.json");
-        rawMajorDistributions = JSONData.JSONImport(college.name + "MajorDistribution.json");
+        importance = JSONData.JSONImport(self.name + "ImportantMetrics.json");
+        rawMajorDistributions = JSONData.JSONImport(self.name + "MajorDistribution.json");
+        rawDiversityDistributions = JSONData.JSONImport(self.name + "DiversityDistribution.json");
+        //adjust to percents
+        for (Map.Entry<String, Object> entry : rawDiversityDistributions.entrySet()) {
+            Map<String,Object> map = (Map<String, Object>) entry.getValue();
+            Map<String,Object> diversitymap = (Map<String, Object>) map.get(Integer.toString(map.size()-1));
+            double v;
+            if(diversitymap.get("value").equals("")){
+                v = 0.0;
+            } else {
+                v = (double) diversitymap.get("value");
+            }
+            rawDiversityDistributions.put(entry.getKey(), v / self.capacity);
+        }
         calculateCapacity();
         calculateMajorDistributions();
+        calculateDiversityDistributions();
     }
 
     public void calculateCapacity(){
@@ -79,18 +94,25 @@ public class AdmissionsOffice {
         }
     }
 
+    public void calculateDiversityDistributions(){
+        for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
+            double value = (double) entry.getValue() * admitCapacity;
+            diversityDistributions.put(entry.getKey(), (int) value);
+        }
+    }
+
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
         //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
 
-        //avoid running in the first round
-        if(!self.attendingStudents.isEmpty()) {
-            calculateYieldRate();
-        }
-        calculateCapacity();
-        calculateMajorDistributions();
-
         if(round.equals("ED")){
+            //avoid running in the first round
+            if(!self.attendingStudents.isEmpty()) {
+                calculateYieldRate();
+            }
+            calculateCapacity();
+            calculateMajorDistributions();
+            calculateDiversityDistributions();
             capacity = (int) (admitCapacity * EDAdmitCapacity);
         } else {
             capacity = admitCapacity;
@@ -120,11 +142,10 @@ public class AdmissionsOffice {
             String major = student.getMajor();
             int diversity = student.getDiversity();
             int value = majorDistributions.get(major);
-            //&& diversityDistributions.get(diversity) > majorCutoff
-            if(value > diversityCutoff) {
+            if(value > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
                 admittedStudents.add(student);
                 majorDistributions.put("value", majorDistributions.get(major) - 1);
-                //diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
+                diversityDistributions.put(diversity, diversityDistributions.get(diversity) - 1);
             }
             i++;
         }
@@ -151,6 +172,7 @@ public class AdmissionsOffice {
         return score;
     }
 
+    //don't use this method
     public void resetRound(){
         admittedStudents.clear();
         EDApplied = 0;
