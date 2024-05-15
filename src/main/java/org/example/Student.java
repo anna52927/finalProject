@@ -48,12 +48,12 @@ public class Student {
 
     public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
         ArrayList<College> list = new ArrayList<>();
-        ArrayList<Integer> collegePercents = new ArrayList<>(Arrays.asList(0,0,0,0,0,0));
-        ArrayList<Integer> copyCollegeRank = new ArrayList<>(Arrays.asList(0,1,2,3,4,5));
+        ArrayList<Integer> collegePercents = new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0));
+        ArrayList<Integer> copyCollegeRank = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6));
 
 
         //have to change to seven so edit everything to fit
-        for(int k = 0; k < 6; k++){
+        for(int k = 0; k < 7; k++){
             double pubImTotal = 0; //the denominator for the fraction
             int hundredCheck = 0; //makes sure it adds up to 100 random number is in range
 
@@ -101,7 +101,7 @@ public class Student {
             collegePercents.remove(collegeIndexRemove);
         }
 
-        //System.out.println("End List: " + list);
+        System.out.println("End List: " + list);
         return list;
     }
 
