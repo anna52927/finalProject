@@ -14,6 +14,7 @@ public class Student {
     HashMap<String, Integer> studentInfo = new HashMap<>();
     private double score;
 
+    //doesn't pass in colleges ranked
     public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank, String major, String diversity) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
@@ -101,7 +102,6 @@ public class Student {
             collegePercents.remove(collegeIndexRemove);
         }
 
-        System.out.println("End List: " + list);
         return list;
     }
 

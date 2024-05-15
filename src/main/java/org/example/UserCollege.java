@@ -10,7 +10,6 @@ public class UserCollege extends College{
     private ArrayList<Student> attendingStudents;
     private ArrayList<Student> alumni;
     private Wealth wealth;
-    public int finAidBudget;
     public UserAdmissionsOffice admissions;
 
     public UserCollege(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitPercent) {
@@ -91,11 +90,11 @@ public class UserCollege extends College{
         */
 
         System.out.println("Enter your college's capacity: ");
-        capacity = scanner.nextInt();
+        super.capacity = scanner.nextInt();
         System.out.println("Enter your colleges tuition: ");
-        wealth.TUITION = scanner.nextInt();
+        super.getWealth().TUITION = scanner.nextInt();
         System.out.println("Enter your colleges public image score: ");
-        wealth.pubIm = scanner.nextInt();
+        super.getWealth().pubIm = scanner.nextInt();
 
         admissions.chooseAdmissionsOfficeInfo();
 

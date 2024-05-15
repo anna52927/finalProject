@@ -136,6 +136,7 @@ public class AdmissionsOffice {
         }
 
         int i = 0;
+
         while(admittedStudents.size() < self.capacity && i < applicants.size()){
             Student student = applicants.get(i);
             String major = student.getMajor();
@@ -159,6 +160,8 @@ public class AdmissionsOffice {
         System.out.println(self.name);
         System.out.println(applicants.size());
         System.out.println(admittedStudents.size());
+        System.out.println(diversityDistributions);
+        System.out.println(majorDistributions);
 
         return admittedStudents;
     }

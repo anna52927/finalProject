@@ -12,11 +12,11 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
 
 
     public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double intialYieldRate){
-        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.0);
-        acceptanceRate = new HashMap<>();
-        acceptanceRate.put(0,initialAcceptanceRate);
-        importance = college.userCollegeInfo;
-        diversityDistributions = new HashMap<String,Integer>();
+        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.5);
+        //acceptanceRate = new HashMap<>();
+        //acceptanceRate.put(0,initialAcceptanceRate);
+        //importance = college.userCollegeInfo;
+        //diversityDistributions = new HashMap<String,Integer>();
 
         //i dont know if we can make this a subclass now because the constructor in admissions
         //office takes in a college object but user college is its own thing separate from the
@@ -27,13 +27,13 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
     public void chooseAdmissionsOfficeInfo(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("What is the initial acceptance rate of your college: ");
-        acceptanceRate.put(0, scanner.nextDouble());
+        super.acceptanceRate.put(0, scanner.nextDouble());
         System.out.println("What is the major cutoff number: ");
-        majorCutoff = scanner.nextInt();
+        super.majorCutoff = scanner.nextInt();
         System.out.println("What is the diversity cutoff number: ");
-        diversityCutoff = scanner.nextInt();
+        super.diversityCutoff = scanner.nextInt();
         System.out.println("Enter the percentage of applicants that will be let in ED: ");
-        EDAdmitCapacity = scanner.nextDouble();
+        super.EDAdmitCapacity = scanner.nextDouble();
 
         //major distributions fill hash map
         /*
