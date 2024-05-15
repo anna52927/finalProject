@@ -141,9 +141,6 @@ public class AdmissionsOffice {
             String major = student.getMajor();
             String  diversity = student.getDiversity();
             int value = majorDistributions.get(major);
-            System.out.println(diversity);
-            System.out.println(diversityDistributions);
-            System.out.println(self.name);
             if(value > diversityCutoff && diversityDistributions.get(diversity) > majorCutoff) {
                 admittedStudents.add(student);
                 majorDistributions.put("value", majorDistributions.get(major) - 1);
@@ -155,11 +152,13 @@ public class AdmissionsOffice {
         if(round.equals("ED")){
             EDApplied = applicants.size();
         } else {
-
             //changed application year to application cycle
-            acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size()+EDApplied));
-
+            acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size() + EDApplied));
         }
+
+        System.out.println(self.name);
+        System.out.println(applicants.size());
+        System.out.println(admittedStudents.size());
 
         return admittedStudents;
     }

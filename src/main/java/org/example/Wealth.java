@@ -186,6 +186,7 @@ public class Wealth {
         for (Student student: students){
             totalSport += student.getHashMap().get("Extracurricular activities");
         }
+
         averageSport = totalSport/students.size();
         pubImChange += averageSport *5;
 
