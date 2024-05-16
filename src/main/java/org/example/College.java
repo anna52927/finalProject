@@ -13,15 +13,15 @@ public class College {
     public int EDAdmitCapacity;
 
 
-    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, double EDAdmitPercent){
-        this.capacity = capacity;
+    public College(String name, int capacity, int tuition, int pubIm, double initialAcceptanceRate, int majorCutoff, int diversityCutoff, double EDAdmitPercent,double initialYieldRate){
+        this.capacity = capacity / 4;     //adjusts to be capacity for freshmen only
         this.name = name;
         attendingStudents = new ArrayList<Student>();
         alumni = new ArrayList<Student>();
         EDAdmitCapacity = (int)EDAdmitPercent * capacity;
 
         wealth = new Wealth(0,tuition,pubIm);
-        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.50);
+        admissions = new AdmissionsOffice(this,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,initialYieldRate);
         System.out.println(admissions.getAcceptanceRate());
 
 

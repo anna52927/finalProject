@@ -11,8 +11,8 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
 
 
 
-    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double intialYieldRate){
-        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,0.5);
+    public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double initialYieldRate){
+        super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,initialYieldRate);
         //acceptanceRate = new HashMap<>();
         //acceptanceRate.put(0,initialAcceptanceRate);
         //importance = college.userCollegeInfo;
@@ -34,6 +34,9 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         super.diversityCutoff = scanner.nextInt();
         System.out.println("Enter the percentage of applicants that will be let in ED: ");
         super.EDAdmitCapacity = scanner.nextDouble();
+        System.out.println("Enter the initial yield rate of your college: ");
+        super.yieldRate = scanner.nextDouble();
+        scanner.close();
 
         //major distributions fill hash map
         /*

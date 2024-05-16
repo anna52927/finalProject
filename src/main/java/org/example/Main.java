@@ -12,13 +12,13 @@ public class Main {
         String[] subjects = {"Agriculture", "Natural resources and conservation", "Architecture", "Area, ethnic, and gender studies", "Communication/journalism", "Computer and information sciences", "Education", "Engineering", "Foreign languages, literatures, and linguistics","Family and consumer sciences","English","Liberal arts/general studies","Biological/life sciences","Mathematics and statistics","Interdisciplinary studies","Philosophy and religious studies","Physical sciences","Psychology","Public administration and social services","Social sciences","Visual and performing arts","Health professions and related programs","Business/marketing","History"};
         String[] diversity = {"Nonresidents","Hispanic/Latino","Black or African American, non-Hispanic","White, non-Hispanic","American Indian or Alaska Native, non-Hispanic","Asian, non-Hispanic","Native Hawaiian or other Pacific Islander, non-Hispanic","Two or more races, non-Hispanic","Race and/or ethnicity unknown"};
         double[] diversityNums = {0.07,0.15,0.1,0.38,0.02,0.20,0.01,0.06,0.06};
-        colleges.add(new College("yale",2000,62250,30,0.06,-4,0,0.33));
-        colleges.add(new College("brown",2000,65146,25,0.06,-1,-4,0.12));
-        colleges.add(new College("harvard",2000,57261,24,.06,0,0,0.21));
-        colleges.add(new College("dartmouth",2000,62658,20,0.06,-2,-1,0.23));
-        colleges.add(new College("princeton",2000,57410,19,0.06,-5,-3,0.12));
-        colleges.add(new College("cornell",2000,57410,22,0.06,-5,-3,0.12));
-        colleges.add(new UserCollege("userCollege", 0,0,0,0.06,0,0,0));
+        colleges.add(new College("yale",6645,62250,77,0.045,-4,0,0.33,0.7));
+        colleges.add(new College("brown",7639,65146,58,0.051,-1,-4,0.12,0.63));
+        colleges.add(new College("harvard",7240,57261,99,.0341,0,0,0.21,0.85));
+        colleges.add(new College("dartmouth",4458,62658,58,0.0734,-2,-1,0.23,0.67));
+        colleges.add(new College("princeton",5604,57410,63,0.0623,-5,-3,0.12,0.77));
+        colleges.add(new College("cornell",15735,57410,56,0.057,-5,-3,0.12,0.66));
+        colleges.add(new UserCollege("userCollege", 0,0,0,0,0,0,0,0));
 
         ((UserCollege)colleges.get(6)).chooseCollegeInfo();
 

@@ -107,13 +107,16 @@ public class AdmissionsOffice {
         if(round.equals("ED")){
             //avoid running in the first round
             if(!self.attendingStudents.isEmpty()) {
-                calculateYieldRate();
+                calculateYieldRate(); //calculating for RD while data is still stored in fields
             }
-            calculateCapacity();
+            admitCapacity = self.capacity; //yield rate is 100% in ED
             calculateMajorDistributions();
             calculateDiversityDistributions();
             capacity = (int) (admitCapacity * EDAdmitCapacity);
         } else {
+            calculateCapacity();
+            calculateMajorDistributions();
+            calculateDiversityDistributions();
             capacity = admitCapacity;
         }
 
@@ -137,7 +140,7 @@ public class AdmissionsOffice {
 
         int i = 0;
 
-        while(admittedStudents.size() < self.capacity && i < applicants.size()){
+        while(admittedStudents.size() < capacity && i < applicants.size()){
             Student student = applicants.get(i);
             String major = student.getMajor();
             String  diversity = student.getDiversity();
@@ -156,12 +159,6 @@ public class AdmissionsOffice {
             //changed application year to application cycle
             acceptanceRate.put(applicants.get(0).getHashMap().get("Application Cycle"), (double) admittedStudents.size() / (applicants.size() + EDApplied));
         }
-
-        System.out.println(self.name);
-        System.out.println(applicants.size());
-        System.out.println(admittedStudents.size());
-        System.out.println(diversityDistributions);
-        System.out.println(majorDistributions);
 
         return admittedStudents;
     }

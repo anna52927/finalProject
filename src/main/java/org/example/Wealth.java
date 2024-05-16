@@ -19,6 +19,8 @@ public class Wealth {
     public int TUITION; // Tuition fee per student
     public int pubIm; // Public image, possibly on a scale like 1-100
     public HashMap<String, Double[]> majorInfo; // Stores earning potential and volatility by major
+    public HashMap<String,Integer>  princetonMajorDis;
+    public HashMap<String,Integer>  princetonDivDis;
 
 
     /**
@@ -74,6 +76,11 @@ public class Wealth {
      * @param college Reference to the College object to access admissions information.
      */
     public void updatePubIm(ArrayList<Student> students, int year, HashMap<Integer, Double> acceptanceRate, College college){
+        if (college.name.equals("pinceton")){
+            this.princetonDivDis = college.admissions.diversityDistributions;
+            this.princetonMajorDis = college.admissions.majorDistributions;
+        }
+
         int pubImChange = 0;
 
 
@@ -96,10 +103,17 @@ public class Wealth {
 
         //each college has majordistributions map
 
+         HashMap<String,Integer> majorDisReq = new HashMap<>();
+         HashMap<String,Integer> divDisReq = new HashMap<>();
+        if (college.name.equals("UserCollege")){
+            majorDisReq = princetonMajorDis; //updated to Integer -- Felix
+            divDisReq = princetonDivDis;
+        }
+        else {
+            majorDisReq = college.admissions.majorDistributions; //updated to Integer -- Felix
+            divDisReq = college.admissions.diversityDistributions;
+        }
 
-
-        HashMap<String,Integer> majorDisReq = college.admissions.majorDistributions; //updated to Integer -- Felix
-        HashMap<String,Integer> divDisReq = college.admissions.diversityDistributions;
 
 
         ArrayList<Student> firstYears = new ArrayList<>();
