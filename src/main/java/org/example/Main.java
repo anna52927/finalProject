@@ -52,7 +52,7 @@ public class Main {
                     randomValues[4], randomValues[5], randomValues[6], randomValues[7], randomValues[8],
                     randomValues[9], randomValues[10], randomValues[11], randomValues[12], randomValues[13],
                     randomValues[14], randomValues[15], randomValues[16], randomValues[17], randomValues[18],
-                    1, 2024, colleges, subjects[random.nextInt(subjects.length)],studentDiversity);
+                    1, 2024, colleges, subjects[random.nextInt(subjects.length)],studentDiversity));
         }
 
 
