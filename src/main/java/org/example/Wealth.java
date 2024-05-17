@@ -19,8 +19,8 @@ public class Wealth {
     public int TUITION; // Tuition fee per student
     public int pubIm; // Public image, possibly on a scale like 1-100
     public HashMap<String, Double[]> majorInfo; // Stores earning potential and volatility by major
-    static HashMap<String,Integer>  princetonMajorDis;
-    static HashMap<String,Integer>  princetonDivDis;
+    public static HashMap<String,Integer>  princetonMajorDis;
+    public static HashMap<String,Integer>  princetonDivDis;
 
 
     /**
