@@ -6,11 +6,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Represents a user-defined admissions office, allowing customization of admissions criteria
+ * such as acceptance rates, major cutoffs, and diversity cutoffs. This class extends
+ * the AdmissionsOffice class.
+ */
 public class UserAdmissionsOffice extends AdmissionsOffice {
     private Map<String,Integer> importance;  //ranked table of importance
 
 
-
+    /**
+     * Constructs a new UserAdmissionsOffice with the specified parameters.
+     *
+     * @param college               The college associated with this admissions office.
+     * @param initialAcceptanceRate The initial acceptance rate of the college.
+     * @param majorCutoff           The cutoff for major selection.
+     * @param diversityCutoff       The cutoff for diversity considerations.
+     * @param EDAdmitCapacity       The percentage of Early Decision admits.
+     * @param initialYieldRate      The initial yield rate of the college.
+     */
     public UserAdmissionsOffice(UserCollege college,double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double initialYieldRate){
         super(college,initialAcceptanceRate,majorCutoff,diversityCutoff,EDAdmitCapacity,initialYieldRate);
         //acceptanceRate = new HashMap<>();
@@ -23,7 +37,11 @@ public class UserAdmissionsOffice extends AdmissionsOffice {
         //college class. Could change what the constructor takes in
 
     }
-
+    /**
+     * Allows the user to input and set admissions office information interactively.
+     * This includes setting the initial acceptance rate, major cutoff, diversity cutoff,
+     * ED admit capacity, and initial yield rate.
+     */
     public void chooseAdmissionsOfficeInfo(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("What is the initial acceptance rate of your college: ");

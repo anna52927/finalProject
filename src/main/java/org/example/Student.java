@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.util.Random;
 
 
-
+/**
+ * Represents a student participating in the admissions cycle.
+ * This class stores various attributes of a student, including academic and extracurricular information,
+ * and generates preferences for colleges based on certain criteria.
+ */
 public class Student {
     protected String major;
     protected String diversity;
@@ -15,6 +19,34 @@ public class Student {
     private double score;
 
     //doesn't pass in colleges ranked
+    /**
+     * Constructs a new Student with the specified attributes and calculates initial preferences.
+     *
+     * @param rigor               The rigor of the student's secondary school record
+     * @param classRank           The student's class rank
+     * @param GPA                 The student's GPA
+     * @param SAT                 The student's SAT score
+     * @param essay               The quality of the student's application essay
+     * @param recommendations     The quality of recommendations for the student
+     * @param interview           The quality of the student's interview
+     * @param extraCurriculars    The student's extracurricular talent
+     * @param talent              The student's talent and ability
+     * @param character           The student's character and personal qualities
+     * @param firstGen            Whether the student is a first-generation college student
+     * @param alumniRelation      Whether the student has alumni relations
+     * @param geoRes              The student's geographical residence
+     * @param stateRes            The student's state residency
+     * @param religion            The student's religious affiliation or commitment
+     * @param raceEthnicStatus    The student's racial or ethnic status
+     * @param volunteerWork       The student's volunteer work
+     * @param workExp             The student's work experience
+     * @param levelInt            The student's level of interest
+     * @param cycleNumber         The application cycle number
+     * @param year                The application year
+     * @param collegeRank         The list of colleges ranked by the student
+     * @param major               The student's chosen major
+     * @param diversity           The student's diversity status
+     */
     public Student(int rigor, int classRank, int GPA, int SAT, int essay, int recommendations, int interview, int extraCurriculars, int talent, int character, int firstGen, int alumniRelation, int geoRes, int stateRes, int religion, int raceEthnicStatus, int volunteerWork, int workExp, int levelInt, int cycleNumber, int year, ArrayList<College> collegeRank, String major, String diversity) {
         score = 0;
         studentInfo.put("Rigor of secondary school record", rigor);
@@ -46,7 +78,12 @@ public class Student {
     }
 
 
-
+    /**
+     * Generates a list of college preferences based on the public image of the colleges.
+     *
+     * @param collegeRank The list of colleges ranked by public image.
+     * @return The list of colleges ordered by preference.
+     */
     public ArrayList<College> collegePrefGen(ArrayList<College> collegeRank){
         ArrayList<College> list = new ArrayList<>();
         ArrayList<Integer> collegePercents = new ArrayList<>(Arrays.asList(0,0,0,0,0,0,0));
@@ -105,7 +142,12 @@ public class Student {
         return list;
     }
 
-
+    /**
+     * Decides which college the student prefers the most from the given list of accepted colleges.
+     *
+     * @param collegeAct The list of colleges that accepted the student.
+     * @return The college that the student prefers the most.
+     */
     public College decide(ArrayList<College> collegeAct) {
         int min = 5;
         for (College college : collegeAct) {
@@ -119,22 +161,84 @@ public class Student {
     }
 
 
-    public HashMap<String, Integer> getHashMap(){
+    /**
+     * Gets the student's information stored in the HashMap.
+     *
+     * @return The HashMap containing the student's information.
+     */
+    public HashMap<String, Integer> getHashMap() {
         return studentInfo;
     }
-    public ArrayList<College> getList(){
+
+    /**
+     * Sets the student's college preferences.
+     *
+     * @param colleges The list of colleges to set as preferences.
+     */
+    public void setList(ArrayList<College> colleges) {
+        this.preference = colleges;
+    }
+
+    /**
+     * Gets the student's college preferences.
+     *
+     * @return The list of colleges preferred by the student.
+     */
+    public ArrayList<College> getList() {
         return preference;
     }
-    public String getDiversity(){return diversity;}
 
-    //Is major a String or Int for now?
-    public String getMajor(){return major;}
-
-    public void setScore(double score){
-        this.score = score;
+    /**
+     * Gets the student's diversity status.
+     *
+     * @return The student's diversity status.
+     */
+    public String getDiversity() {
+        return diversity;
     }
 
-    public double getScore(){
+    /**
+     * Sets the student's diversity status.
+     *
+     * @param diversity The diversity status to set.
+     */
+    public void setDiversity(String diversity) {
+        this.diversity = diversity;
+    }
+
+    /**
+     * Gets the student's major.
+     *
+     * @return The student's major.
+     */
+    public String getMajor() {
+        return major;
+    }
+
+    /**
+     * Sets the student's major.
+     *
+     * @param major The major to set.
+     */
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    /**
+     * Gets the student's application score.
+     *
+     * @return The student's application score.
+     */
+    public double getScore() {
         return score;
+    }
+
+    /**
+     * Sets the student's application score.
+     *
+     * @param score The score to set.
+     */
+    public void setScore(double score) {
+        this.score = score;
     }
 }

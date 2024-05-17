@@ -33,8 +33,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-// The AdmissionsCycle class handles the logic for a college admission cycle,
-// which includes managing early decision and regular admission rounds.
+/**The AdmissionsCycle class handles the logic for a college admission cycle
+ * which includes managing early decision and regular admission rounds. */
 public class AdmissionsCycle {
     private ArrayList<Student> students; // List of students participating in this admissions cycle
     private ArrayList<College> colleges; // List of colleges participating in this admissions cycle
