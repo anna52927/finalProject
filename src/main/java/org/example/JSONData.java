@@ -10,9 +10,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+/**
+ * Utility class for importing and converting JSON data into a Map.
+ */
 public class  JSONData {
-
+    /**
+     * Imports JSON data from a file and converts it to a Map.
+     *
+     * @param filename The name of the JSON file to be imported.
+     * @return A Map containing the JSON data.
+     */
     public static Map<String,Object> JSONImport(String filename) {
         File jsonFile = new File(filename); // Replace with the path to your JSON file
         Map<String, Object> map = new HashMap<>();
@@ -26,7 +33,12 @@ public class  JSONData {
         }
         return map;
     }
-
+    /**
+     * Converts a JsonNode to a Map.
+     *
+     * @param node The JsonNode to be converted.
+     * @return A Map containing the converted data.
+     */
     private static Map<String, Object> convertJsonToMap(JsonNode node) {
         Map<String, Object> map = new HashMap<>();
 

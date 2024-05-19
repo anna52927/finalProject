@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Represents the admissions office of a college, managing admissions criteria,
+ * acceptance rates, admitted students, major and diversity distributions, and more.
+ */
 public class AdmissionsOffice {
     public College self;  //idk what to name this
     public Map<String,Object> importance;  //ranked table of importance
@@ -21,7 +24,16 @@ public class AdmissionsOffice {
     public double yieldRate;  //The most recent years yield rate
     public int admitCapacity; //The amount of students to admit (based off of yield)
 
-
+    /**
+     * Constructs a new AdmissionsOffice with the specified parameters.
+     *
+     * @param college                The associated college.
+     * @param initialAcceptanceRate  The initial acceptance rate.
+     * @param majorCutoff            The cutoff for major selection.
+     * @param diversityCutoff        The cutoff for diversity considerations.
+     * @param EDAdmitCapacity        The percentage of students admitted through Early Decision.
+     * @param initialYieldRate       The initial yield rate.
+     */
     public AdmissionsOffice(College college, double initialAcceptanceRate,int majorCutoff,int diversityCutoff,double EDAdmitCapacity,double initialYieldRate){
 
         this.self = college; //wow, this line looks cursed
@@ -62,10 +74,16 @@ public class AdmissionsOffice {
         calculateDiversityDistributions();
     }
 
+    /**
+     * Calculates the admission capacity based on the yield rate.
+     */
     public void calculateCapacity(){
         admitCapacity = (int)(self.capacity / yieldRate);
     }
 
+    /**
+     * Calculates the yield rate based on the number of admitted students and those who enrolled.
+     */
     public void calculateYieldRate(){
         //kinda janky, would have made more sense if we stored admitted students as an array of class arrays
         int year = admittedStudents.get(0).getHashMap().get("Application Cycle");
@@ -77,7 +95,9 @@ public class AdmissionsOffice {
         }
         yieldRate = (double)count/admittedStudents.size();
     }
-
+    /**
+     * Calculates the major distributions based on the raw data and admit capacity.
+     */
     public void calculateMajorDistributions(){
         // Chat GPTified code (modified by ChatGPT)
         for (Map.Entry<String, Object> entry : rawMajorDistributions.entrySet()) {
@@ -92,14 +112,22 @@ public class AdmissionsOffice {
             majorDistributions.put(entry.getKey(), intValue);
         }
     }
-
+    /**
+     * Calculates the diversity distributions based on the raw data and admit capacity.
+     */
     public void calculateDiversityDistributions(){
         for (Map.Entry<String,Object> entry : rawDiversityDistributions.entrySet()) {
             double value = (double) entry.getValue() * admitCapacity;
             diversityDistributions.put(entry.getKey(), (int) value);
         }
     }
-
+    /**
+     * Considers applicants for admission and determines which students to admit based on the current round (ED or RD).
+     *
+     * @param applicants The list of applicants.
+     * @param round      The current admission round ("ED" or "RD").
+     * @return The list of admitted students.
+     */
     public ArrayList<Student> considerApplicants(ArrayList<Student> applicants,String round){
         //System.out.println("this many apply to " + self.name + " "+round + " : "+ applicants.size());
         int capacity;
@@ -162,7 +190,12 @@ public class AdmissionsOffice {
 
         return admittedStudents;
     }
-
+    /**
+     * Evaluates an applicant based on the importance metrics and returns their score.
+     *
+     * @param applicant The student applicant.
+     * @return The evaluation score of the applicant.
+     */
     public double evaluateApplicant(Student applicant) {
         int score = 0;
         for (Map.Entry<String, Object> entry : importance.entrySet()) {
@@ -174,11 +207,18 @@ public class AdmissionsOffice {
     }
 
     //don't use this method
+    /**
+     * Resets the admission round, clearing the list of admitted students and resetting the ED applied count.
+     */
     public void resetRound(){
         admittedStudents.clear();
         EDApplied = 0;
     }
-
+    /**
+     * Retrieves the acceptance rates of the college.
+     *
+     * @return A HashMap with the acceptance rates by year.
+     */
     public HashMap<Integer,Double> getAcceptanceRate(){
         return acceptanceRate;
     }
